@@ -625,75 +625,83 @@ margin: 5px 0;
     border: 1px solid var(--border);
 }
 
-
-
 /* ============================================================
-   UNICO BLOCCO OTTIMIZZAZIONE MOBILE (Sostituisci da qui alla fine)
+   UNICO BLOCCO OTTIMIZZAZIONE MOBILE (Sostituisci tutto)
    ============================================================ */
 @media (max-width: 600px) {
-    .container { padding: 30px 20px !important; }
+    .container { padding: 25px 15px !important; }
 
-    /* 1. NOME E TITOLO */
-    header h1 {
-        font-size: 1.7rem !important;
+    /* 1. HEADER: Risolve H1 troppo a destra e Sottotitolo su 2 righe */
+    .profile-header { 
+        gap: 12px !important; /* Ridotto per dare più spazio al testo */
+    }
+    .profile-photo { 
+        width: 80px !important;  /* Più piccola per far stare il nome a sinistra */
+        height: 80px !important; 
+        flex-shrink: 0 !important;
+    }
+    header h1 { 
+        font-size: 1.4rem !important; /* Rimpicciolito per non spingere a destra */
+        margin: 0 0 4px 0 !important; 
         line-height: 1.1 !important;
-        margin-bottom: 12px !important;
+    }
+    .subtitle { 
+        font-size: 0.85rem !important; /* Più piccolo per stare su una riga */
+        white-space: nowrap !important; /* Impedisce di andare a capo */
     }
 
-    /* 2. NAVIGAZIONE (Centratura verticale perfetta) */
+    /* 2. NAVIGAZIONE: Centratura verticale perfetta */
     nav ul {
         display: flex !important;
         justify-content: space-between !important;
-        height: 55px !important; /* Altezza della barra */
+        height: 50px !important;
+        align-items: center !important;
         padding: 0 !important;
-        margin: 0 !important;
     }
     nav li {
         flex: 1 !important;
         display: flex !important;
-        align-items: center !important;   /* Centra verticalmente il link */
-        justify-content: center !important; /* Centra orizzontalmente il link */
-        height: 100% !important;          /* Occupa tutta l'altezza della barra */
+        justify-content: center !important;
     }
     nav a {
         padding: 0 !important;
         margin: 0 !important;
-        font-size: 0.85rem !important;
+        font-size: 0.82rem !important;
         line-height: 1 !important;
-        display: block !important;
+        /* Spostiamo leggermente il testo in basso per centrarlo otticamente */
+        padding-top: 3px !important; 
     }
 
-    /* 3. JUMP LINKS (GO TO sulla stessa linea) */
+    /* 3. JUMP LINKS: "GO TO:" in linea e Bullet simmetrici */
     .jump-nav {
-        flex-direction: row !important; /* Forza la disposizione orizzontale */
-        flex-wrap: wrap !important;     /* Va a capo solo se non c'è più spazio */
-        align-items: center !important;
-        gap: 8px !important;            /* Ridotto per far stare tutto in linea */
-        justify-content: flex-start !important;
+        display: block !important; /* Permette al testo di fluire naturalmente */
+        margin-bottom: 25px !important;
     }
     .jump-title {
-        font-size: 0.8rem !important; /* Leggermente più piccolo per aiutare la riga */
-        margin-right: 5px !important;
+        display: inline !important; /* Sta sulla stessa linea della prima voce */
+        font-size: 0.85rem !important;
+        margin-right: 10px !important;
     }
     .jump-links {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        align-items: center !important;
+        display: inline !important; /* Fa fluire i link come un paragrafo */
     }
-    /* Pallino simmetrico */
+    .jump-links a {
+        display: inline !important; /* Essenziale per il wrap corretto */
+        font-size: 0.85rem !important;
+        color: var(--text-light) !important;
+    }
+    /* Pallino: spazio identico a destra e sinistra */
     .jump-links a:not(:last-child)::after {
         content: "•" !important;
+        margin: 0 10px !important; 
         display: inline-block !important;
-        width: 24px !important;      /* Area fissa del pallino */
-        text-align: center !important;
         color: #ccc !important;
-        margin: 0 !important;
     }
 
-    /* FIX PAGINE INTERNE E TABELLE */
-    .photo-grid img { max-width: 130px; }
+    /* FIX PAGINE INTERNE */
+    .photo-grid img { max-width: 120px !important; }
     .mytable, .participants-table { display: block; width: 100%; overflow-x: auto; }
     .book-header, .teaching-intro { flex-direction: column !important; text-align: center !important; gap: 20px !important; }
-    .book-cover { width: 150px !important; margin: 0 auto !important; }
+    .book-cover { width: 140px !important; margin: 0 auto !important; }
     footer { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
 }
