@@ -625,83 +625,73 @@ margin: 5px 0;
     border: 1px solid var(--border);
 }
 
-/* ============================================================
-   UNICO BLOCCO OTTIMIZZAZIONE MOBILE (Sostituisci tutto)
-   ============================================================ */
 @media (max-width: 600px) {
     .container { padding: 25px 15px !important; }
 
-    /* 1. HEADER: Risolve H1 troppo a destra e Sottotitolo su 2 righe */
+    /* 1. HEADER: Risolve H1 troppo a destra e Sottotitolo rotto */
     .profile-header { 
-        gap: 12px !important; /* Ridotto per dare più spazio al testo */
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+        text-align: left !important;
     }
     .profile-photo { 
-        width: 80px !important;  /* Più piccola per far stare il nome a sinistra */
-        height: 80px !important; 
+        width: 75px !important;  /* Più piccola per dare spazio al testo */
+        height: 75px !important; 
         flex-shrink: 0 !important;
     }
     header h1 { 
-        font-size: 1.4rem !important; /* Rimpicciolito per non spingere a destra */
-        margin: 0 0 4px 0 !important; 
-        line-height: 1.1 !important;
+        font-size: 1.4rem !important; /* Rimpicciolito per stare a sinistra */
+        margin: 0 !important;
+        line-height: 1.2 !important;
     }
     .subtitle { 
-        font-size: 0.85rem !important; /* Più piccolo per stare su una riga */
-        white-space: nowrap !important; /* Impedisce di andare a capo */
+        font-size: 0.85rem !important; 
+        white-space: nowrap !important; /* Forza il sottotitolo su una riga */
+        display: block !important;
     }
 
-    /* 2. NAVIGAZIONE: Centratura verticale perfetta */
+    /* 2. NAVIGAZIONE (Manteniamo quella che funziona) */
     nav ul {
         display: flex !important;
         justify-content: space-between !important;
-        height: 50px !important;
         align-items: center !important;
+        height: 55px !important;
         padding: 0 !important;
     }
-    nav li {
-        flex: 1 !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
-    nav a {
-        padding: 0 !important;
-        margin: 0 !important;
-        font-size: 0.82rem !important;
-        line-height: 1 !important;
-        /* Spostiamo leggermente il testo in basso per centrarlo otticamente */
-        padding-top: 3px !important; 
-    }
+    nav li { flex: 1 !important; display: flex !important; justify-content: center !important; }
+    nav a { font-size: 0.85rem !important; line-height: 1 !important; }
 
     /* 3. JUMP LINKS: "GO TO:" in linea e Bullet simmetrici */
     .jump-nav {
-        display: block !important; /* Permette al testo di fluire naturalmente */
-        margin-bottom: 25px !important;
+        display: flex !important;      /* Diventa una riga unica */
+        flex-wrap: wrap !important;    /* Permette di andare a capo se necessario */
+        align-items: baseline !important; /* Allinea il testo sulla base */
+        gap: 0 !important;
     }
     .jump-title {
-        display: inline !important; /* Sta sulla stessa linea della prima voce */
+        display: inline !important;
+        margin-right: 8px !important;  /* Spazio tra GO TO: e la prima voce */
+        font-weight: bold !important;
         font-size: 0.85rem !important;
-        margin-right: 10px !important;
     }
     .jump-links {
-        display: inline !important; /* Fa fluire i link come un paragrafo */
+        display: inline !important;    /* Si comporta come testo continuo */
     }
     .jump-links a {
-        display: inline !important; /* Essenziale per il wrap corretto */
+        display: inline !important;
         font-size: 0.85rem !important;
-        color: var(--text-light) !important;
     }
-    /* Pallino: spazio identico a destra e sinistra */
+    /* Il segreto dei Bullet simmetrici: margin uguale ai lati */
     .jump-links a:not(:last-child)::after {
         content: "•" !important;
-        margin: 0 10px !important; 
-        display: inline-block !important;
+        margin: 0 10px !important;     /* 10px a sinistra, 10px a destra esatti */
         color: #ccc !important;
+        display: inline-block !important;
     }
 
-    /* FIX PAGINE INTERNE */
+    /* FIX GENERALI */
     .photo-grid img { max-width: 120px !important; }
-    .mytable, .participants-table { display: block; width: 100%; overflow-x: auto; }
-    .book-header, .teaching-intro { flex-direction: column !important; text-align: center !important; gap: 20px !important; }
-    .book-cover { width: 140px !important; margin: 0 auto !important; }
+    .book-header, .teaching-intro { flex-direction: column !important; text-align: center !important; }
     footer { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
 }
