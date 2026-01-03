@@ -99,12 +99,13 @@ nav ul {
 
 
 nav a {
-    display: inline-block;
-    padding: 12px 0; /* Cambia da 16/6 a 12/12 per equilibrio perfetto */
-    line-height: 1;
+	display: inline-block;      /* Importante per far funzionare il padding */
+	padding: 16px 0 6px 0;     /* IL TRUCCO: mettiamo il padding direttamente sul link */
+	line-height: 1;      /* Forza il testo a stare esattamente al centro */
     text-decoration: none;
     color: var(--text);
     font-weight: 600;
+    margin: 0;
 }
 
 nav a:hover, nav a.current {
@@ -216,74 +217,13 @@ h5 {
     background-color: #fafafa;
 }
 
-/* --- OTTIMIZZAZIONI PER DISPOSITIVI MOBILI (Schermi < 600px) --- */
+/* Responsive: su schermi piccoli riduce leggermente il font */
 @media (max-width: 600px) {
-    .container {
-        padding: 30px 20px;
-    }
-
-    /* 1. FIX NOME E TITOLI */
-    header h1 {
-        font-size: 1.8rem; /* Un po' più piccolo per stare meglio su mobile */
-        line-height: 1.1;  /* Riduce lo spazio tra "Francesco" e "Caravenna" */
-        margin-top: 10px;
-        margin-bottom: 5px;
-    }
-    
-    .subtitle {
-        font-size: 1rem;
-        line-height: 1.2;
-    }
-
-    /* 2. FIX NAVIGAZIONE PRINCIPALE */
-    nav ul {
-        justify-content: space-between; /* Distribuisce meglio i link */
-        gap: 0; 
-    }
-
-    nav a {
-        font-size: 0.85rem;
-        padding: 12px 0; /* Padding uguale sopra e sotto per centrare il testo */
-    }
-
-    /* 3. FIX JUMP LINKS (GO TO:) */
-    .jump-nav {
-        flex-direction: column; /* Mette "GO TO:" sopra i link */
-        align-items: flex-start;
-        gap: 8px;
-        margin-bottom: 25px;
-    }
-
-    .jump-links {
-        flex-wrap: wrap; /* Permette ai link di andare a capo */
-        gap: 8px 0px;    /* Spazio verticale tra le righe di link */
-        line-height: 1.4;
-    }
-    
-    .jump-links a {
-        font-size: 0.85rem;
-        white-space: nowrap; /* Impedisce alla singola parola di spezzarsi */
-    }
-
-    /* Gestione pallini separatori su mobile */
-    .jump-links a:not(:last-child)::after {
-        margin-left: 8px;
-        margin-right: 8px;
-    }
-
-    /* Tabelle: scorrimento orizzontale fluido */
-    .mytable, .participants-table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Foto: due colonne su mobile */
-    .photo-grid img {
-        max-width: 130px; 
+    .participants-table {
+        font-size: 0.8rem;
     }
 }
+
 section {
     margin-bottom: 0; /* Più compatto */
 }
