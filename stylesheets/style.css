@@ -219,78 +219,6 @@ h5 {
 }
 
 /* --- OTTIMIZZAZIONI PER DISPOSITIVI MOBILI (Schermi < 600px) --- */
-
-@media (max-width: 600px) {
-    /* 1. Rimuoviamo il bordo rosso una volta confermato */
-    body { border: none !important; }
-
-    /* 2. NAVIGAZIONE (Home, Research, ecc.) - CENTRATURA TOTALE */
-    nav ul {
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: stretch !important; /* Forza i link a riempire l'altezza */
-        height: 60px !important;         /* Altezza fissa della barra */
-        padding: 0 !important;
-        margin: 0 !important;
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-    }
-
-    nav li {
-        list-style: none !important;
-        flex: 1 !important;             /* Ogni voce occupa lo stesso spazio */
-        display: flex !important;
-        align-items: center !important;  /* Centra verticalmente il contenuto */
-        justify-content: center !important; /* Centra orizzontalmente */
-    }
-
-    nav a {
-        display: flex !important;
-        align-items: center !important;  /* Centra il testo nel link */
-        height: 100% !important;         /* Il link occupa tutta l'altezza del nav */
-        padding: 0 !important;
-        font-size: 0.85rem !important;
-        line-height: 1 !important;
-        margin: 0 !important;
-    }
-
-    /* 3. JUMP LINKS (Bullet simmetrici al millimetro) */
-    .jump-nav {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 12px !important;
-    }
-
-    .jump-links {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        align-items: center !important;
-        row-gap: 10px !important; /* Spazio se vanno su due righe */
-        column-gap: 0 !important; /* Gestiamo lo spazio solo col pallino */
-    }
-
-    .jump-links a {
-        display: flex !important;
-        align-items: center !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        text-decoration: none !important;
-    }
-
-    /* Il segreto della simmetria: il pallino in una scatola fissa */
-    .jump-links a:not(:last-child)::after {
-        content: "•" !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 30px !important;  /* Il pallino sta al centro di un'area di 30px */
-        color: #ccc !important;
-        font-size: 1rem !important;
-        pointer-events: none !important;
-    }
-}
  
     /* Tabelle e Foto */
     .mytable, .participants-table {
@@ -541,75 +469,7 @@ footer {
     text-decoration: underline;
 }
 
-/* Ottimizzazione per mobile: se lo schermo è piccolo, i testi del footer si incolonnano */
-@media (max-width: 600px) {
-    footer {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-}
 
-/* Responsive */
-@media (max-width: 600px) {
-	.profile-photo { width: 95px; height: 95px; } /* Foto leggermente più piccola per far spazio al nome */
-    .profile-header { flex-direction: row; text-align: left; gap: 15px; }
-    header h1 { font-size: 2rem; }
-    .subtitle { font-size: 1rem; }
-    nav ul { justify-content: flex-start; gap: 15px; }
-    .cv-links { flex-direction: column; gap: 5px; }
-}
-
-
-/* --- OTTIMIZZAZIONI PER DISPOSITIVI MOBILI (Schermi < 600px) --- */
-@media (max-width: 600px) {
-    .container {
-        padding: 30px 15px; /* Riduce i margini laterali per sfruttare lo spazio */
-    }
-
-    h1 {
-        font-size: 1.6rem; /* Titolo leggermente più piccolo */
-    }
-
-    /* Rende il menu di navigazione più flessibile: le voci vanno a capo se necessario */
-    nav ul {
-        flex-wrap: wrap;
-        gap: 8px 15px;
-        justify-content: center;
-    }
-
-    nav ul li a {
-        font-size: 0.85rem;
-        padding: 4px 0;
-    }
-
-    /* Tabelle: permette lo scorrimento orizzontale solo della tabella, senza rompere il layout */
-    .mytable, .participants-table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* Scorrimento fluido su iPhone */
-    }
-
-    /* Riduce leggermente il font nelle tabelle per mostrare più dati */
-    .schedule-table, .participants-table {
-        font-size: 0.8rem;
-        min-width: 500px; /* Impedisce alla tabella di schiacciarsi troppo */
-    }
-
-    .participants-table td, .participants-table th {
-        padding: 6px 4px;
-    }
-
-    /* Foto: le rimpicciolisce un po' e le centra */
-    .photo-grid {
-        justify-content: center;
-    }
-    
-    .photo-grid img {
-        max-width: 140px; /* Più piccole su mobile per vederne due affiancate */
-    }
-}
 
 /* La "mini-bandiera" flat in puro CSS */
 
@@ -702,19 +562,6 @@ footer {
     font-size: 1.8rem;
 }
 
-/* Ottimizzazione mobile per la pagina libro */
-@media (max-width: 600px) {
-    .book-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .book-cover {
-        width: 150px; /* Un po' più piccola su mobile */
-    }
-}
-
 
 /* --- PAGINA TEACHING (teaching.html) --- */
 .teaching-intro {
@@ -756,14 +603,6 @@ margin: 13px 0;
 margin: 5px 0;
 }
 
-/* Responsività per mobile */
-@media (max-width: 600px) {
-    .teaching-intro {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-}
 
 /* Permette di distanziare meglio le righe del diario delle lezioni */
 .teaching-list li br + text, .teaching-list li {
@@ -787,3 +626,61 @@ margin: 5px 0;
 }
 
 
+/* ============================================================
+   UNICO BLOCCO OTTIMIZZAZIONE MOBILE (Da mettere a fine file)
+   ============================================================ */
+@media (max-width: 600px) {
+    .container { padding: 30px 20px !important; }
+
+    /* 1. NOME E TITOLO */
+    header h1 {
+        font-size: 1.7rem !important;
+        line-height: 1.1 !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* 2. NAVIGAZIONE (Risolve Screenshot 2) */
+    nav ul {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important; /* Centra perfettamente tra le due linee */
+        height: 55px !important;         /* Altezza fissa della barra */
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    nav li {
+        flex: 1 !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+    nav a {
+        padding: 0 !important;
+        font-size: 0.85rem !important;
+        line-height: 1 !important;
+        margin: 0 !important;
+    }
+
+    /* 3. JUMP LINKS (Risolve Screenshot 1) */
+    .jump-links {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        row-gap: 8px !important;
+    }
+    /* Il segreto della simmetria: il pallino in un'area fissa */
+    .jump-links a:not(:last-child)::after {
+        content: "•" !important;
+        display: inline-block !important;
+        width: 28px !important;      /* Spazio fisso per il pallino */
+        text-align: center !important; /* Pallino al centro dei 28px */
+        color: #ccc !important;
+        margin: 0 !important;
+    }
+
+    /* FIX PAGINE INTERNE */
+    .photo-grid img { max-width: 130px; }
+    .mytable, .participants-table { display: block; width: 100%; overflow-x: auto; }
+    .book-header, .teaching-intro { flex-direction: column !important; text-align: center !important; gap: 20px !important; }
+    .book-cover { width: 150px !important; margin: 0 auto !important; }
+    footer { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
+}
