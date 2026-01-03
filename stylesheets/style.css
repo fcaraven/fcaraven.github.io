@@ -72,10 +72,11 @@ header {
 }
 
 header h1 {
-    font-size: 2.5rem;
-    font-weight: 700; /* Più armonioso con il font Inter */
-    margin: 15px 0 0 0;
-    letter-spacing: -0.04em; /* Effetto tipografico moderno */
+    font-size: 1.8rem;
+    line-height: 1.0;  /* Interlinea quasi nulla per compattare il nome */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Aumentato leggermente per dare aria */
+    letter-spacing: -0.04em;
 }
 
 /* --- NAV --- */
@@ -98,9 +99,10 @@ nav ul {
 }
 
 
+/* Questa modifica vale sia per Desktop che per Mobile */
 nav a {
     display: inline-block;
-    padding: 12px 0; /* Cambia da 16/6 a 12/12 per equilibrio perfetto */
+    padding: 16px 0 12px 0; /* Più spazio sopra (16) che sotto (12) per centrarlo otticamente */
     line-height: 1;
     text-decoration: none;
     color: var(--text);
@@ -230,11 +232,11 @@ h5 {
         margin-bottom: 5px;
     }
     
-    .subtitle {
-        font-size: 1rem;
-        line-height: 1.2;
-    }
-
+.subtitle {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-top: 5px; /* Spazio extra tra nome e Research/Teaching */
+}
     /* 2. FIX NAVIGAZIONE PRINCIPALE */
     nav ul {
         justify-content: space-between; /* Distribuisce meglio i link */
@@ -266,9 +268,9 @@ h5 {
     }
 
     /* Gestione pallini separatori su mobile */
-    .jump-links a:not(:last-child)::after {
-        margin-left: 8px;
-        margin-right: 8px;
+	.jump-links a:not(:last-child)::after {
+        margin-left: 10px;
+        margin-right: 6px;
     }
 
     /* Tabelle: scorrimento orizzontale fluido */
@@ -359,10 +361,13 @@ a:hover {
 /* Aggiunge il pallino separatore tra i link via CSS */
 .jump-links a:not(:last-child)::after {
     content: "•";
+    /* Riduciamo il margine destro per compensare lo spazio naturale dell'HTML */
     margin-left: 12px;
-    color: #ccc; /* Pallino grigio chiaro discreto */
+    margin-right: 8px; 
+    color: #ccc;
     font-weight: 400;
     display: inline-block;
+    text-decoration: none !important; /* Evita che il pallino venga sottolineato */
 }
 
 /* --- Variante per Pagine Centrate (Cetraro, etc.) --- */
