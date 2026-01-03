@@ -1,0 +1,403 @@
+
+# LAST UPDATE: OCTOBER 4, 2016
+#
+# CODE TO GENERATE PLOTS WITH THE SOFTWARE "R", FOR THE PAPER
+# "The asymptotic smile of a multiscaling stochastic volatility model"
+# by F. Caravenna and J. Corbetta
+#
+
+##########################################################
+# "ShocksN" CREATES A VECTOR WHOSE FIRST COMPONENT IS "N"
+# (THE NUMBER OF "JUMPS") AND THE FOLLOWING COMPONENTS ARE
+# THE JUMP LOCATIONS, DRAWN UNIFORMLY IN (0,T)
+#
+# IN "ShocksNplus" THE NUMBER OF JUMPS IS RANDOM, DRAWN ACCORDING
+# TO A POISSON CONDITIONED OF TAKING VALUES AT LEAST N
+##########################################################
+
+Shocks1 <- function(Tau_0=Tau_0_Value, Tempo_Finale=30, Lambda=Lambda_Value){
+Tempi_salto <- runif(1, 0, Tempo_Finale)
+Shock_ordinati <- c(1, -Tau_0, Tempi_salto)
+return(Shock_ordinati)
+}
+
+Shocks2 <- function(Tau_0=Tau_0_Value, Tempo_Finale=30, Lambda=Lambda_Value){
+Tempi_salto <- runif(2, 0, Tempo_Finale)
+Tempi_ordinati <- sort(Tempi_salto)
+Shock_ordinati <- c(2,-Tau_0,Tempi_ordinati)
+return(Shock_ordinati)
+}
+
+Shocks3plus <- function(Tau_0=Tau_0_Value, Tempo_Finale=30, Lambda=Lambda_Value){
+LT <- Lambda*Tempo_Finale
+#
+# NOW WE SIMULATE A POISSON(LT) CONDITIONED ON TAKING VALUES AT LEAST 3
+#
+u <- runif(1, ppois(2, LT), 1)
+N <- 3
+while(ppois(N,LT) < u) {
+	N <- N+1
+	}
+#
+Tempi_salto <- runif(N, 0, Tempo_Finale)
+Tempi_ordinati <- sort(Tempi_salto)
+Shock_ordinati <- c(N,-Tau_0,Tempi_ordinati)
+return(Shock_ordinati)
+}
+
+################################################
+# "Time_change" GENERATES THE TIME CHANGE, USING
+# THE VECTOR WITH THE JUMP LOCATIONS AS IMPUT
+################################################
+
+Time_change <- function(Salti=Shocks(Tempo_Finale=Tempo_finale, Lambda=lambda), Tempo_finale=30, lambda=Lambda_Value, D=D_Value, V=V_Value){
+SigmaSquare <- V^2 * lambda^(2*D-1) / gamma(2*D+1)
+Tempo_Modificato <- -(-Salti[2])^(2*D)
+if(Salti[1]!=0){
+	for(j in 1:Salti[1]){
+	Tempo_Modificato <- Tempo_Modificato +(Salti[j+2]-Salti[j+1])^(2*D)
+	}
+}
+Tempo_Modificato <- SigmaSquare * (Tempo_Modificato + (Tempo_finale - Salti[length(Salti)])^(2*D))
+return(Tempo_Modificato)
+}
+ 
+##############################################
+# "Prezzo_Call" COMPUTES THE PRICE OF A CALL OPTION
+# IN A STOCHASTIC VOLATILITY MODEL, GIVEN THE TIME CHANGE
+##############################################
+
+Prezzo_Call <- function(S0=1, K=0.95, Tempo_modificato=Time_change()){
+d1 <- (log(S0/K) + 0.5*Tempo_modificato)/sqrt(Tempo_modificato)
+d2 <- (log(S0/K) - 0.5*Tempo_modificato)/sqrt(Tempo_modificato)
+Prezzo <- S0*pnorm(d1) - K*pnorm(d2)
+return(Prezzo)
+}
+
+###############################################
+# "Simula_Prezzo_Strat" SIMULATES THE PRICE OF A CALL OPTION
+# IN OUR MODEL
+###############################################
+
+Simula_Prezzo_Strat <- function(K_price=1, T_finale=30, S0_price=1, n=N_Simulazioni, Tau_0_price=Tau_0_Value, D_price=D_Value, V_price=V_Value, Lambda_price=Lambda_Value){
+res <- matrix(nrow=length(K_price), ncol=length(T_finale))
+for(i in 1:length(K_price)) { for(j in 1:length(T_finale)) {
+# IL NUMERO TOTALE DI SIMULAZIONI è 3*n
+X1 <- rep(NA, times=n)
+X2 <- rep(NA, times=n)
+X3plus <- rep(NA, times=n)
+for(l in 1:n){
+Salti_Call1 <- Shocks1(Tau_0=Tau_0_price, Tempo_Finale=T_finale[j], Lambda=Lambda_price)
+Salti_Call2 <- Shocks2(Tau_0=Tau_0_price, Tempo_Finale=T_finale[j], Lambda=Lambda_price)
+Salti_Call3plus <- Shocks3plus(Tau_0=Tau_0_price, Tempo_Finale=T_finale[j], Lambda=Lambda_price)
+Tempo_Mod1 <- Time_change(Salti=Salti_Call1, Tempo_finale=T_finale[j], D=D_price, V=V_price, lambda=Lambda_price)
+Tempo_Mod2 <- Time_change(Salti=Salti_Call2, Tempo_finale=T_finale[j], D=D_price, V=V_price, lambda=Lambda_price)
+Tempo_Mod3plus <- Time_change(Salti=Salti_Call3plus, Tempo_finale=T_finale[j], D=D_price, V=V_price, lambda=Lambda_price)
+X1[l] <- Prezzo_Call(S0=S0_price, K=K_price[i], Tempo_modificato=Tempo_Mod1)
+X2[l] <- Prezzo_Call(S0=S0_price, K=K_price[i], Tempo_modificato=Tempo_Mod2)
+X3plus[l] <- Prezzo_Call(S0=S0_price, K=K_price[i], Tempo_modificato=Tempo_Mod3plus)
+}
+#
+# THE FOLLOWING IS FOR THE EVENT WHERE THERE ARE NO JUMPS
+Salti_Call0 <- c(0,-Tau_0_price)
+Tempo_Mod0 <- Time_change(Salti=Salti_Call0, Tempo_finale=T_finale[j], D=D_price, V=V_price, lambda=Lambda_price)
+X0 <- Prezzo_Call(S0=S0_price, K=K_price[i], Tempo_modificato=Tempo_Mod0)
+#
+LT <- Lambda_price * T_finale[j]
+prezzo_sim <- dpois(0, LT) * X0 + dpois(1, LT) * mean(X1) + dpois(2, LT) * mean(X2) + (1-ppois(2,LT)) * mean(X3plus)
+res[i,j] <- prezzo_sim
+}}
+return(res)
+}
+
+###############################################
+# "Vol_Imp" COMPUTES THE IMPLIED VOLATILITY
+# IN OUR MODEL, USING "Simula_Prezzo_Strat" TO GENERATE PRICES
+###############################################
+
+Vol_Imp <- function(K_price=1, T_finale=30, S0_price=1, n=N_Simulazioni, Tau_0_price=Tau_0_Value, D_price=D_Value, V_price=V_Value, Lambda_price=Lambda_Value, Prezzo_Simulato = Simula_Prezzo_Strat(K_price, T_finale, S0_price, n, Tau_0_price, D_price, V_price, Lambda_price)){
+res <- matrix(nrow=length(K_price), ncol=length(T_finale))
+for(i in 1:length(K_price)) { for(j in 1:length(T_finale)) {
+Prezzo_BS_true <- function(sigma){
+	d1 <- (log(S0_price/K_price[i]) + sigma^2/2 * T_finale[j])/(sigma*sqrt(T_finale[j]))
+	d2 <- d1 - sigma * sqrt(T_finale[j])
+	prezzo <- S0_price*pnorm(d1)- K_price[i]*pnorm(d2)
+	return(prezzo)
+	}
+# THE FOLLOWING IS A BISECTION ALGORITHM TO FIND THE IMPLIED VOLATILITY
+sig0 <- 0.1
+sig1 <- 0.1
+prestart <- Prezzo_BS_true(sig1)
+if(prestart == Prezzo_Simulato[i,j]) { return(sig1) }
+if(prestart < Prezzo_Simulato[i,j]) {
+	while(Prezzo_BS_true(sig1) < Prezzo_Simulato[i,j]) {
+		sig1 <- 2*sig1
+		}
+	}
+if(prestart > Prezzo_Simulato[i,j]) {
+	while(Prezzo_BS_true(sig1) > Prezzo_Simulato[i,j]) {
+		sig1 <- sig1/2
+		}
+	sigdum <- sig0
+	sig0 <- sig1
+	sig1 <- sigdum
+	}
+# AT THIS POINT THE IMPLIED VOLATILITY IS IN THE INTERVAL (sig0, sig1)
+while(abs((sig1 - sig0) / sig1) > 0.001) {
+	signew <- mean(c(sig0, sig1))
+	if(Prezzo_BS_true(signew) > Prezzo_Simulato[i,j]) {sig1 <- signew} else {sig0 <- signew}
+	}
+res[i,j] <- sig1
+}}
+return(res)
+}
+
+
+##################################################
+# HERE ARE THE PARAMETERS AND THE THEORETICAL ASYMPTOTIC CURVES
+##################################################
+
+D_Value <- 0.16
+Lambda_Value <- 0.001
+V_Value <- 0.01
+Tau_0_Value <- 1000
+N_Simulazioni <- 1e3
+
+#
+# THESE CONSTANTS (TAKEN FOR OUR PAPER) ARE FUNCTIONS OF THE PARAMETERS
+#
+
+c_Val <- function(D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+return((Lambda)^(D-.5) * V / sqrt(gamma(2*D+1)))
+}
+
+Sigma_0_Val <- function(D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+return( c_Val(D, Lambda, V, Tau_0) * sqrt(2*D) * (Tau_0)^(D - 0.5) )
+}
+
+C_Val <- function(D = D_Value) {
+return( (1-D)^(.5/(1-D)) / (.5 - D)^((.5 - D)/(1 - D)) )
+}
+
+#
+# THESE ARE THE BASIC REFERENCE CURVES
+#
+
+kappa1 <- function(t) {return(sqrt(t * log(1/t)))}
+kappa2 <- function(t) {return(t^(D_Value) * sqrt(log(1/t)))}
+
+#
+# THESE ARE THE THEORETICAL FORMULAS FOR IMPLIED VOLATILITY IN REGIMES a, b, c, d
+#
+
+sigmaimp_a <- function(K, T, D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+c_Value <- c_Val(D, Lambda, V, Tau_0)
+C_Value <- C_Val(D)
+res <- matrix(nrow=length(K), ncol=length(T))
+for(i in 1:length(K)) { for(j in 1:length(T)) {
+	rat <- abs(log(K[i])) / (c_Value^(1/D_Value) * T[j])
+	res[i,j] <- sqrt( c_Value^(1/D_Value) / (2*C_Value) ) * ( rat / sqrt(log(rat)) )^((.5 - D_Value)/(1 - D_Value)) 
+}}
+return(res)
+}
+
+sigmaimp_a_mod <- function(K, T, D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+c_Value <- c_Val(D, Lambda, V, Tau_0)
+C_Value <- C_Val(D)
+res <- matrix(nrow=length(K), ncol=length(T))
+for(i in 1:length(K)) { for(j in 1:length(T)) {
+	rat1 <- abs(log(K[i])) / (c_Value * T[j]^(D_Value))
+	rat2 <- abs(log(K[i])) / (c_Value^(1/D_Value) * T[j])
+	lc <- C_Value * rat1^(1/(1-D_Value)) * (log(rat2))^((.5 - D_Value)/(1 - D_Value)) + log(rat1^(D_Value/(1-D_Value)))
+	res[i,j] <- abs(log(K[i])) / sqrt(2 * T[j] * lc)
+}}
+return(res)
+}
+
+effe <- function(a) {
+res <- rep(NA, length=length(a))
+for(i in 1:length(a)) {
+	m <- as.integer(sqrt(.5 - D_Value) * a[i])^(1/(1-D_Value))
+	if(m==0) {m <- 1}
+	A <- m + a[i]^2 / 2 / m^(1-2*D_Value)
+	B <- (m+1) + a[i]^2 / 2 / (m+1)^(1-2*D_Value)
+	res[i] <- (min(c(A,B)))
+	}
+return(res)
+}
+
+sigmaimp_b <- function(K, T, D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+c_Value <- c_Val(D, Lambda, V, Tau_0)
+res <- matrix(nrow=length(K), ncol=length(T))
+for(i in 1:length(K)) { for(j in 1:length(T)) {
+rapp <- abs(log(K[i])) / kappa2(c_Value^(1/D) * T[j]) * sqrt(log(c_Value^(1/D) * T[j]) /log(Lambda*T[j]) )
+res[i,j] <- sqrt(Lambda) / sqrt(2 * effe(rapp)) * abs(log(K[i])) / kappa1(Lambda*T[j])
+}}
+return(res)
+}
+
+
+sigmaimp_c <- function(K, T, D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+c_Value <- c_Val(D, Lambda, V, Tau_0)
+res <- matrix(nrow=length(K), ncol=length(T))
+for(i in 1:length(K)) { for(j in 1:length(T)) {
+rati <- log( abs(log(K[i])) / kappa2(c_Value^(1/D) * T[j]) ) / log( Lambda*T[j] )
+res[i,j] <- sqrt(Lambda) / sqrt(2 * (1 - rati)) * abs(log(K[i])) / kappa1(Lambda * T[j])
+}}
+return(res)
+}
+
+
+sigmaimp_d <- function(K, T, D=D_Value, Lambda=Lambda_Value, V=V_Value, Tau_0=Tau_0_Value) {
+c_Value <- c_Val(D, Lambda, V, Tau_0)
+Sigma_0_Value <- Sigma_0_Val(D, Lambda, V, Tau_0)
+res <- matrix(nrow=length(K), ncol=length(T))
+for(i in 1:length(K)) { for(j in 1:length(T)) {
+res[i,j] <- Sigma_0_Value
+}}
+return(res)
+}
+
+
+##################################################
+# HERE IS THE CODE TO PRODUCE THE PLOTS
+##################################################
+
+#
+# THIS IS FOR 3d PLOTS OF THE VOLATILITY SURFACE
+# CF. FIGURE 2 IN THE PAPER
+#
+
+K <- exp( sort( c( -0.5, -0.4, -0.3, -0.2, -0.15, -0.1, -0.08, -0.06, -0.05, -0.04, -0.03, -0.025, -0.02, -0.015, -0.01, -0.005, 0, 0.005, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5) ) )
+
+T <- 1:60
+
+vs <- Vol_Imp(K,T)
+
+etichetta <- paste("D", toString(D_Value), "Lambda", toString(Lambda_Value), "V", toString(V_Value), "Tau0", toString(round(Tau_0_Value)))
+write.table(vs, file=paste("ImpVol ", etichetta, ".txt", sep=""), sep="\t")
+
+T_sel <- c(1 + 2*0:29)
+
+quartz(width=8, height=4.5)
+par(mar=c(1, 2, 0, 0.5))
+
+persp(T[T_sel], log(K), t(vs[,T_sel]), theta=250, phi=8, r=6, col="grey", xlim=c(1,60), zlim=c(0,0.1), border="grey", shade=.8, ticktype="detailed", expand=0.5, xlab="", ylab="", zlab="")
+
+dev.copy2pdf(file=paste("ImpVol ", etichetta, " a.pdf", sep=""))
+
+persp(T[T_sel], log(K), t(vs[,T_sel]), theta=70, phi=8, r=6, col="grey", xlim=c(1,60), zlim=c(0,0.1), border="grey", shade=.8, ticktype="detailed", expand=0.5, xlab="", ylab="", zlab="")
+
+dev.copy2pdf(file=paste("ImpVol ", etichetta, " b.pdf", sep=""))
+
+#
+# THIS IS FOR 2d PLOTS OF COMPARING THE IMPLIED VOLATILITY
+# WITH THE ASYMPTOTIC FORMULAS IN REGIMES a, b, c, d
+# CF. FIGURE 3 IN THE PAPER
+#
+
+quartz(width=4.3, height=4)
+par(mar=c(2, 2, 0.5, 0.5)+0.2)
+
+T <- 1 + 2*0:29
+
+# REGIME d
+
+K_vec <- exp(.2* kappa1(Sigma_0_Val()^2 * T))
+
+vs_vec <- 0*T
+for(i in 1:length(T)) {vs_vec[i] <- Vol_Imp(K_vec[i], T[i], n=2e3)}
+vd_vec <- 0*T
+for(i in 1:length(T)) {vd_vec[i] <- sigmaimp_d(K_vec[i],T[i])}
+
+plot(T, vs_vec, ylim=c(0,0.01), xlab="", ylab="")
+points(T, vd_vec, type="l", col=4)
+
+dev.copy2pdf(file="regime d k = .2 kappa1.pdf")
+
+# REGIME c
+
+K_vec <- exp(.3 * kappa2(c_Val()^(1/D_Value) * T))
+
+vs_vec <- 0*T
+for(i in 1:length(T)) {vs_vec[i] <- Vol_Imp(K_vec[i], T[i], n=2e3)}
+vc_vec <- 0*T
+for(i in 1:length(T)) {vc_vec[i] <- sigmaimp_c(K_vec[i],T[i])}
+
+K_vec2 <- exp(.1 * kappa2(c_Val()^(1/D_Value) * T))
+
+vs_vec2 <- 0*T
+for(i in 1:length(T)) {vs_vec2[i] <- Vol_Imp(K_vec2[i], T[i], n=2e3)}
+vc_vec2 <- 0*T
+for(i in 1:length(T)) {vc_vec2[i] <- sigmaimp_c(K_vec2[i],T[i])}
+
+plot(T, vs_vec, ylim=c(0,0.04), xlab="", ylab="")
+points(T, vs_vec2)
+points(T, vc_vec, type="l", col=4)
+points(T, vc_vec2, type="l", col=4)
+
+dev.copy2pdf(file="regime c k = .1 .3 kappa2.pdf")
+
+# REGIME b
+
+K_vec <- exp(kappa2(c_Val()^(1/D_Value) * T))
+
+vs_vec <- 0*T
+for(i in 1:length(T)) {vs_vec[i] <- Vol_Imp(K_vec[i], T[i], n=2e3)}
+vb_vec <- 0*T
+for(i in 1:length(T)) {vb_vec[i] <- sigmaimp_b(K_vec[i],T[i])}
+
+K_vec2 <- exp(2*kappa2(c_Val()^(1/D_Value) * T))
+
+vs_vec2 <- 0*T
+for(i in 1:length(T)) {vs_vec2[i] <- Vol_Imp(K_vec2[i], T[i], n=2e3)}
+vb_vec2 <- 0*T
+for(i in 1:length(T)) {vb_vec2[i] <- sigmaimp_b(K_vec2[i],T[i])}
+
+K_vec3 <- exp(.5*kappa2(c_Val()^(1/D_Value) * T))
+
+vs_vec3 <- 0*T
+for(i in 1:length(T)) {vs_vec3[i] <- Vol_Imp(K_vec3[i], T[i], n=2e3)}
+vb_vec3 <- 0*T
+for(i in 1:length(T)) {vb_vec3[i] <- sigmaimp_b(K_vec3[i],T[i])}
+
+
+plot(T, vs_vec, ylim=c(0,0.105), xlab="", ylab="")
+points(T, vs_vec2)
+points(T, vs_vec3)
+points(T, vb_vec, type="l", col=4)
+points(T, vb_vec2, type="l", col=4)
+points(T, vb_vec3, type="l", col=4)
+
+dev.copy2pdf(file="regime b k = .5 1 2 kappa2.pdf")
+
+# REGIME a
+
+K_vec <- exp(3*kappa2(c_Val()^(1/D_Value) * T))
+
+# WARNING, THIS TAKES SOME TIME, DUE TO MORE SIMULATIONS
+
+vs_vec <- 0*T
+for(i in 1:length(T)) {vs_vec[i] <- Vol_Imp(K_vec[i], T[i], n=5e3)}
+va_vec <- 0*T
+for(i in 1:length(T)) {va_vec[i] <- sigmaimp_a(K_vec[i],T[i])}
+vb_vec <- 0*T
+for(i in 1:length(T)) {vb_vec[i] <- sigmaimp_b(K_vec[i],T[i])}
+
+K_vec2 <- exp(9*kappa2(c_Val()^(1/D_Value) * T))
+
+# WARNING, THIS TAKES A LOT OF TIME, DUE TO MUCH MORE SIMULATIONS
+
+vs_vec2 <- 0*T
+for(i in 1:length(T)) {vs_vec2[i] <- Vol_Imp(K_vec2[i], T[i], n=1e5)}
+va_vec2 <- 0*T
+for(i in 1:length(T)) {va_vec2[i] <- sigmaimp_a(K_vec2[i],T[i])}
+
+plot(T, vs_vec, ylim=c(0,0.17), xlab="", ylab="")
+points(T, vs_vec2)
+points(T, va_vec, type="l", col=4)
+points(T, va_vec2, type="l", col=4)
+
+dev.copy2pdf(file="regime a k = 3 9 kappa2.pdf")
+
+##################################################

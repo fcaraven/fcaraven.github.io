@@ -1,0 +1,1889 @@
+%!TEX encoding = UTF-8 Unicode
+%!TEX spellcheck = Italian
+
+\documentclass[a4paper,11pt,oneside]{amsart}
+
+\usepackage[italian]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+
+\usepackage{amsmath, latexsym, amsfonts, amssymb, amsthm, amscd}
+%\usepackage{showkeys}
+\usepackage{graphics,epsf,epsfig,psfrag}
+\usepackage{perpage}
+\usepackage{lastpage}
+\usepackage{url}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{multicol}
+\renewcommand{\multicolsep}{0.1em}
+
+
+\usepackage[a4paper,scale={0.75,0.75},marginratio={1:1}]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% FANCY PAGE LAYOUT %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+%\fancyhead[R]{\sf Curriculum Vit\ae}
+%\fancyhead[L]{\sf Francesco Caravenna}
+\fancyhead[R]{}
+\fancyhead[L]{}
+\cfoot{\small \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{8mm}
+
+
+\fancypagestyle{plain}{% 
+%\fancyhead{\sf ~} % empty header
+\fancyhf{}
+\cfoot{\small \thepage\ / \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\footskip}{6.2mm}
+}
+
+
+\frenchspacing
+
+\setlength{\parindent}{0pt}
+
+%\usepackage[T1]{fontenc}
+%%\usepackage[latin1]{inputenc} %under Linux
+%\usepackage[ansinew]{inputenc} %under Windows
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%% LIST ENVIRONMENTS %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\newenvironment{myenumerate}{%
+%\renewcommand{\theenumi}{\arabic{enumi}}%
+%\renewcommand{\labelenumi}{{\rm(\theenumi)}}%
+%\begin{list}{\labelenumi}
+%	{%
+%	\setlength{\itemsep}{0.3em}%
+%	\setlength{\topsep}{0.3em}%
+%	\setlength{\partopsep}{0em}%
+%	\setlength{\parsep}{0em}%
+%	\setlength{\parskip}{0em}%
+%	\setlength\leftmargin{1.5em}%
+%	\setlength\labelwidth{1.1em}%
+%	\setlength{\labelsep}{0.4em}%
+%	\usecounter{enumi}%
+%	}%
+%	}%
+%{\end{list}
+%}
+%
+%
+%\renewenvironment{enumerate}{
+%\begin{myenumerate}}%
+%{\end{myenumerate}} 
+
+\newcounter{myenum}
+\newenvironment{myenumerate}{%
+  \begin{list}{[\arabic{myenum}]\rule{0pt}{1.1em}}%
+ 	{\setlength\leftmargin{2.4em}}%
+%	\setlength\labelwidth{2.4em}%
+     \setlength{\labelsep}{0.5em}
+     \usecounter{myenum}}%
+  {\end{list}} 
+
+
+\newenvironment{myitemize}{%
+\begin{list}{$\bullet$}% 
+ 	{%
+	\setlength{\itemsep}{0.3em}%
+	\setlength{\topsep}{0.3em}%
+	\setlength{\partopsep}{0em}%
+	\setlength{\parsep}{0em}%
+	\setlength{\parskip}{0em}%
+	\setlength\leftmargin{1.5em}%
+	\setlength\labelwidth{1.1em}%
+	\setlength{\labelsep}{0.4em}%
+%	\usecounter{enumi}%
+	}%
+	}%
+{\end{list}}
+
+
+\renewenvironment{itemize}{
+\begin{myitemize}}%
+{\end{myitemize}} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% FOOTNOTES %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\MakePerPage[2]{footnote} % restarts footnote counter at every new page
+\def\thefootnote{\fnsymbol{footnote}} % prints footnotes markers as symbols
+
+%\long\def\symbolfootnote[#1]#2{\begingroup\def\thefootnote{\fnsymbol{footnote}}%
+%\footnote[#1]{#2}\endgroup}
+% for unnumbered footnotes, use \symbolfootnote[0]{text here}
+% ... 1=*, 2=dagger, 3=doubledagger, etc.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\definecolor{myred}{RGB}{176,16,16}
+\definecolor{myblack}{RGB}{0,0,0}
+
+\titleformat{\section}{\color{myred}\titlerule[0.7pt]\color{myblack}}
+{\color{myred}\rule[-0.4em]{0.7pt}{1.55em}\color{myblack}}
+{.35em}{\bfseries\sffamily\MakeUppercase}
+
+\titlespacing{\section}{0pt}{*3}{*1.5}
+%\titlespacing{\section}{-0.35em}{*3}{*1.5}
+
+
+%\newcommand{\mysection}[1]{%
+%  \ifhmode\par\fi
+%  \removelastskip
+%  \vskip 0.7em
+%  \begingroup
+%  \textcolor{myred}{\noindent\rule[-0.5ex]{\columnwidth}{1.2pt}\nobreak}\par
+%  \noindent
+%  \vskip -0.15em\nobreak
+%  \leavevmode\textcolor{myred}{\rule[-0.35em]{1.2pt}{1.55em}}%
+%  \MakeUppercase{\hskip 0.8ex \bfseries \sffamily #1}\par
+%  \vskip 0.5em\nobreak
+%  \endgroup%
+%%  \textcolor{myred}{\noindent\hrulefill\nobreak}
+%  \nopagebreak%
+%  }
+%
+%\renewcommand{\section}{\mysection}
+
+\newcommand\myskip{\vskip .175\baselineskip plus .175\baselineskip}
+%\def\myskip{\smallskip}
+\newcommand\bP{\mathbf{P}}
+\newcommand\dd{\mathrm{d}}
+\newcommand\cH{\mathcal{H}}
+\newcommand\N{\mathbb{N}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pxfonts} % Sets Palatino as main font
+\renewcommand{\sfdefault}{iwona} % Sets Iwona as sans-serif font
+%\usepackage[euler-digits]{eulervm} % Alternative math fonts (Euler)
+
+\begin{document}
+
+\LARGE
+{\huge\sffamily\bfseries Francesco Caravenna}\hfill 
+{\normalsize\sffamily \raisebox{0.53em}{[aggiornato al \today]}}
+
+{\sffamily Curriculum Vit\ae}
+
+\vspace{1.5ex}
+
+\normalsize
+
+\section{Dati Personali}
+
+\begin{itemize}
+
+\item Nato il 15 marzo 1979 a Treviglio (BG)
+
+\item \emph{Indirizzo:} via Cozzi 55,\ 20125 Milano,\ Italy\\
+\phantom{\emph{Indirizzo:}} ufficio 3062, edificio U5\\
+\phantom{\emph{Indirizzo:}} telefono +39 02 6448 5752
+
+\item \textit{E-mail:} \texttt{francesco.caravenna@unimib.it}
+
+\item \textit{Home page:} \url{http://www.matapp.unimib.it/~fcaraven/}
+
+\item \textit{Conoscenze linguistiche:} Italiano (lingua madre), Inglese, Francese
+
+\item \textit{Conoscenze informatiche:} C, R, HTML/CSS, \LaTeX
+
+\end{itemize}
+
+
+\section{Formazione}
+
+\begin{itemize}
+\item
+(21 Ott 2005) \textit{Dottorato di Ricerca in Matematica},
+Universit\`a degli Studi di Milano Bicocca 
+e Universit\'e Paris 7 Denis Diderot (F). Relatori:
+Giambattista Giacomin e Alberto Gandolfi.
+
+\item
+(19 Dic 2003)
+\textit{Diploma di Licenza in Fisica} (voto: 70/70 e lode),
+Scuola Normale Superiore di Pisa. Relatore: Sergio Caracciolo.
+
+\item
+(23 Set 2002)
+\textit{Laurea in Fisica} (voto: 110/110 e lode), 
+Universit\`a di Pisa. Relatore: Sergio Caracciolo.
+\end{itemize}
+
+
+
+\section{Posizioni Accademiche}
+
+\begin{itemize}
+\item (Nov 2010 -- oggi) \emph{Professore Associato di
+Probabilit\`a e Statistica Matematica} (s.s.d. MAT/06),
+Dipartimento di Matematica e Applicazioni, Universit\`a degli Studi di Milano-Bicocca.
+
+\item (Ott 2006 -- Ott 2010) \textit{Ricercatore in Probabilit\`a
+e Statistica Matematica} (s.s.d. MAT/06),
+Dipartimento di Matematica Pura e Applicata, 
+Universit\`a degli Studi di Padova.
+
+\item (Ott 2005 -- Set 2006) \textit{Postdoc in Matematica} nel gruppo
+di Erwin Bolthausen,
+Institut f\"ur Mathematik, Universit\"at Z\"urich (CH).
+\end{itemize}
+
+\section{Riconoscimenti}
+
+\begin{itemize}
+\item Vincitore del ``\emph{Premio Guido Fubini 2011}'', 
+assegnato dall'Istituto Superiore Mario Boella
+a un giovane matematico che lavora in Italia nell'ambito
+dei processi aleatori.
+\end{itemize}
+
+\section{Studenti di dottorato}
+
+\begin{itemize}
+\item Niccol\`o Torri, tesi \emph{``Localization and universality phenomena for
+random polymers''} discussa il 18 settembre 2015,
+Universit\'e Claude Bernarde Lyon 1 (F) in cotutela con
+l'Universit\`a degli Studi di Milano-Bicocca
+(supervisione congiunta con Fabio Lucio Toninelli).
+
+%\noindent
+%[Attualmente post-doc presso il Dipartimento
+%di Matematica dell'Universit\`a di Nantes (F)]
+
+\item Jacopo Corbetta, tesi \emph{``General smile asymptotics and a multiscaling
+stochastic volatility model''} discussa il 4 marzo 2015,
+Universit\`a degli Studi di Milano-Bicocca.
+
+%\noindent
+%[Attualmente post-doc presso CERMICS,
+%\'Ecole des Ponts - ParisTech,
+%Marne la Vall\'ee (F)]
+\end{itemize}
+
+
+\section{Finanziamenti}
+
+\begin{itemize}
+\item Coordinatore (P.I.) del Progetto di Ricerca 
+\textit{``Modelli probabilistici per la meccanica statistica di polimeri, 
+sistemi di particelle interagenti e applicazioni''} (CPDA082105/08) 
+dell'Universit\`a degli Studi di Padova (2008) [finanziamento di 34\,000 euro]
+
+\item Membro di progetti PRIN a tema probabilit\`a/meccanica statistica (anni 2004, 2006, 2009).
+\end{itemize}
+
+\section{Organizzazione di scuole e conferenze}
+
+\begin{itemize}
+\item Organizzazione della Winter School
+\emph{``Recent Breakthroughs in Singular Stochastic PDEs''}
+(Universit\`a di Milano-Bicocca, 2-6 febbraio 2015),
+con mini-corsi di Massimiliano Gubinelli e Lorenzo Zambotti 
+[in collaborazione con Federica Masiero e Gianmario Tessitore].
+
+\item Membro del comitato organizzatore del
+\emph{``XII Workshop on Quantitative Finance''} (Padova, 27-28 gennaio 2011).
+\end{itemize}
+
+\section{Soggiorni di Ricerca}
+
+\begin{itemize}
+
+\item Cinque mesi presso il \emph{Mathematisch Instituut}, \emph{Universiteit Leiden} (NL)
+come visiting professor nell'ambito del progetto
+ERC Advanced Grant VARIS, su invito di Frank den Hollander
+(17 marzo - 11 maggio 2012; 1 maggio - 30 giugno 2013; 1-30 marzo 2014) 
+
+\item Due mesi presso il 
+\textit{Laboratoire de Probabilit\'es et Mod\`eles Al\'eatoires},
+\textit{Universit\'es Paris 6 e Paris 7} (F), su invito di Giambattista Giacomin
+e Lorenzo Zambotti  (5 ottobre - 13 dicembre 2009) .
+
+\item Un mese presso l'\emph{Institut f\"ur Mathematik}, \emph{Technische Universit\"at Berlin} (D)
+su invito di Jean-Dominique Deuschel (8 gennaio - 2 febbraio 2007) .
+
+\item Diversi periodi brevi (una/due settimane) presso la \emph{University of Warwick} 
+(16-21 giu 2014),
+la \emph{National University of Singapore} (4-15 apr 2016, 27 gen - 8 feb 2014),
+l'\emph{Universit\'e de Nantes} (18-22 ott 2010),
+la \emph{Technische Universit\"at Berlin} (3-14 nov 2008), l'\emph{ENS Lyon} (16-20 giu 2008),
+l'\textit{Universit\'e Paris 7} (17-21 lug 2006, 19-23 mag 2008),
+l'\textit{Universit\"at Z\"urich} (28 apr - 2 mag 2008),
+la \emph{Technische Universiteit Eindhoven},
+centro \emph{Eurandom} (10-14 lug 2006, 22-26 ott 2007).
+\end{itemize}
+
+%\newpage
+
+
+
+
+
+\section{Attivit\`a di Referee}
+
+\begin{itemize}
+\item Ho svolto attivit\`a di \textit{referee} per le seguenti riviste:
+\textit{Probability Theory and Related Fields}, 
+\textit{Annals of Probability},
+\textit{Communications in Mathematical Physics},
+\textit{Stochastic Processes and their Applications},
+\textit{Electronic Journal of Probability},
+\textit{Annales de l'Institut Henri Poincar\'e}, 
+\textit{Statistics and Probability Letters},
+\textit{Markov Processes and Related Fields},
+\textit{Potential Analysis}.
+\end{itemize}
+
+
+
+
+
+%\newpage
+
+
+
+\section{Interessi di ricerca}
+
+%\begin{multicols}{2}
+
+La mia attivit\`a di ricerca \`e incentrata sulla teoria della probabilit\`a 
+e sulle sue applicazioni. Le mie linee di ricerca principali sono le seguenti:
+\begin{enumerate}
+\item[\bf 1.] Meccanica statistica,
+in particolare modelli probabilistici di polimeri
+\item[\bf 2.] Propriet\`a asintotiche di passeggiate aleatorie reali
+\item[\bf 3.] Modelli probabilistici per serie finanziarie
+\end{enumerate}
+
+\smallskip
+{\hskip 1.2em}Sono coautore di 23 articoli
+pubblicati su riviste internazionali
+quali \emph{J. Eur. Math. Soc. (JEMS)}, 
+\emph{Probab. Theory Related Fields}, \emph{Ann. Probab.}, 
+\emph{Commun. Math. Phys.}, 
+\emph{Ann. Appl. Probab.}, 
+\emph{Stochastic Process. Appl.}, 
+\emph{Electron. J. Probab.}, 
+\emph{Ann. Inst. H. Poincar\'e}.
+%\emph{J. Stat. Phys.}, 
+%\emph{Electron. Commun. Probab.},
+%\emph{Adv. in Appl. Probab.}.
+
+
+
+%\smallskip
+%
+%{\hskip 1.2em}Presento di seguito una descrizione dei risultati ottenuti.
+%
+%\medskip
+%
+%\textbf{1.} 
+%%Sin dalla mia tesi di dottorato [\ref{thesis}], 
+%La mia linea di ricerca principale
+%\`e %stata 
+%lo studio di modelli probabilistici in meccanica statistica,
+%in particolare modelli di polimeri in interazione con l'ambiente, tipicamente
+%basati su passeggiate aleatorie o su processi di
+%rinnovo (passeggiate aleatorie
+%con incrementi positivi).
+%Tali modelli, introdotti nelle scienze applicate,
+%ricevono molta attenzione nella letteratura matematica
+%per la ricca fenomenologia che esibiscono: fenomeni di localizzazione,
+%transizioni di fase, universalit\`a.
+%
+%\smallskip
+%
+%\textbf{1a.} Un modello a cui ho dedicato molta attenzione \`e il cosiddetto
+%\emph{copolimero}, o polimero disomogeneo, in prossimit\`a di un'interfaccia %selettiva
+%che separa due solventi. La disomogeneit\`a del polimero \`e
+%codificata da una successione reale $\omega = (\omega_n)_{n\in\N}$,
+%che descrive le affinit\`a dei monomeri (i costituenti del polimero) per i solventi,
+%mentre l'intensit\`a e 
+%l'asimmetria dell'interazione sono regolate da due parametri reali $\lambda$ e~$h$.
+%\`E possibile mostrare che esiste una
+%curva critica $h = h_c(\lambda)$ che separa una regione ``localizzata'' $h < h_c(\lambda)$,
+%in cui le configurazioni tipiche del polimero restano vicine all'interfaccia tra i solventi,
+%da una regione ``delocalizzata'' $h > h_c(\lambda)$,
+%in cui le configurazioni tipiche del polimero sono 
+%invece interne a uno dei due solventi.
+%
+%{\hskip 1.2em}Lo studio della curva critica $h_c(\lambda)$
+%\`e uno dei problemi principali per questo modello. 
+%Le sue propriet\`a dipendono
+%dalla scelta della successione $\omega$ che codifica la disomogeneit\`a.
+%Il caso pi\`u interessante \`e quello in cui $\omega$ \`e
+%una realizzazione di un processo aleatorio (tipicamente una successione i.i.d.):
+%modelli di questo tipo sono detti \emph{sistemi disordinati},
+%o fortemente disomogenei, e la loro analisi
+%\`e particolarmente difficile e affascinante. Una classe di modelli pi\`u
+%trattabili \`e data da sistemi debolmente disomogenei, in cui $\omega$ \`e
+%una successione periodica.
+%%o anche omogenei, in cui $\omega$ \`e costante.
+%
+%%Anche il caso limite dei sistemi omogenei, in cui $\omega$ \`e costante,
+%%\`e interessante, perch\'e spesso il modello diventa esattamente risolubile.
+%
+%\smallskip
+%
+%{\hskip 1.2em}Per il modello di copolimero disordinato,
+%una panoramica dei risultati noti e dei problemi aperti
+%(aggiornata al 2012) \`e fornita nel proceeding~[\ref{cgt}],
+%scritto in collaborazione con Giambattista Giacomin e Fabio Lucio Toninelli.
+%Il proceeding [\ref{bari}] fornisce un'introduzione
+%accessibile al modello, cos\`i come [\ref{cdhp}], scritto in collaborazione con Frank den Hollander
+%e Nicolas P\'etr\'elis in occasione di un corso da noi tenuto per la
+%XIV Scuola Brasiliana di Probabilit\`a congiuntamente con la 
+%Scuola Estiva del Clay Mathematics Institute, nell'agosto 2010.
+%
+%{\hskip 1.2em}Venendo agli articoli su rivista,
+%in collaborazione con Giambattista Giacomin ho mostrato 
+%in~[\ref{cg}] che la tecnica del \textit{constrained annealing},
+%estensivamente utilizzata nella letteratura fisica, \`e inefficace per migliorare
+%le stime dall'alto sulla curva critica $h_c(\lambda)$ del modello di copolimero disordinato.
+%In collaborazione anche con Massimiliano
+%Gubinelli, ho elaborato in~[\ref{cgg1}] un test statistico con stima esplicita per la probabilit\`a
+%di errore, basato su disuguaglianze di concentrazione,
+%che ci ha permesso di fornire evidenze numeriche schiaccianti contro una congettura
+%sulla curva critica, proposta nella letteratura fisica da C. Monthus
+%[Eur. Phys. J. B 13 (2000), 111-130].
+%
+%
+%{\hskip 1.2em}Mi sono quindi interessato alle propriet\`a 
+%della curva critica $h_c(\lambda)$ nel regime di debole accoppiamento $\lambda \to 0$.
+%In collaborazione con Giambattista Giacomin, ho mostrato in~[\ref{cg2}]
+%che in questo regime si ha un fenomeno notevole di \emph{universalit\`a}:
+%una vasta classe di modelli di copolimero esibisce lo
+%stesso comportamento asintotico $h_c(\lambda) \sim m \, \lambda$,
+%dove la costante $m$ non dipende dai dettagli del modello e ammette una caratterizzazione
+%in termini di un modello continuo, costruito a partire da un moto browniano.
+%Sono note stime esplicite dal basso e dall'alto sulla costante $m$, ma il suo valore esatto
+%non \`e noto in generale. 
+%Un'eccezione \`e data da modelli di copolimero costruiti
+%a partire da processi di rinnovo con media finita. In questo caso speciale, in collaborazione
+%con Quentin Berger, Julien Poisat, Rongfeng Sun e Nikos Zygouras, siamo riusciti a determinare
+%in~[\ref{bcpsz}] il valore esatto della costante~$m$. 
+%
+%{\hskip 1.2em}
+%I risultati in~[\ref{bcpsz}] si applicano anche alla
+%classe dei modelli di \emph{pinning},
+%che descrivono un polimero in interazione con un'interfaccia lineare.
+%Su questi modelli c'\`e stata un'attivit\`a di ricerca molto intensa nella letteratura matematica
+%recente, che ha permesso di dimostrare rigorosamente diversi risultati congetturati dai fisici
+%e di risolvere alcune questione aperte.
+%
+%{\hskip 1.2em}
+%Ritornando al modello di copolimero basato su un processo di rinnovo con media infinita,
+%che \`e il caso pi\`u interessante,
+%T. Bodineau e G. Giacomin avevano proposto in [J. Stat. Phys. 117 (2004), 801-818]
+%un modello semplificato,
+%con la speranza che catturasse le propriet\`a cruciali del modello originale,
+%in particolare il valore della costante $m$.
+%In collaborazione con Erwin Bolthausen e B\'eatrice de Tili\`ere,
+%usando tecniche di rinormalizzazione e \textit{coarse-graining},
+%siamo riusciti a determinare in~[\ref{bcdt}] il punto 
+%critico di questo modello semplificato, mostrando
+%che il modello originale di copolimero \`e in realt\`a sostanzialmente
+%pi\`u ricco.
+%
+%{\hskip 1.2em}
+%Uno strumento importante per lo studio dei modelli di polimeri disordinati,
+%applicabile sia a modelli di copolimero che di pinning, \`e la
+%disuguaglianza di regolarizzazione (\emph{smoothing}) ottenuta da G. Giacomin e
+%F.L. Toninelli [Commun. Math. Phys. 266 (2006), 1-16].
+%In collaborazione con Frank den Hollander, ne abbiamo fornito in~[\ref{cdh}]
+%un'estensione, rimuovendo ipotesi non necessarie sulla
+%distribuzione del disordine e fornendo costanti asintoticamente ottimali. Tale estensione
+%si \`e rivelata un ingrediente importante per ottenere i risultati in~[\ref{bcpsz}].
+%
+%\smallskip
+%
+%\textbf{1b.} L'interesse per fenomeni di \emph{universalit\`a}, in cui 
+%una vasta classe di modelli microscopici manifesta lo stesso comportamento macroscopico,
+%ha guidato in modo cruciale la mia attivit\`a di ricerca recente, portando ad
+%alcuni dei risultati che ritengo pi\`u importanti. 
+%
+%{\hskip 1.2em}Insieme a Rongfeng Sun
+%e Nikos Zygouras, abbiamo formulato in~[\ref{csz1}] un quadro generale che permette
+%di ottenere il limite delle funzioni di partizione, nel regime di debole accoppiamento,
+%per modelli in cui il disordine \`e ``rilevante'' (ossia una quantit\`a di disordine
+%arbitrariamente piccola, ma fissata, cambia le propriet\`a macroscopiche
+%del sistema, ad es.\ gli esponenti critici). 
+%Questo approccio pu\`o essere
+%applicato a una vasta classe di sistemi disordinati: oltre ai gi\`a menzionati
+%modelli di copolimero e pinning, abbiamo considerato in~[\ref{csz1}] il modello di 
+%\emph{polimero diretto
+%in ambiente aleatorio} e il \emph{modello di Ising bidmensionale
+%con campo esterno aleatorio},
+%che hanno ricevuto una grande attenzione nella letteratura matematica e fisica.
+%
+%{\hskip 1.2em}Le tecniche usate in~[\ref{csz1}] rivestono un interesse generale.
+%Forniamo infatti condizioni esplicite per la convergenza di
+%espansioni in ``caos polinomiale'' verso il ``caos di Wiener'',
+%basate su un \emph{principio di Lindeberg}
+%(o principio di invarianza) che estende risultati precedenti di
+%E.~Mossel, R.~O'Donnel e K.~Oleszkiewicz [Ann. Math. 171 (2010), 295-341].
+%
+%{\hskip 1.2em}Ottenere i limiti delle funzioni di partizione \`e un passo cruciale
+%per ricavare il limite di scala completo del modello. In collaborazione con Rongfeng Sun
+%e Nikos Zygouras, abbiamo mostrato in~[\ref{csz2}] che \`e possibile costruire
+%una versione continua del modello di pinning disordinato, quando il disordine \`e rilevante,
+%ottenuta come limite di scala di una vasta classe di modelli di pinning discreti, 
+%nel regime di debole accoppiamento.
+%Tale modello continuo, che \`e basato su un insieme 
+%rigenerativo stabile della retta reale (l'insieme degli zeri
+%di un processo di Bessel) e su un disordine browniano,
+%ha propriet\`a sottili e notevoli. Ad esempio, 
+%per quasi ogni realizzazione del disordine, la legge del modello \`e singolare
+%rispetto alla legge dell'insieme rigenerativo. Di conseguenza, il modello continuo di pinning 
+%non ammette una Hamiltoniana (rispetto all'insieme rigenerativo) e la sua
+%stessa costruzione rigorosa \`e un problema delicato.
+%%I limiti delle funzioni di partizione possono essere viste come funzioni di partizione continue.
+%
+%{\hskip 1.2em}
+%Nella prepubblicazione~[\ref{ctt}],
+%con Fabio Lucio Toninelli e con il nostro ex studente di dottorato
+%Niccol\`o Torri, abbiamo messo in evidenza 
+%il valore di universalit\`a del modello continuo di pinning,
+%mostrando che esso fornisce il comportamento asintotico della curva critica (e dell'energia libera)
+%per una vasta classe di modelli di pinning discreti, nel regime
+%di debole accoppiamento. Si tratta di un'estensione altamente non banale
+%dei risultati ottenuti in~[\ref{cg2}] per il copolimero, perch\'e le tecniche
+%usate in~[\ref{cg2}] si basano sull'esistenza di una Hamiltoniana continua, che
+%non esiste nel caso del pinning.
+%
+%{\hskip 1.2em}
+%Come gi\`a detto, l'approccio in~[\ref{csz1}] si applica a modelli in cui il disordine \`e
+%``rilevante''. L'estensione a modelli in cui il disordine \`e ``marginalmente rilevante'',
+%che sono tipicamente caratterizzati da divergenze logaritmiche, \`e l'oggetto della
+%prepubblicazione~[\ref{csz3}], in collaborazione con Rongfeng Sun
+%e Nikos Zygouras. In questo lavoro mostriamo che per modelli di pinning o di polimero diretto 
+%``marginalmente rilevanti'' si verifica una transizione 
+%tra una fase di ``disordine forte'' e una di ``disordine debole'' nel regime di debole accoppiamento.
+%Mostriamo inoltre che la funzione di partizione
+%ha un limite in legge log-normale nella fase di ``disordine debole''.
+%Questi risultati permettono di dire qualcosa sull'\emph{equazione 
+%del calore stocastica bidimensionale}
+%con rumore bianco spazio-temporale moltiplicativo,
+%%Un problema aperto importante \`e dare un senso rigoroso a tale equazione,
+%che \`e mal posta in senso classico e sfugge anche alle recenti teorie
+%di M. Hairer [Invent. Math. 198 (2014), 269-504] e M. Gubinelli, P. Imkeller, N. Perkowski
+%[Forum of Mathematics, Pi, 2015, no. 6].
+%Regolarizzando il potenziale mediante convoluzione con un nucleo regolare
+%e riscalandone l'intensit\`a,
+%%e mandando il parametro di regolarizzazione a zero, 
+%abbiamo mostrato in~[\ref{csz3}] che,  nella fase di ``disordine debole'',
+%la soluzione ha distribuzioni marginali asintoticamente log-normali
+%e presenta un'interessante struttura di correlazioni multi-scala.
+%%Tale equazione non pu\`o essere trattata nemmeno con la recente
+%%teoria delle ``Strutture di Regolarit\`a'' di Martin Hairer
+%%[Invent. Math. 198 (2014), 269-504] n\'e con la teoria alternativa delle
+%%``Distribuzioni Paracontrollate'' di Gubinelli, Imkeller e Perkowski
+%%[Forum of Mathematics, Pi, 2015, no. 6].
+%
+%\smallskip
+%
+%\textbf{1c.} Ho ottenuto risultati anche per altri sistemi disordinati.
+%Nell'articolo~[\ref{cgg2}],
+%in collaborazione con Giambattista Giacomin e Massimiliano Gubinelli,
+%dimostriamo un teorema limite centrale per modelli di polimeri semi-flessibili
+%costruiti componendo rotazioni aleatorie. Nell'articolo~[\ref{cpp}], in collaborazione
+%con Philippe Carmona e Nicolas P\'etr\'elis, dimostriamo un fenomeno di localizzazione
+%forte per una versione discreta del modello parabolico di Anderson con disordine a code pesanti.
+%Nella prepubblicazione~[\ref{cdhpp}], in collaborazione con Frank den Hollander, Nicolas
+%P\'etr\'elis e Julien Poisat, consideriamo un modello 
+%``annealed'' (in cui si fa un'opportuna media sul disordine)
+%di polimero, in cui i monomeri hanno una ``carica'' e si possono attrarre o respingere.
+%Per questo modello, forniamo un'analisi completa del diagramma di fase,
+%mostrando che c'\`e una transizione
+%di fase di primo ordine e ottenendo risultati dettagliati (grandi deviazioni,
+%legge dei grandi numeri, teorema limite centrale) per le quantit\`a di interesse.
+%%Lo strumento chiave \`e una rappresentazione della funzione di partizione,
+%%basata su una formula del tipo Ray-Knight per il tempo locale della passeggiata
+%%aleatoria semplice sugli interi.
+%
+%\smallskip
+%
+%\textbf{1d.} 
+%%Tutti i risultati descritti finora riguardano sistemi disordinati (fortemente disomogenei). 
+%Nella prima
+%fase della mia attivit\`a di ricerca mi sono anche interessato
+%all'analisi di sistemi \textit{debolmente
+%disomogenei}, in cui la successione $\omega$ che codifica la disomgeneit\`a
+%\`e periodica (o anche costante, nel qual caso il modello \`e detto omogeneo).
+%Tali modelli sono tipicamente pi\`u trattabili rispetto a quelli disordinati
+%e permettono pertanto di ottenere risultati pi\`u forti.
+%
+%{\hskip 1.2em}Nell'articolo [\ref{cgz2}], in collaborazione
+%con Giambattista Giacomin e Lorenzo Zambotti, abbiamo mostrato che modelli omogenei
+%di pinning e copolimero ammettono una rappresentazione esplicita della funzione di partizione,
+%basata sulla teoria del rinnovo, che permette di ottenerne il comportamento asintotico
+%preciso (non solo logaritmico) nel limite di volume infinito.
+%Abbiamo poi mostrato in [\ref{cgz1}] e [\ref{cgz3}] che questi risultati
+%possono essere estesi a modelli debolmente disomogenei,
+%sfruttando la teoria del rinnovo markoviana. 
+%L'asintotica precisa della funzione di partizione ci ha permesso di analizzare
+%in dettaglio le propriet\`a del modello, ottenendo risultati fini sulle traiettorie quali
+%i limiti di scala verso processi continui (quali moto browniano, moto browniano riflesso,
+%meandro browniano) e i limiti di volume infinito.
+%
+%{\hskip 1.2em}Un approccio basato sulla teoria del rinnovo markoviana
+%\`e anche alla base 
+%degli articoli [\ref{cd1}] e [\ref{cd2}], in collaborazione con Jean-Dominique Deuschel.
+%In questi lavori analizziamo modelli di pinning e di \emph{wetting} (in cui si
+%aggiunge il vincolo di positivit\`a) con interazione di tipo laplaciano,
+%noti anche come modelli di membrana, in dimensione (1+1). 
+%I risultati principali ottenuti in [\ref{cd1}] riguardano l'esistenza di una
+%transizione di fase non banale e la relativa regolarit\`a: in particolare, mostriamo che
+%la transizione \`e di secondo ordine per il modello di pinning, ma di primo ordine
+%per il modello di wetting. L'analisi del modello di pinning \`e approfondita
+%in [\ref{cd2}], dove deriviamo i limiti di scala delle configurazioni tipiche del modello e
+%forniamo una caratterizzazione per traiettorie del diagramma di fase. 
+%Questi modelli con interazione laplaciana sono fortemente
+%legati all'integrale di una passeggiata aleatoria e, pertanto, alcuni dei problemi
+%e risultati ottenuti nell'analisi hanno un interesse di carattere generale,
+%come testimoniato dalle numerose citazione ottenute da [\ref{cd1}]
+%al di fuori della comunit\`a di meccanica statistica.
+%
+%{\hskip 1.2em}Nell'articolo [\ref{bc}], in collaborazione con Martin Borecki, 
+%ho considerato modelli di pinning in dimensione (1+1) con interazione mista
+%di tipo gradiente pi\`u laplaciano, mostrando che, a differenza
+%del caso di interazione puramente laplaciana, la transizione di fase sparisce.
+%
+%{\hskip 1.2em}Infine, in collaborazione con Nicolas P\'etr\'elis, ho studiato
+%in [\ref{cp1}] e~[\ref{cp2}] un modello omogeneo di polimero in interazione
+%attrattiva o repulsiva con un ambiente costituito da una successione di interfacce equispaziate.
+%Sebbene non vi siano transizioni di fase al variare dell'intensit\`a dell'interazione,
+%ci sono transizioni in termini della distanza $T_N$
+%tra le interfacce (dove $N$ \`e la lunghezza del polimero), che determina \textit{scaling}
+%radicalmente diversi per le traiettorie tipiche.
+%Pi\`u precsamente, nel caso attrattivo si ha una transizione per $T_N \approx \log N$,
+%mentre nel caso repusivo ci sono due transizioni distinte, per $T_N \approx N^{1/3}$
+%e per $T_N \approx N^{1/2}$.
+%%rinnovo ha permesso di fornire 
+%
+%\medskip
+%
+%\textbf{2.} Lo studio delle propriet\`a asintotiche delle passeggiate aleatorie reali 
+%\`e un argomento classico in teoria della 
+%probabilit\`a. Motivato anche dalle applicazioni alla meccanica statistica, 
+%in cui diversi modelli sono costruiti a partire da passeggiate aleatorie, mi sono 
+%interessato al comportamento asintotico di una passeggiata aleatoria 
+%condizionata a restare positiva (su un orizzonte temporale finito),
+%dimostrando un teorema limite locale sotto l'ipotesi 
+%che la passeggiata aleatoria sia nel dominio di 
+%attrazione della legge normale~[\ref{llt}].
+%Le tecniche alla base di questo risultato derivano dalla teoria delle fluttuazioni
+%per passeggiate aleatorie reali.
+%
+%{\hskip 1.2em}In collaborazione con Lo\"ic Chaumont,
+%abbiamo considerato passeggiate aleatorie nel dominio di attrazione di una legge stabile,
+%dimostrando un principio di invarianza (teorema limite centrale funzionale)
+%nel caso in cui la passeggiata aleatoria sia
+%condizionata a restare positiva per tutto il tempo~[\ref{carcha}].
+%Successivamente abbiamo esteso tale principio di invarianza
+%a \emph{ponti} di passeggiate aleatorie condizionate
+%a restare positive~[\ref{carcha2}]. Questi risultati 
+%hanno gi\`a trovato applicazioni
+%interessanti, ad esempio
+%nello studio di mappe planari aleatorie, a opera di N.~Curien e J.-F.~Le Gall
+%[Ann. Inst. H. Poincar\'e (to appear), arXiv:1506.01590],
+%e nello studio della diffusione di Ferrari-Spohn,
+%a opera di D.~Ioffe, S.~Shlosman e Y.~Velenik
+%[Commun. Math. Phys. 336 (2015), 905-932].
+%
+%{\hskip 1.2em}Pi\`u recentemente, nella prepubblicazione~[\ref{strong}]
+%ho ottenuto condizioni necessarie
+%e sufficienti per il teorema del rinnovo locale,
+%detto anche ``strong renewal theorem'', per processi di rinnovo 
+%nel dominio di attrazione di una legge stabile,
+%risolvendo un problema aperto che risale a un articolo classico di Garsia e Lamperti
+%del 1963. Lo stesso risultato \`e stato ottenuto indipendentemente e simultaneamente
+%da Ron Doney, uno dei massimi esperti del settore. Abbiamo deciso di unire
+%i nostri sforzi e stiamo attualmente collaborando
+%per estendere il risultato a passeggiate aleatorie (con incrementi non necessariamente positivi).
+%
+%\medskip
+%
+%\textbf{3.} Il mio interesse per la modellistica di serie finanziarie \`e pi\`u recente.
+%In collaborazione con Alessandro Andreoli, Paolo Dai Pra e Gustavo Posta,
+%in~[\ref{acdp}] abbiamo introdotto e studiato un modello a volatilit\`a stocastica
+%per serie finanziarie, affiancando ai risultati teorici un'analisi numerica
+%effettuata sulla serie storica del Dow Jones Industrial Average. A dispetto della sua semplicit\`a,
+%il modello \`e in grado di riprodurre accuratamente diverse propriet\`a delle serie finanziarie,
+%incluso il cosiddetto ``multi-scaling dei momenti''.
+%
+%{\hskip 1.2em}Le propriet\`a finanziarie di questo modello, in particolare il prezzaggio
+%di opzioni, sono state studiate in collaborazione col mio ex dottorando Jacopo Corbetta.
+%Nella prepubblicazione~[\ref{carcor2}] abbiamo ottenuto formule asintotiche
+%per la superficie di volatilit\`a implicita, valide in regimi generali di maturit\`a brevi
+%e/o strike estremi, che mostrano in particolare come il ``volatility smile'' del nostro modello
+%sia estremamente pronunciato. Tali formule asintotiche si basano su stime 
+%sulla coda della distribuzione dei \emph{return}, per le quali usiamo tecniche
+%di grandi deviazioni.
+%
+%{\hskip 1.2em}Il legame tra l'asintotica della volatilit\`a implicita e le
+%stime sulla coda dei return \`e molto generale, come abbiamo mostrato
+%nella prepubblicazione~[\ref{carcor1}], estendendo risultati
+%di S. Benaim e P. Friz [Math. Finance 19 (2009), 1-12]
+%a regimi ``misti'', in cui volatilit\`a e strike possono variare simultaneamente.
+%Questo ci ha permesso di ottenere, sempre in~[\ref{carcor1}],
+%nuovi sviluppi asintotici
+%per diversi modelli, tra cui il popolare modello di Merton.
+
+
+
+
+\newpage
+
+\section{Pubblicazioni}
+
+
+
+
+%\smallskip
+\medskip
+{\large\sf \bfseries Articoli su rivista}
+\smallskip
+
+\input{../Publications/pub}
+
+\smallskip
+\medskip
+{\large\sf \bfseries Proceedings}
+\smallskip
+
+\input{../Publications/proc}
+
+\smallskip
+\medskip
+{\large\sf \bfseries Libro di testo}
+\smallskip
+
+\begin{itemize}
+\item F. Caravenna, P. Dai Pra.
+\textit{Probabilit\`a. Un'introduzione attraverso modelli e applicazioni.}
+Springer-Verlag Italia, Milano (2013).
+\end{itemize}
+
+
+% EXTENDED
+%
+%\smallskip
+%\medskip
+%{\large\sf \bfseries Indicatori bibliometrici (rilevati il 19 febbraio 2016)}
+%\smallskip
+%
+%
+%\begin{itemize}
+%\item \emph{MathSciNet}: 125 citazioni, \ h-index 7 \ (23 documenti considerati)
+%
+%\item \emph{Scopus}: 131 citazioni, \ h-index 8 \ (21 documenti considerati)
+%
+%\item \emph{Web of Sience}: 131 citazioni, \ h-index 8 \ (19 documenti considerati)
+%
+%\item \emph{Google Scholar}: 394 citazioni, \ h-index 12 \ (36 documenti considerati)
+%\end{itemize}
+
+
+
+
+
+
+%\begin{myenumerate}
+%%\setcounter{myenum}{-1}
+%
+%%\item\label{thesis}
+%%F. Caravenna,
+%%\textit{Random walk models and probabilistic techniques 
+%%for inhomogeneous polymer chains},
+%%Ph.D. Thesis (2005), Universit\`a di Milano-Bicocca 
+%%and Universit\'e Paris~7.
+%%
+%\item\label{llt}
+%F. Caravenna,
+%\textit{A local limit theorem for random walks conditioned to stay positive},
+%Probab. Theory Related Fields \textbf{133} (2005), 508--530.
+%
+%\item\label{cg}
+%F. Caravenna, G. Giacomin,
+%\textit{On constrained annealed bounds for pinning and wetting models},
+%Electron. Comm. in Probab. \textbf{10} (2005), 179--189.
+%
+%\item\label{cgg1}
+%F. Caravenna, G. Giacomin, M. Gubinelli,
+%\textit{A numerical approach to copolymers at selective interfaces},
+%J. Stat. Phys. \textbf{122} (2006), 799--832.
+%
+%\item\label{cgz1}
+%F. Caravenna, G. Giacomin, L. Zambotti,
+%\textit{A renewal theory approach to periodic copolymers with adsorption},
+%Ann. Appl. Probab. \textbf{17} (2007), 1362--1398.
+%
+%\item\label{cgz2}
+%F. Caravenna, G. Giacomin, L. Zambotti,
+%\textit{Sharp asymptotic behavior for wetting models in (1+1)-dimension},
+%Electron. J. Probab. \textbf{11} (2006), 345--362.
+%
+%\item\label{cgz3}
+%F. Caravenna, G. Giacomin, L. Zambotti,
+%\textit{Infinite volume limits of polymer chains with periodic charges},
+%Markov Process. Related Fields \textbf{13} (2007), 697--730.
+%
+%\item\label{carcha}
+%F. Caravenna, L. Chaumont,
+%\textit{Invariance principles for random walks conditioned to stay positive},
+%Ann. Inst. H. Poincar\'e Probab. Statist. \textbf{44} (2008), 170--190.
+%
+%\item\label{bari}
+%F. Caravenna,
+%\textit{Modelli di polimeri e passeggiate aleatorie},
+%Boll. Unione Mat. Ital. Serie IX, vol. I (2008), 559--571
+%% (disponibile su \texttt{http://www.math.unipd.it/{\footnotesize $\sim$}fcaraven/pub.html})
+%
+%\item\label{cd1}
+%F. Caravenna, J.-D. Deuschel,
+%\textit{Pinning and wetting transition for (1+1)-dimensional fields with Laplacian interaction},
+%Ann. Probab. 36 (2008), 2388--2433.
+%% (disponibile su \texttt{arXiv.org}: 0703434v2 [math.PR])
+%
+%\item\label{bcdt}
+%E. Bolthausen, F. Caravenna, B. de Tili\`ere,
+%\textit{The quenched critical point of a diluted disordered polymer model},
+%Stochastic Process. Appl. 119 (2009), 1479--1504.
+%% (disponibile su \texttt{arXiv.org}: 0711.0141v1 [math.PR])
+%
+%\item\label{cd2}
+%F. Caravenna, J.-D. Deuschel,
+%\textit{Scaling limits of (1+1)-dimensional pinning models with Laplacian interaction},
+%Ann. Probab. 37 (2009), 903--945.
+%
+%\item\label{cgg2}
+%F. Caravenna, G. Giacomin, M. Gubinelli,
+%\textit{Large scale behavior of semiflexible heteropolymers},
+%Ann. Inst. H. Poincar\'e Probab. Statist. 46 (2010), 97--118.
+%
+%\item\label{cp1}
+%F. Caravenna, N. P\'etr\'elis,
+%\textit{A polymer in a multi-interface medium},
+%Ann. Appl. Probab. 19 (2009), 1803--1839.
+%
+%\item\label{cp2}
+%F. Caravenna, N. P\'etr\'elis,
+%\textit{Depinning of a polymer in a multi-interface medium},
+%Electron. J. Probab. 14 (2009), 2038--2067.
+%
+%\item\label{cg2}
+%F. Caravenna, G. Giacomin,
+%\textit{The weak coupling limit of disordered copolymer models},
+%Ann. Probab. 38 (2010), 2322--2378.
+%
+%\item\label{bc}
+%M. Borecki, F. Caravenna,
+%\textit{Localization for (1+1)-dimensional pinning models with $(\nabla + \Delta)$ interaction},
+%Electron. Commun. Probab. 15 (2010), 534--548.
+%
+%\item\label{acdp}
+%A. Andreoli, F. Caravenna, P. Dai Pra, G. Posta,
+%\textit{Scaling and multiscaling in financial series: a simple model},
+%Adv. in Appl. Probab. 44 (2012), 1018--1051.
+%
+%\item\label{cgt}
+%F. Caravenna, G. Giacomin, F. L. Toninelli,
+%\textit{Copolymers at selective interfaces: settled issues and open problems},
+%in: Probability in complex physical systems. In honour of Erwin Bolthausen and 
+%J\"urgen G\"artner. Edited by J.-D. Deuschel, B. Gentz, W. K\"onig, M. von Renesse, 
+%M. Scheutzow, U. Schmock.
+%Springer Proceedings in Mathematics 11 (2012), 289--312. 
+%
+%\item\label{cpp}
+%F. Caravenna, P. Carmona, N. P\'etr\'elis,
+%\textit{The discrete-time parabolic Anderson model with heavy-tailed potential},
+%Ann. Inst. H. Poincar\'e 48 (2012), 1049--1080.
+%
+%\item\label{cdhp}
+%F. Caravenna, F. den Hollander and N. P\'etr\'elis,
+%\textit{Lectures on Random Polymers},
+%in: Probability and Statistical Physics in Two and more Dimensions. 
+%Proceedings of the Clay Mathematics Institute Summer School and 
+%XIV Brazilian School of Probability (Buzios, Brazil). 
+%Edited by David Ellwood, Charles Newman, Vladas Sidoravicius and Wendelin Werner.
+%Clay Mathematics Proceedings 15 (2012), 319--393. 
+%
+%\item\label{bcpsz}
+%Q. Berger, F. Caravenna, J. Poisat, R. Sun, N. Zygouras,
+%\textit{The critical curve of the random pinning and copolymer models at weak coupling},
+%Commun. Math. Phys. 326 (2014), 507--530. 
+%
+%\item\label{carcha2}
+%F. Caravenna, L. Chaumont,
+%\textit{An invariance principle for random walk bridges conditioned to stay positive},
+%Electron. J. Probab. 18 (2013), no. 60, 1--32. 
+%
+%\item\label{cdh}
+%F. Caravenna, F. den Hollander,
+%\textit{A general smoothing inequality for disordered polymers},
+%Electron. Commun. Probab. 18 (2013), no. 76, 1--15. 
+%
+%\item\label{csz1}
+%F. Caravenna, R. Sun, N. Zygouras,
+%\textit{Polynomial chaos and scaling limits of disordered systems},
+%J. Eur. Math. Soc. (JEMS), to appear.
+%
+%\item\label{csz2}
+%F. Caravenna, R. Sun, N. Zygouras,
+%\textit{The continuum disordered pinning model},
+%Probab. Theory Related Fields, to appear.
+%
+%
+%
+%\end{myenumerate}
+
+
+
+%\medskip
+%{\large\sf \bfseries Preprint}
+%\smallskip
+%
+%\begin{myenumerate}
+%\setcounter{myenum}{25}
+%\item\label{carcor1} F. Caravenna, J. Corbetta,
+%\textit{General smile asymptotics with bounded maturity},
+%preprint (2014), arXiv.org:1411.1624.
+%
+%\item\label{carcor2}  F. Caravenna, J. Corbetta,
+%\textit{The asymptotic smile of a multiscaling stochastic volatility model},
+%preprint (2015), arXiv.org:1501.03387.
+%
+%\item\label{ctt} F. Caravenna, F. L. Toninelli, N. Torri,
+%\textit{Universality for the pinning model in the weak coupling regime},
+%preprint (2015), arXiv.org:1505.04927.
+%
+%\item\label{strong} F. Caravenna,
+%\textit{The strong renewal theorem},
+%preprint (2015), arXiv.org:1507.07502.
+%
+%\item\label{cdhpp} F. Caravenna, F. den Hollander, N. P\'etr\'elis, J. Poisat,
+%\textit{Annealed scaling for a charged polymer},
+%preprint (2015), arXiv.org:1509.02204.
+%
+%\item\label{csz3} F. Caravenna, R. Sun, N. Zygouras,
+%\textit{Universality in marginally relevant disordered systems},
+%preprint (2015), arXiv.org:1510.06287.
+%\end{myenumerate}
+
+
+
+%\newpage
+
+\section{Seminari}
+\label{sec:seminari}
+
+\smallskip
+Ho tenuto numerosi seminari su invito a conferenze italiane e internazionali, oltre
+a svariati altri seminari in universit\`a e centri di ricerca e ad alcuni
+seminari di carattere divulgativo. 
+
+% EXTENDED
+%{\hskip 1.2em}Ho tenuto per due volte (2007 e 2015) una conferenza breve 
+%su invito al Congresso dell'Unione
+%Matematica Italiana; sono stato \emph{plenary speaker}
+%all'Italian Meeting on Hyperbolic Equations (2013);
+%ho tenuto il Colloquium del Dipartimento di Matematica 
+%all'Universit\`a di Leiden (2014).
+
+
+%\newpage
+
+%\smallskip
+\medskip
+{\large\sf \bfseries Seminari su invito}
+\smallskip
+
+\begin{itemize}
+\item (14 Giu 2016)
+\emph{Scaling and universality in Probability},
+Mathematics Colloquium of the University of Luxembourg (L).
+
+\item (10 Set 2015)
+\emph{Un'estensione multilineare del teorema limite centrale
+e il fenomeno dell'universalit\`a per sistemi disordinati},
+conferenza breve su invito,
+XX Congresso dell'Unione Matematica Italiana, Siena.
+
+\item (31 Ago 2015)
+\emph{Universality in marginally relevant disordered systems},
+Conferenza ``Scaling Limits in Models of Statistical Mechanics'',
+Mathematisches Forschungsinstitut Oberwolfach (D).
+
+\item (5 Mag 2015)
+\emph{Polynomial chaos and scaling limits of disordered systems},
+Workshop on Stochastic Processes in Random Media,  Institute for Mathematical Sciences,
+National University of Singapore.
+
+\item (28 Lug 2014)
+\emph{The continuum disordered pinning model},
+SPA 2014 Conference, ``Random Polymers'' Invited Session, Buenos Aires (AR).
+
+\item (6 Giu 2014)
+\emph{Polynomial chaos and scaling limits of disordered systems},
+Statistical Mechanics Conference, Universit\'e de Nantes (F).
+
+\item (27 Apr 2014)
+\emph{Polynomial chaos and scaling limits of disordered systems},
+Mini-Workshop, NYU Abu Dhabi (UAE).
+
+\item (13 Mar 2014)
+\emph{Scaling and universality in Probability},
+General Colloquium, Mathematisch Instituut,
+Universiteit Leiden (NL).
+
+\item (12 Set 2013)
+\emph{Scaling limits and universality for random pinning models},
+plenary speaker, 15th Italian Meeting on Hyperbolic Equations,
+Universit\`a di Milano-Bicocca.
+
+\item (9 Ago 2013)
+\emph{Scaling limits and universality for random pinning models},
+Workshop ``Universality and Scaling Limits in Probability and Statistical Mechanics'',
+Hokkaido University, Sapporo (JP).
+
+\item (21 Mar 2013)
+\emph{Scaling limits and universality for random pinning models},
+Workshop ``Analysis and Stochastics in Complex Physical Systems'', Universit\"at Leipzig (D).
+
+%\item (10-12 Gen 2013)
+%\emph{Random Polymers and Localization Strategies} [mini-corso],
+%School of ``Random Polymers'', Eurandom, Eindhoven~(NL).
+%
+%\item (14-18 Mag 2012)
+%\emph{Random Polymers and Localization Strategies} [mini-corso],
+%Worshop ``Random Polymers and Related Topics'', Institute for Mathematical Sciences,
+%National University of Singapore.
+%
+\item (15 Feb 2011)
+\emph{The weak coupling limit of disordered copolymer models},
+Workshop on Interacting Processes in Random Environments,
+Fields Institute, Toronto (CDN).
+
+\item (16 Ott 2010)
+\emph{The weak coupling limit of disordered copolymer models},
+Workshop ``Probabilistic Methods in Statistical Physics''
+in occasione dei 65 anni di Erwin Bolthausen, Technische Universit\"at Berlin (D).
+
+%\item (2-7 Ago 2010)
+%\emph{Random Polymers} [esercitazioni per il corso tenuto da Frank den Hollander; 
+%in collaborazione con Nicolas P\'etr\'elis],
+%XIV Scuola Brasiliana di Probabilit\`a congiuntamente con la 
+%Scuola Estiva del Clay Mathematics Institute
+%``Probability and Statistical Physics in Two and more Dimensions'',
+%B\'uzios -- Rio de Janeiro (BR).
+
+\item (7 Giu 2010)
+\emph{Scaling and multiscaling in financial indexes: a simple model},
+Colloque ``M\'ecanique Statistique et Milieux Al\'eatoires'',
+Universit\'e de Nantes~(F).
+
+\item (11 Giu 2008)
+\textit{Pinning and wetting transition for
+(1+1)-dimensional fields with Laplacian interaction},
+Conferenza ``Gradient Models and Elasticity'', University of Warwick (UK).
+
+\item (6 Mar 2008)
+\textit{The quenched critical point of a diluted disordered polymer model}, 
+Workshop GREFI-MEFI 2008, CIRM, Marseille (F).
+
+\item (26 Set 2007)
+\textit{Modelli di polimeri e passeggiate aleatorie},
+conferenza breve su invito,
+XVIII Congresso dell'Unione Matematica Italiana, Bari.
+
+\item (22 Giu 2007)
+\textit{On the phase diagram of random copolymers at selective interfaces},
+Conferenza ``Random Polymer Models'', Eurandom, Eindhoven~(NL).
+
+\item (21 Feb 2007)
+\textit{Pinning and wetting models with Laplacian interaction in (1+1)-di\-men\-sion},
+Conferenza ``Polymer Models and Related Topics'',
+Laboratoire J.A. Dieudonn\'e, Universit\'e de Nice ``Sophia Antipolis'' (F).
+
+\item (4 Set 2006)
+\textit{Pinning models with Laplacian interactions in (1+1)-dimension},
+Conferenza ``Spatial Random Processes and Statistical Mechanics'',
+Mathematisches Forschungsinstitut Oberwolfach (D).
+
+\item (6 Giu 2006)
+\textit{A renewal theory approach to weakly inhomogeneous polymer models},
+Conferenza ``Hydrodynamic Limits and Particle Systems'',
+Centro di Ricerca Matematica ``Ennio De Giorgi'', Pisa.
+\end{itemize}
+
+
+%\pagebreak
+
+%\smallskip
+\medskip
+{\large\sf \bfseries Altri Seminari}
+\smallskip
+
+\begin{itemize}
+\item (15 Giu 2016)
+\emph{Universality in marginally relevant disordered systems},
+University of Luxembourg (L).
+
+\item (2 Giu 2016)
+\emph{Universality in marginally relevant disordered systems},
+University of Paris Diderot (F).
+
+\item (19 Nov 2015)
+\emph{Multi-linear central limit theorems and scaling limits of disordered systems},
+Vienna Seminar in Mathematical Finance and Probability (A).
+
+\item (19 Mar 2015)
+\emph{Polynomial chaos and scaling limits of disordered systems},
+S\'eminaire de Probabilit\'es, ENS Lyon (F).
+
+\item (11 Ott 2013)
+\emph{Polynomial chaos and scaling limits of disordered systems},
+Universit\`a degli Studi di Padova.
+
+\item (12 Lug 2013)
+\emph{Scaling limits and universality for random pinning models},
+Rhein-Main Kolloquium Stochastik, Johannes Gutenberg Universit\"at Mainz (D).
+
+\item (13 Giu 2013)
+\emph{Scaling limits and universality for random pinning models},
+Most Informal Probability Seminar, Universiteit Leiden (NL).
+
+\item (10 Giu 2013)
+\emph{Scaling limits and universality for random pinning models},
+Universit\'e d'Angers (F).
+
+\item (27 Lug 2012)
+\emph{Scaling and multiscaling in financial series: a simple model},
+Dipartimento di Statistica e Metodi Quantitativi,
+Universit\`a degli Studi di Milano-Bicocca.
+
+\item (10 Lug 2012)
+\emph{A random copolymer near a selective interface},
+Sapienza Universit\`a di Roma.
+
+\item (3 Apr 2012)
+\emph{Bootstrap percolation on Galton Watson trees},
+Most Informal Probability Seminar, Universiteit Leiden (NL).
+
+\item (12 Mar 2012)
+\emph{Scaling and multiscaling in financial series: a simple model},
+Universit\`a degli Studi di Modena e Reggio Emilia.
+
+\item (23 Set 2011)
+\emph{Scaling and multiscaling in financial indexes: a simple model},
+Universit\`a di Roma Tor Vergata.
+
+\item (16 Dic 2010)
+\emph{A polymer in a multi-interface medium},
+Oberseminar Stochastics,
+Universit\"at Bonn (D).
+
+\item (2 Nov 2010)
+\emph{Scaling and multiscaling in financial indexes: a simple model},
+Universit\`a degli Studi di Milano-Bicocca.
+
+\item (10 Giu 2010)
+\emph{The weak coupling limit of disordered copolymer models},
+University of Warwick~(UK).
+
+\item (20 Mag 2010)
+\emph{Scaling and multiscaling in financial indexes: a simple model},
+Universit\`a degli Studi di Padova.
+
+\item (1 Feb 2010)
+\emph{Scaling and multiscaling in financial indexes: a simple model},
+Universit\`a di Pavia.
+
+\item (8 Dec 2009)
+\emph{A polymer in a multi-interface medium},
+S\'eminaire de Probabilit\'es,
+Laboratoire de Probabilit\'es et Mod\`eles Al\'eatoires,
+Universit\'es Paris 6 e Paris 7 (F).
+
+\item (5 Nov 2009)
+\emph{Large scale behavior of semiflexible heteropolymers},
+Universit\'e de Nantes (F).
+
+\item (21 Lug 2009)
+\textit{A polymer in a multi-interface medium},
+Universit\`a di Roma 3.
+
+\item (12 Nov 2008)
+\textit{A polymer in a multi-interface medium},
+Berliner Kolloquium Wahr\-schein\-lich\-keits\-theo\-rie
+(IRTG Seminar), Humboldt Universit\"at zu Berlin (D).
+
+\item (19 Giu 2008)
+\textit{Pinning and wetting transition for
+(1+1)-dimensional fields with Laplacian interaction},
+S\'eminaire de Probabilit\'es, ENS Lyon (F).
+
+\item (30 Apr 2008)
+\textit{Pinning and wetting transition for
+(1+1)-dimensional fields with Laplacian interaction},
+Seminar on Stochastic Processes, Universit\"at Z\"urich (CH).
+
+\item (23 Ott 2007)
+\textit{The quenched critical point of a diluted disordered polymer model},
+Random Spatial Structures Seminar, Eurandom, Eindhoven (NL).
+
+\item (17 Lug 2007)
+\textit{The quenched critical point of a diluted disordered polymer model},
+Scuola Estiva di Probabilit\`a di St.~Flour (F).
+
+\item (24 Gen 2007)
+\textit{Free energy lower bounds for random copolymers at selective interfaces},
+Technische Universit\"at Berlin (D).
+
+\item (13 Lug 2006)
+\textit{Pinning models with Laplacian interactions in (1+1)-dimension},
+Random Spatial Structures Seminar, Eurandom, Eindhoven (NL).
+
+\item (17 Mar 2006)
+\textit{A renewal theory approach to periodically inhomogeneous polymer models},
+Seminaire de Probabilit\'es et Statistique,
+Centre de Math\'ematiques et Informatique,
+Universit\'e de Provence, Marseille (F).
+
+\item (21 Dic 2005)
+\textit{A local limit theorem and an invariance principle
+for random walks conditioned to stay positive},
+Seminar on Stochastic Processes, ETH Z\"urich (CH).
+
+\item (16 Dic 2005)
+\textit{A renewal theory approach to periodically inhomogeneous polymer models},
+Berlin-Leipzig Seminar, Technische Universit\"at Berlin (D).
+
+\item (19 Lug 2005)
+\textit{A renewal theory approach to periodically inhomogeneous polymer models},
+Scuola Estiva di Probabilit\`a di St.~Flour (F).
+
+\item (27 Mag 2005)
+\textit{Copolimeri in prossimit\`a di un'interfaccia selettiva},
+Universit\`a di Milano-Bicocca.
+
+\item (2 Giu 2004)
+\textit{Un th\'eor\`eme limite local pour des marches al\'eatoires 
+sous la contrainte d'\^etre positives},
+Rencontres de Probabilit\'es, Universit\'e de Rouen (F).
+\end{itemize}
+
+%\smallskip
+\medskip
+{\large\sf \bfseries Seminari di carattere divulgativo}
+\smallskip
+
+\begin{itemize}
+\item (12 Mar 2015) \emph{La matematica in universit\`a},
+seminario per gli studenti delle scuole superiori, giornata di orientamento
+``Privavera in Bicocca 2015''.
+
+\item (14 Mar 2013) \emph{Ricerca in matematica},
+seminario per gli studenti delle scuole superiori, giornata di orientamento
+``Privavera in Bicocca 2013''.
+
+\item (5 Nov 2008) \emph{The Banach-Tarski Paradox},
+Technische Universit\"at Berlin (D).
+
+\item (29 Giu 2006) \emph{What is\ldots the Banach-Tarski Paradox?},
+Z\"urich Graduate Colloquium (CH).
+\end{itemize}
+
+
+
+%\newpage
+
+\section{Attivit\`a Didattica}
+
+\nopagebreak
+
+A partire dal dottorato, ho tenuto esercitazioni e corsi
+per le lauree triennali e magistrali in diverse universit\`a
+presso l'Universit\`a di Milano-Bicocca, 
+l'Universit\`a di Padova, il Politecnico di Milano e l'Universit\`a di Zurigo.
+Ho inoltre tenuto diversi corsi e mini-corsi di livello pi\`u avanzato (dottorato, scuole, workshop).
+
+%\smallskip
+%
+%{\hskip 1.2em}L'esperienza maturata insegnando il primo
+%corso di probabilit\`a  della laurea triennale
+%in matematica, insieme a Paolo Dai Pra,
+%ci ha condotto a scrivere un libro di testo, pubblicato da Springer,
+%calibrato specificamente sulle esigenze degli studenti di matematica:
+%
+%\begin{itemize}
+%\item F. Caravenna, P. Dai Pra.
+%\textit{Probabilit\`a. Un'introduzione attraverso modelli e applicazioni.}
+%%UNITEXT - La matematica per il 3+2.
+%Springer-Verlag Italia, Milano (2013).
+%\end{itemize}
+
+%\smallskip
+%
+%{\hskip 1.2em}Riporto di seguito l'elenco degli insegnamenti da me tenuti.
+
+
+\medskip
+{\large\sf \bfseries Corsi in scuole e workshop}
+\smallskip
+\label{sec:corsiscuole}
+
+\begin{itemize}
+\item (2 Giu 2016)
+Minicorso su \emph{Polynomial chaos and scaling limits of disordered systems} [3h],
+%[corso ($5 \times 1.5$ ore)],
+Group de travail ``M\'ecanique statistique, syst\`emes de particules'',
+Universit\'e Paris Diderot (F).
+
+\item (7 - 11 Mar 2016)
+Corso su \emph{Polynomial chaos and scaling limits of disordered systems} [3~x~1.5h],
+%[corso ($5 \times 1.5$ ore)],
+Workshop YEP XIII, Eurandom, TU Eindhoven (NL).
+
+\item (28 Set - 2 Ott 2015)
+Corso su \emph{Polynomial chaos and scaling limits of disordered systems} [5~x~1.5h],
+%[corso ($5 \times 1.5$ ore)],
+Berlin-Potsdam Summer School 2015, Levico Terme (I).
+
+\item (10-12 Gen 2013)
+Mini-corso \emph{Random Polymers and Localization Strategies} [3~x~2h],
+Scuola ``Random Polymers'', Eurandom, Eindhoven~(NL),
+10-12 Gennaio 2013.
+
+\item (14-18 Mag 2012)
+Mini-corso \emph{Random Polymers and Localization Strategies} [3~x~2h + 1h],
+Worshop ``Random Polymers and Related Topics'', Institute for Mathematical Sciences,
+National University of Singapore, 14-18 Maggio 2012.
+
+\item (6-10 Set 2011)
+Mini-corso \emph{Lo strano comportamento di una passeggiata casuale} [1.5h + 2h],
+Summer school matematica ``Alfa Class'', Progetto Diderot - Fondazione CRT,
+Solonghello.
+
+\item (2-7 Ago 2010)
+Esercitazioni per il corso \emph{Random Polymers} 
+[5x1h esercitazioni, in collaborazione con Nicolas P\'etr\'elis;
+corso tenuto da Frank den Hollander],
+XIV Scuola Brasiliana di Probabilit\`a congiuntamente con la 
+Scuola Estiva del Clay Mathematics Institute
+``Probability and Statistical Physics in Two and more Dimensions'',
+B\'uzios -- Rio de Janeiro (BR).
+\end{itemize}
+
+%\pagebreak
+
+\medskip
+{\large\sf \bfseries Corsi per il dottorato}
+\smallskip
+
+\begin{itemize}
+\item (a.a. 2013/14)
+Mini-corso \textit{Random Graphs and Complex Networks},
+Dottorato di Ricerca in Matematica, Universit\`a
+di Milano, Milano-Bicocca, Pavia e Politecnico di Milano (corso interdottorato)
+[in collaborazione con Federico Bassetti].
+
+\item (a.a. 2009/10) Mini-corso \textit{Random Graphs and Complex Networks},
+Dottorato di Ricerca in Matematica, Universit\`a degli Studi di Padova
+[in collaborazione con Paolo Dai Pra].
+
+\item (a.a. 2008/09)
+Mini-corso \textit{Processi di punto di Poisson e applicazioni},
+Dottorato di Ricerca in Matematica, Universit\`a degli Studi di Padova.
+
+\item (a.a. 2006/07)
+Mini-corso \textit{Modelli di polimeri e passeggiate aleatorie},
+Dottorato di Ricerca in Matematica, Universit\`a degli Studi di Padova.
+\end{itemize}
+
+
+
+\medskip
+{\large\sf \bfseries Corsi ed esercitazioni per la laurea triennale e magistrale}
+
+\medskip
+
+\emph{Presso l'Universit\`a degli Studi di Milano-Bicocca}
+
+%\smallskip
+\begin{itemize}
+\item (a.a. 2015/16)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2015/16)
+Corso di \textit{Calcolo delle Probabilit\`a},
+Laurea in Matematica.
+
+\item (a.a. 2014/15)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2014/15)
+Corso ed esercitazioni di \textit{Calcolo delle Probabilit\`a},
+Laurea in Matematica.
+
+\item (a.a. 2013/14)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2013/14)
+Corso ed esercitazioni di \textit{Calcolo delle Probabilit\`a},
+Laurea in Matematica.
+
+\item (a.a. 2012/13)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2012/13)
+Corso ed esercitazioni di \textit{Calcolo delle Probabilit\`a},
+Laurea in Matematica.
+
+\item (a.a. 2011/12)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2011/12)
+Corso ed esercitazioni di \textit{Calcolo delle Probabilit\`a},
+Laurea in Matematica.
+
+\item (a.a. 2010/11)
+Corso di \textit{Processi Stocastici},
+Laurea Magistrale in Matematica
+[in collaborazione con Gianmario Tessitore].
+
+\item (a.a. 2004/05) Esercitazioni di \textit{Processi stocastici},
+Laurea in Matematica
+[docente: Gianmario Tessitore].
+
+\item (a.a. 2003/04) Esercitazioni di \textit{Processi stocastici},
+Laurea in Matematica
+[docente: Daniela Bertacchi].
+
+\item (a.a. 2003/04)
+Esercitazioni di \textit{Calcolo delle probabilit\`a e statistica matematica},
+Laurea in Matematica
+[docente: Daniela Bertacchi].
+\end{itemize}
+
+\smallskip
+\emph{Presso l'Universit\`a degli Studi di Padova}
+%\smallskip
+
+\begin{itemize}
+\item (a.a. 2010/11)
+Corso di \textit{Analisi Stocastica},
+Laurea Magistrale in Matematica
+[in collaborazione con David Barbato].
+
+\item (a.a. 2009/10) Esercitazioni di \textit{Statistica}, Laurea in Biologia Molecolare,
+[docente: Paolo Dai Pra].
+
+\item (a.a. 2009/10)
+Corso di \textit{Analisi Stocastica},
+Laurea Magistrale in Matematica.
+
+\item (a.a. 2008/09)
+Esercitazioni di \textit{Probabilit\`a e Statistica},
+Laurea in Matematica
+[docente: Paolo Dai Pra].
+
+\item (a.a. 2008/09)
+Corso di \textit{Analisi Stocastica},
+Laurea Magistrale in Matematica.
+
+\item (a.a. 2007/08)
+Corso di \textit{Matematica C} (probabilit\`a e analisi),
+Laurea in Ingegneria Biomedica
+[in collaborazione con Caterina Sartori].
+
+\item (a.a. 2007/08)
+Esercitazioni di \textit{Probabilit\`a e Statistica},
+Laurea in Matematica
+[docente: Paolo Dai Pra].
+
+\item (a.a. 2007/08)
+Esercitazioni di \textit{Metodi statistici per la biologia},
+Laurea in Biologia
+[docente: Paolo Dai Pra].
+
+\item (a.a. 2006/07)
+Esercitazioni di \textit{Metodi statistici per la biologia},
+Laurea in Biologia [docente: Paolo Dai Pra].
+
+\item (a.a. 2006/07)
+Esercitazioni di \textit{Metodi statistici per la biologia},
+Laurea in Biologia Molecolare [docente: Paolo Dai Pra].
+\end{itemize}
+
+\smallskip
+\emph{Presso l'Universit\"at Z\"urich}
+%\smallskip
+
+\begin{itemize}
+\item (a.a. 2005/06) Esercitazioni di \textit{Algebra lineare II},
+Laurea in Matematica [docente: Erwin Bol\-thau\-sen].
+
+\item (a.a. 2005/06) Esercitazioni di \textit{Algebra lineare I},
+Laurea in Matematica [docente: Erwin Bol\-thau\-sen].
+\end{itemize}
+
+%\newpage
+
+\smallskip
+\emph{Presso il Politecnico di Milano}
+%\smallskip
+
+\begin{itemize}
+
+\item (a.a. 2002/03) Esercitazioni on line (``Sessioni Live'') di
+\textit{Calcolo delle probabilit\`a e statistica},
+Laurea in Ingegneria Informatica Online [docente: Elio Piazza].
+
+\item (a.a. 2002/03) \textit{Laboratorio numerico di statistica},
+Laurea in Ingegneria Gestionale [docente: Elio Piazza].
+\end{itemize}
+
+%\newpage
+
+% EXTENDED
+%
+%\section{Supervisione di tesi di laurea}
+%\label{sec:tesi}
+%
+%Dal 2008 a oggi sono stato relatore di
+%20 tesi di laurea triennale e 7 tesi di laurea magistrale 
+%(oltre a 2 tesi di dottorato) in matematica.
+%Cinque studenti brillanti, di cui sono stato relatore di laurea
+%magistrale, hanno proseguito gli studi
+%con un dottorato in prestigiose sedi estere:
+%\begin{itemize}
+%\item[-] Alessandro Garavaglia presso la Technische Universiteit Eindhoven (NL);
+%
+%\item[-] Marco Furlan presso l'Universit\'e Paris Dauphine (F);
+% 
+%\item[-] Elia Bisi presso la University of Warwick (UK);
+%
+%\item[-] Niccol\`o Torri presso l'Universit\'e Lyon 1 (F),
+%in cotutela con l'Universit\`a degli Studi di Milano-Bicocca;
+%
+%\item[-] Enrico Zanardo presso la Columbia University di New York (US)
+%[dottorato in economia].
+%\end{itemize}
+%
+%%\smallskip
+%
+%%{\hskip 1.2em}Riporto di seguito l'elenco delle tesi di cui sono stato relatore.
+%
+%%\medskip
+%%{\large\sf \bfseries Studenti di dottorato}
+%%\smallskip
+%%\label{sec:dottorato}
+%%
+%%\begin{itemize}
+%%\item Niccol\`o Torri, tesi \emph{``Localization and universality phenomena for
+%%random polymers''} discussa il 18 settembre 2015,
+%%Universit\'e Claude Bernarde Lyon 1 (F) in cotutela con
+%%l'Universit\`a degli Studi di Milano-Bicocca
+%%(supervisione congiunta con Fabio Lucio Toninelli).
+%%
+%%\noindent
+%%[Attualmente post-doc presso il Dipartimento
+%%di Matematica dell'Universit\`a di Nantes (F)]
+%%
+%%\item Jacopo Corbetta, tesi \emph{``General smile asymptotics and a multiscaling
+%%stochastic volatility model''} discussa il 4 marzo 2015,
+%%Universit\`a degli Studi di Milano-Bicocca.
+%%
+%%\noindent
+%%[Attualmente post-doc presso CERMICS,
+%%\'Ecole des Ponts - ParisTech,
+%%Marne la Vall\'ee (F)]
+%%\end{itemize}
+%
+%
+%%\newpage
+%
+%\medskip
+%{\large\sf \bfseries Tesi di laurea magistrale}
+%\smallskip
+%%\section{Supervisione tesi di laurea magistrali}
+%%
+%\nopagebreak
+%
+%\begin{itemize}
+%\item \emph{Diameter in ultra-small scale-free random graphs},
+%studente Alessandro Garavaglia, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2013/14
+%(direzione congiunta con Remco van der Hofstad, TU Eindhoven).
+%
+%\item \emph{Stochastic Navier-Stokes equation in 3 dimensions},
+%studente Marco Furlan, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13
+%(direzione congiunta con Gianmario Tessitore e con Massimiliano
+%Gubinelli, Universit\'e Paris Dauphine).
+%
+%\item \emph{Large Deviations},
+%studente Elia Bisi, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13.
+%
+%\item \emph{Il grafo aleatorio di Erd\"os-Renyi},
+%studentessa Alice Sala, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%\item \emph{Localization phenomena for linear chains with correlated disorder},
+%studente Niccol\`o Torri, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%\item \emph{Kingman's coalescent and some applications to population genetics},
+%studente Vanni Rovera, laurea magistrale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2010/11.
+%
+%\item \emph{Bootstrap percolation on random trees},
+%studente Enrico Zanardo, laurea magistrale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2010/11
+%(direzione congiunta con Marek Biskup, UCLA).
+%\end{itemize}
+%
+%%\newpage
+%
+%\medskip
+%{\large\sf \bfseries Tesi di laurea triennale}
+%\smallskip
+%%\section{Supervisione tesi di laurea triennali}
+%%
+%\nopagebreak
+%
+%\begin{itemize}
+%\item \emph{Il modello di Ising},
+%studentessa Federica Sabia, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2014/15.
+%
+%\item \emph{Condensazione di Bose-Einstein},
+%studentessa Marta-Clarissa Arrighi, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2014/15.
+%
+%\item \emph{Disuguaglianze di concentrazione},
+%studentessa Michela Montrasio, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2014/15.
+%
+%\item \emph{Convergenza all'equilibrio per catene di Markov},
+%studente Lorenzo Madasi, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2013/14.
+%
+%\item \emph{Character Theory and Random Walks on Finite Groups},
+%studentessa Marta Maggioni, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2013/14
+%(direzione congiunta con Thomas Weigel).
+%
+%\item \emph{Catene di Markov a tempo continuo},
+%studente Davide Cortesi, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2013/14.
+%
+%\item \emph{Modellizzare gli eventi estremi},
+%studente Jacopo Zanzi, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2013/14.
+%
+%\item \emph{La convergenza debole e la misura di Wiener},
+%studente Marco Moraschini, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13.
+%
+%\item \emph{Quanto pu\`o sporgere un muro a secco?},
+%studentessa Michela Testa, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13.
+%
+%\item \emph{Percolazione},
+%studentessa Carola Corti, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13.
+%
+%%\item \emph{Planar flows from the point of view of complex analysis},
+%%studente Nikita Simonov, laurea triennale in matematica,
+%%Universit\`a degli Studi di Milano-Bicocca, a.a. 2012/13
+%%(correlatore; relatore Pietro Poggi-Corradini).
+%
+%\item \emph{Aspetti combinatori della passeggiata aleatoria semplice},
+%studentessa Sara Locatelli, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%\item \emph{Cammini autoevitanti sul reticolo esagonale},
+%studentessa Claudia Piccinini, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%%\item \emph{Descrizione probabilistica delle reazioni chimiche},
+%%studentessa Giulia Mezzadri, laurea triennale in matematica,
+%%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12 (correlatore).
+%
+%\item \emph{Propriet\`a asintotiche delle catene di Markov},
+%studentessa Krizia Giglione, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%\item \emph{Il teorema ergodico},
+%studente Aniello Cerullo, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2011/12.
+%
+%\item \emph{Alcuni risultati nella teoria delle grandi deviazioni},
+%studentessa Ga\"elle Iris Touwaide, laurea triennale in matematica,
+%Universit\`a degli Studi di Milano-Bicocca, a.a. 2010/11.
+%
+%\item \emph{Opzioni americane e problemi di arresto ottimale},
+%studente Federico Favero, laurea triennale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2010/11.
+%
+%\item \emph{Il modello di Curie-Weiss e le grandi deviazioni},
+%studentessa Valentina Favero, laurea triennale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2009/10.
+%
+%\item \emph{Il teorema ergodico},
+%studente Mauro Timini, laurea triennale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2009/10.
+%
+%\item \emph{Il processo di ramificazione di Galton-Watson}, studentessa
+%Roberta Maroni, laurea triennale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2008/09.
+%
+%\item \emph{Modelli di polimeri, passeggiate aleatorie e processi di rinnovo},
+%studentessa Diana Frizziero, laurea triennale in matematica,
+%Universit\`a degli Studi di Padova, a.a. 2008/09.
+%\end{itemize}
+%
+%%\newpage
+%
+%
+%
+%
+%\section{Attivit\`a gestionali, organizzative e di servizio}
+%
+%%\bigskip
+%
+%\medskip
+%
+%\emph{Presso l'Universit\`a degli Studi di Milano-Bicocca}
+%\smallskip
+%
+%\begin{itemize}
+%\item Membro del Collegio dei Docenti del
+%Dottorato
+%in Matematica Pura e Applicata, 
+%%Universit\`a degli Studi  di Milano-Bicocca, 
+%cicli XXIX (anno di inizio 2013) e
+%XXX (anno di inizio 2014);
+%
+%\item Membro del Collegio dei Docenti del
+% Dottorato in Matematica consortile con
+%l'Universit\`a di Pavia (sede amministrativa) e l'Indam, ciclo XXXI (anno di inizio 2015).
+%
+%%\item Assicuratore di qualit\`a?
+%
+%\item Membro della commissione 
+%per l'attribuzione degli assegni di ricerca %(junior e senior)
+%del Dipartimento di Matematica
+%e Applicazioni (anni 2014 e 2015).
+%
+%\item Membro della commissione per l'attribuzione delle
+%esercitazioni e dei tutorati assegnati tramite bando (anno 2015).
+%
+%\item 
+%%Seminari a tema ``La matematica in universit\`a''
+%%per studenti delle scuole superiori,
+%Partecipazione alle giornate di orientamento ``Primavera in Bicocca''
+%2013 e 2015.
+%%(14 marzo 2013; 12 marzo 2015)
+%
+%
+%\item Sorveglianza ai test d'ingresso per i corsi di laurea della Scuola di Scienze (anno 2014).
+%
+%%\item Assicuratore di qualit\`a
+%
+%\end{itemize}
+%
+%\smallskip
+%\emph{Presso l'Universit\`a degli Studi di Padova}
+%\smallskip
+%
+%\begin{itemize}
+%\item Componente della Giunta del Dipartimento di Matematica
+%Pura e Applicata
+%%(una versione ristretta del Consiglio di Dipartimento) 
+%per due anni (13 ottobre 2008 -- 31 ottobre 2010).
+%
+%\item Assistenza ai test di ammissione della Facolt\`a di Scienze mm. ff. nn.
+%(anni 2007 e 2010).
+%%(3 settembre 2007, 1 settembre 2010)
+%\end{itemize}
+
+
+
+%\bigskip
+%
+%\rule{\columnwidth}{.8pt}
+%
+%\bigskip
+%
+%Le dichiarazioni rese nel presente curriculum sono da ritenersi 
+%rilasciate ai sensi degli artt. 46 e 47 del DPR n. 445/2000.
+%
+%\medskip
+%
+%Il presente curriculum, non contiene dati sensibili e 
+%dati giudiziari di cui all'art. 4, comma 1, lettere d) ed e) del D.Lgs. 30.6.2003 n. 196.
+%
+%\medskip
+%
+%Il sottoscritto dichiara di essere consapevole che nel 
+%rispetto delle regole di trasparenza previste dalla Legge e come stabilito dal bando di concorso, 
+%i curricula di tutti candidati saranno pubblicati sul sito Web dell'Universit\`a 
+%degli Studi di Milano \url{www.unimi.it/valcomp}.
+%
+%\bigskip
+%\medskip
+%\smallskip
+%
+%Data \qquad \boxed{\rm \ 17 \ gennaio \ 2016\ }
+%\qquad\qquad \quad Luogo \qquad \boxed{\rm \ Cassano \ d'Adda \ (MI) 
+%\hspace{3.1cm}}
+%
+%\bigskip
+%\bigskip
+%\bigskip
+%
+%\hspace{8.7cm} \rule[-.1cm]{6.88cm}{.8pt}
+%
+%\hspace{8.7cm} Firma
+
+
+\end{document}

@@ -1,0 +1,684 @@
+# Last updated: June 3rd, 2010.
+
+#############################################################
+#############################################################
+########### PART I : DEFINITION OF THE FUNCTIONS ############
+#############################################################
+#############################################################
+
+
+##################################################################
+## THE FUNCTION "detrend" RETURNS THE LINEAR TREND OF THE       ##
+## VECTOR "Data" COMPUTED AS THE AVERAGE OVER THE PAST "N" DATA ##
+##################################################################
+
+detrend <- function(Data, N=250){
+Detrend <- 1:(length(Data)-N)
+for(i in (N+1):length(Data))
+Detrend[i-N] <- mean(Data[(i-N):(i-1)])
+return(Detrend)
+}
+
+#############################################
+## THE FUNCTION "increments" RETURNS       ##
+## THE INCREMENTS OF THE VECTOR "Data"     ##
+## WITH THE GIVEN STEP                     ##
+#############################################
+
+increments <- function(Data = LogIndex, Step=1){
+return(Data[(Step+1):length(Data)] - Data[1:(length(Data)-Step)])
+}
+
+#############################################################
+## THE FUNCTION "volatility" RETURNS THE VOLATILITY OF THE ##
+## VECTOR "Data" COMPUTED AS THE STANDARD DEVIATION OVER   ##
+## A LOCAL WINDOW OF 2R+1 DATA                             ##
+#############################################################
+
+volatility <- function(Data, R=50){
+Var <- NA
+Ausil<-(R+1):(length(Data)-R)
+for(I in Ausil)
+Var <- c(Var,mean((increments(Data=Data[(I-R):(I+R)]))^2))
+return(Var[2:length(Var)])
+}
+
+##################################################################
+## THE FUNCTIONS "exponent" COMPUTES EMPIRICALLY THE SCALING    ##
+## EXPONENT a=a(q) IN THE RELATION E(|X_h|^q) ~ h^{a(q)}        ##
+## THROUGH A LINEAR REGRESSION OF (log E(|X_h|^q)) VS. (log h)  ##
+## FOR h BETWEEN Hmin AND Hmax DAYS (Hmax-Hmin AT LEAST 2).     ##
+##                                                              ##
+## THE FUNCTION RETURNS A TWO-COLUMNS MATRIX (q, a(q))          ##
+## "From" AND "To" ARE THE MINIMAL AND MAXIMAL VALUE OF q       ##
+## "By" IS THE SPACING BETWEEN SUCCESSIVE VALUES OF q           ##
+##################################################################
+
+exponent <- function(Data=LogIndex, From=0, To=5, By=0.25, Hmin=1, Hmax=5){
+Labels <- seq(From, To, by=By)
+Res <- matrix(NA, ncol=2, nrow=length(Labels))
+Res[,1] <- Labels
+L <- length(Data)
+Incr <- matrix(NA, nrow=L-1, ncol=Hmax-Hmin+1)
+for(h in 1:(Hmax-Hmin+1)){
+Incr[1:(L-h),h] <- Data[(h+1):L] - Data[1:(L-h)]
+}
+Moments <- matrix(NA, nrow=length(Labels), ncol=Hmax-Hmin+1)
+for(i in 1:length(Labels)){
+for(h in Hmin:Hmax){
+hlab <- h-Hmin+1
+Moments[i,hlab] <- mean(abs(Incr[(1:(L-h)), hlab])^(Labels[i]))
+}
+c <- coefficients(lm(log(Moments[i,]) ~ log(1:length(Moments[i,]))))
+Res[i,2] <- c[2]
+}
+# Momenti <<- Moments # OPTIONAL
+return(Res)
+}
+
+###############################################################
+## THE FUNCTION "correlations" COMPUTES THE EMPIRICAL        ##
+## CORRELATIONS OF THE INCREMENTS OF THE VECTOR "Data".      ##
+## IT RETURNS A TWO-COLUMNS MATRIX:                          ##
+## FIRST COLUMN DAY LABELS - SECOND COLUMN CORRELATIONS      ##
+## "Start" AND "Stop" ARE EXPRESSED IN DAYS                  ##
+## "Step" IS THE WIDTH (IN DAYS) OF THE INCREMENTS           ##
+###############################################################
+
+correlations <- function(Data=LogIndex, Start=1, Stop=400, Step=1){
+From <- as.integer(Start/Step)  ## "From" AND "To" ARE EXPRESSED IN NUMBER OF "Step"
+if(From <= 0) {From <- 1}
+To <- as.integer(Stop/Step)
+Res <- matrix(nrow=To-From+1, ncol=2)  ## THIS IS THE MATRIX OF THE RESULTS
+Ldata <- length(Data)
+C <- as.integer(Ldata/Step)
+Incr <- Data[Step*(2:C)] - Data[Step*(1:(C-1))]
+L <- length(Incr)
+for (i in From:To){
+Res[i-From+1, 1] <- i*Step
+Res[i-From+1, 2] <- cor(abs(Incr[1:(L-i)]), abs(Incr[(i+1):L]))
+}
+return(Res)
+}
+
+#################################################################
+## THE FUNCTIONS "distribution" COMPUTES THE EMPIRICAL DENSITY ##
+## (HISTOGRAM) OF THE INCREMENTS OF THE VECTOR "Data"          ##
+## IT RETURNS A TWO-COLUMNS MATRIX (LABELS, PROBABILITIES)     ##
+## "Step" IS THE WIDTH (IN DAYS) OF THE INCREMENTS             ##
+## "Blocks" IS THE NUMBER OF BOXES                             ##
+## "From" AND "To" ARE OPTIONAL PARAMETER                      ##
+#################################################################
+
+distribution <- function(Data=LogIndex, Step=1, Blocks=40, From, To){
+Res <- matrix(nrow=Blocks, ncol=2)
+L <- length(Data)
+Incr <- Data[(Step+1):L] - Data[1:(L-Step)]
+if(missing(From)){ From <- min(Incr) }
+if(missing(To)){ To <- max(Incr) }
+D <- (To - From)/Blocks
+for(i in 1:Blocks){
+Res[i,1] <- From + (i - 1 + 1/2)*D
+Res[i,2] <- sum((Incr >= Res[i,1]) & (Incr < Res[i,1]+D))
+}
+Res[Blocks,2] <- Res[Blocks,2] + sum(Incr == Res[Blocks,1]+D)
+Res[,2] <- Res[,2]/length(Incr)
+return(Res)
+}
+
+#######################################################################
+## THE FUNCTIONS "righttail" (RESP. "lefttail") IS A FUNCTION OF "t" ##
+## WHICH COMPUTES THE FRACTION OF INCREMENTS > t (RESP. < t)         ##
+## "Step" IS THE WIDTH (IN DAYS) OF THE INCREMENTS                   ##
+#######################################################################
+
+righttail <- function(t, Data=LogIndex, Step=1){
+Res <- rep(NA,length(t))
+L <- length(Data)
+Incr <- Data[(Step+1):L] - Data[1:(L-Step)]
+for(i in 1:length(t)){
+Res[i] <- length(Incr[Incr>t[i]])
+}
+return(Res/length(Incr))
+}
+
+lefttail <- function(t, Data=LogIndex, Step=1){
+Res <- rep(NA,length(t))
+L <- length(Data)
+Incr <- Data[(Step+1):L] - Data[1:(L-Step)]
+for(i in 1:length(t)){
+Res[i] <- length(Incr[Incr<t[i]])
+}
+return(Res/length(Incr))
+}
+
+######################################################################
+## THE FUNCTION "montecarlo" GENERATES A SAMPLE OF DATA DISTRIBUTED ##
+## ACCORDING TO OUR MODEL.                                          ##
+######################################################################
+
+montecarlo <- function(Const=TRUE, N=length(LogIndex), Lambda=Lambda_Value, D=D_Value, MS=MS_Value, VS=MS2_Value-MS_Value^2) {
+#
+S <- MS
+if (Const!=TRUE) {
+        S <- runif(1, MS - sqrt(3*VS), MS + sqrt(3*VS))
+        # S <- rnorm(1, MS, sqrt(VS))
+        # S <- rgamma(1, MS^2/VS, scale = VS/MS)
+        }
+
+X <- rep(NA, N)
+#
+Alea <- rexp(1,Lambda)
+AleaSum <- Alea
+while(AleaSum < N) {
+AleaSum <- AleaSum + rexp(1,Lambda)
+Alea <- c(Alea, AleaSum)
+}
+#
+Last <- -1 * rexp(1, Lambda)
+Label <- 1
+Next <- Alea[Label]
+#
+for(i in 1:N){
+        if(i <= Next){
+                X[i] <- S * sqrt((i-Last)^(2*D) - (i-1-Last)^(2*D))
+                }
+        else{
+        Temp <- S^2 * ((Next-Last)^(2*D) - (i-1-Last)^(2*D))
+        Last <- Next
+        Label <- Label+1
+        Next <- Alea[Label]
+        if (Const!=TRUE) {
+                S <- runif(1, MS - sqrt(3*VS), MS + sqrt(3*VS))
+                # S <- rnorm(1, MS, sqrt(VS))
+                # S <- rgamma(1, MS^2/VS, scale = VS/MS)
+                }
+        while(i > Next){
+                Temp <- Temp + S^2 * ((Next-Last)^(2*D))
+                Last <- Next
+                Label <- Label+1
+                Next <- Alea[Label]
+                if (Const!=TRUE) {
+                        S <- runif(1, MS - sqrt(3*VS), MS + sqrt(3*VS))
+                        # S <- rnorm(1, MS, sqrt(VS))
+                        # S <- rgamma(1, MS^2/VS, scale = VS/MS)
+                        }
+        }
+        X[i] <- sqrt(Temp + S^2 * ((i-Last)^(2*D)))
+        }
+}
+Incr <- X * rnorm(N)
+return(cumsum(Incr))
+}
+
+#################################################
+## THE FUNCTION "segments_plot" ADDS TO A PLOT ##
+## THE THEORETICAL MULTISCALING CURVE          ##
+#################################################
+
+segments_plot <- function(D=D_Value, To=5, Col=2) {
+segments(0,0, 1/(0.5-D), 1/(1-2*D), col=Col, lwd=1.5)
+segments(1/(0.5-D), 1/(1-2*D), To, D*To+1, col=Col, lwd=1.5)
+}
+
+#########################################################
+## THE FUNCTION "rhoF" COMPUTES THE THEORETICAL        ##
+## VOLATILITY AUTOCORRELATION DECAY OF OUR MODEL       ##
+## AS A FUNCTION OF lambda, D, E(sigma), E(sigma^2)    ##
+#########################################################
+
+rhoF <- function (D=D_Value, Lambda=Lambda_Value, MS=MS_Value, MS2=MS2_Value, From=1, To=400, Number=200000){
+
+Res <- matrix(ncol=2, nrow=To-From+1)
+Res[,1] <- From:To
+Vector <- rexp(Number, rate=1)
+
+for(k in From:To){
+Res[k - From + 1,2] = 2 /pi * 1/(MS2*gamma(2*D) - MS^2*gamma(D + 1/2)^2*2/pi) * exp(-Lambda*k)*((MS2 - MS^2)*mean(Vector^(D - 1/2)*(Vector + Lambda*k)^(D -1/2))+MS^2*cov(Vector^(D - 1/2), (Vector + Lambda*k)^(D - 1/2)))
+
+}
+return(Res)
+}
+
+###################################################
+
+
+
+#########################################################
+#########################################################
+######## PART II : LOADING THE DJIA TIME SERIES #########
+######## AND EVALUATING THE BASIC QUANTITIES    #########
+#########################################################
+#########################################################
+
+
+
+#########################################################################
+## THE FILE "DJI_1934-2009(+250).data" MUST BE IN THE WORKING DIRECTORY #
+## (IT CAN BE OBTAINED, E.G., FROM YAHOO! FINANCE)                      #
+## THIS FILE CONTAINS 19099 ROWS OF DAILY DATA FOR THE DOW JONES        #
+## INDUSTRIAL AVERAGE INDEX, FROM 29 Dec 1933 TO 31 Dec 2009:           #
+## 18849 DATA TO WORK ON (1 Jan 1935 - 31 Dec 2009)                     #
+## PLUS 250 AUXILIARY DATA FOR THE DETREND (29 Dec 1933 - 31 Dec 1934)  #
+#########################################################################
+
+DJ.df<- read.table("DJI_1934-2009(+250).data", header=T)
+Index <- DJ.df$Open[length(DJ.df$Open):1]
+
+## "Index" IS A NUMERIC VECTOR CONTAINING THE DAILY OPENING PRICES
+## OF THE DJIA IN CRONOLOGICAL ORDER, FROM 29 Dec 1933 TO 31 Dec 2009
+## "length(Index)" IS EQUAL TO 19099
+
+LogIndexTemp <- log(Index)
+Detrend250 <- detrend(Data=LogIndexTemp, N=250)
+
+LogIndex <- LogIndexTemp[251:length(LogIndexTemp)] - Detrend250
+
+## "LogIndex" CONTAINS THE DETRENDED DAILY LOG-PRICES OF THE DJIA
+## FROM 1 Jan 1935 TO 31 Dec 2009 ("length(LogIndex)" EQUALS 18849)
+## THIS IS THE BASIC VECTOR WE ARE GOING TO WORK ON
+
+############################
+## PARAMETERS DEFINITIONS ##
+############################
+
+EabsX <- mean(abs(increments(Data = LogIndex)))	# = 0.00653593
+DevX <- sqrt(var(increments(Data = LogIndex)))	# = 0.009534691
+
+Lambda_Value <- 0.00097
+D_Value <- 0.16
+MS_Value <- 0.108
+MS2_Value <- 0.0117
+
+From_Distr <- -3*DevX
+To_Distr <- 3*DevX
+Blocks_Distr <- 40
+Delta <- (To_Distr - From_Distr)/Blocks_Distr
+
+From_Tails <- DevX
+To_Tails <- 6*DevX
+By_Tails <- DevX/5
+xTails <- seq(from=From_Tails, to=To_Tails, by=By_Tails)
+
+DevX5 <- sqrt(var(increments(Data=LogIndex, Step=5)))
+x5 <- seq(0, 6*DevX5, by=DevX5/6)
+
+DevX400 <- sqrt(var(increments(Data=LogIndex, Step=400)))
+x400 <- seq(0, DevX400 * 3.3, by=DevX400/10)
+
+###########################################
+## COMPUTING EMPIRICAL QUANTITIES ON DJI ##
+###########################################
+
+ExponIndex <- exponent(Data = LogIndex)
+
+CorrIndex <- correlations(Data = LogIndex)
+
+DistrIndex <- distribution(Data = LogIndex, From=From_Distr, To=To_Distr, Blocks=Blocks_Distr)
+DistrIndex[,2] <- DistrIndex[,2]/Delta
+
+RightIndex <- righttail(xTails, Data=LogIndex)
+LeftIndex <- lefttail(-xTails, Data=LogIndex)
+
+RightIndex5 <- righttail(x5, Data=LogIndex, Step=5)
+LeftIndex5 <- lefttail(-x5, Data=LogIndex, Step=5)
+
+RightIndex400 <- righttail(x400, Data=LogIndex, Step=400)
+LeftIndex400 <- lefttail(-x400, Data=LogIndex, Step=400)
+
+######################################################
+##                                                  ##
+##  COMPUTING THEORETICAL QUANTITIES FOR OUR MODEL  ##
+##                                                  ##
+##        WARNING : THIS MAY TAKE A WHILE!          ##
+##                                                  ##
+######################################################
+
+LogSim <- montecarlo(N=2e7)
+
+CorrTeor <- rhoF(Number=1e6)
+
+DistrTeor <- distribution(Data = LogSim, From=From_Distr, To=To_Distr, Blocks=3*Blocks_Distr)
+DistrTeor[,2] <- DistrTeor[,2]/Delta*3
+
+RightTeor <- righttail(xTails, Data=LogSim)
+LeftTeor <- lefttail(-xTails, Data=LogSim)
+RightLeftTeor <- (RightTeor + LeftTeor)/2
+
+RightTeor5 <- righttail(x5, Data=LogSim, Step=5)
+LeftTeor5 <- lefttail(-x5, Data=LogSim, Step=5)
+RightLeftTeor5 <- (RightTeor5 + LeftTeor5)/2
+
+RightTeor400 <- righttail(x400, Data=LogSim, Step=400)
+LeftTeor400 <- lefttail(-x400, Data=LogSim, Step=400)
+RightLeftTeor400 <- (RightTeor400 + LeftTeor400)/2
+
+###########################################################
+
+
+
+##########################################
+##########################################
+#### PART III: GENERATING THE FIGURES ####
+##########################################
+##########################################
+
+
+
+###################################################
+
+quartz(width=4.3, height=4)
+par(mar=c(2, 2, 0.2, 0.5)+0.2)
+
+###################################################
+
+# FIGURE 1-A: DIFFUSIVE SCALING OF DJIA
+
+plot(DistrIndex, xlab="", ylab="", xlim=c(-0.03, 0.03), ylim=c(0,60))
+
+DistrIndex2 <- distribution(Data = LogIndex, From=From_Distr*sqrt(2), To=To_Distr*sqrt(2), Blocks=Blocks_Distr, Step=2)
+DistrIndex2[,1] <- DistrIndex2[,1]/sqrt(2)
+DistrIndex2[,2] <- DistrIndex2[,2]/Delta
+points(DistrIndex2, col=2, pch=2)
+
+DistrIndex5 <- distribution(Data = LogIndex, From=From_Distr*sqrt(5), To=To_Distr*sqrt(5), Blocks=Blocks_Distr, Step=5)
+DistrIndex5[,1] <- DistrIndex5[,1]/sqrt(5)
+DistrIndex5[,2] <- DistrIndex5[,2]/Delta
+points(DistrIndex5, col=4, pch=4)
+
+DistrIndex10 <- distribution(Data = LogIndex, From=From_Distr*sqrt(10), To=To_Distr*sqrt(10), Blocks=Blocks_Distr, Step=10)
+DistrIndex10[,1] <- DistrIndex10[,1]/sqrt(10)
+DistrIndex10[,2] <- DistrIndex10[,2]/Delta
+points(DistrIndex10, col=6, pch=6)
+
+DistrIndex25 <- distribution(Data = LogIndex, From=From_Distr*sqrt(25), To=To_Distr*sqrt(25), Blocks=Blocks_Distr, Step=25)
+DistrIndex25[,1] <- DistrIndex25[,1]/sqrt(25)
+DistrIndex25[,2] <- DistrIndex25[,2]/Delta
+points(DistrIndex25, col=3, pch=5)
+
+legend(0.0133, 60, legend=c("1 day","2 days", "5 days", "10 days", "25 days"), pch=c(1,2,4,6,5), col=c(1,2,4,6,3))
+
+dev.copy2pdf(file="dji_distrib1-2-5-10-25.pdf")
+
+###################################################
+
+# FIGURE 1-B: MULTISCALING FOR THE DJIA
+
+plot(ExponIndex, ylim=c(0,2.55), xlab="", ylab="")
+segments(0, 0, 5, 2.5, col=2, lwd=1.5)
+
+dev.copy2pdf(file="dji_multiscaling1.pdf")
+
+###################################################
+###################################################
+
+# FIGURE 2-A: EMPIRICAL AND THEORETICAL MULTISCALING FOR THE DJIA
+
+plot(ExponIndex, ylim=c(0,2.55), xlab="", ylab="")
+segments_plot(D=D_Value, Col=2)
+
+dev.copy2pdf(file="dji_multiscaling2.pdf")
+
+###################################################
+
+# FIGURE 2-B: VARIABILITY OF MULTISCALING FOR THE DJIA
+
+ExponIndex1 <- exponent(Data=LogIndex[(1:7500)])
+ExponIndex2 <- exponent(Data=LogIndex[(1:7500)+250*22])
+ExponIndex3 <- exponent(Data=LogIndex[(1:7500)+250*44])
+
+plot(ExponIndex, ylim=c(0,2.55), xlab="", ylab="")
+segments_plot(D=D_Value, Col=2)
+points(ExponIndex2, col=4, pch=2)
+points(ExponIndex3, col=6, pch=5)
+legend(0, 2.55, legend=c("1935-1964","1957-1986", "1979-2008"), pch=c(1,2,5), col=c(1,4,6), text.width=1.25)
+
+dev.copy2pdf(file="dji_multiscalingvar.pdf")
+
+###################################################
+###################################################
+
+# FIGURE 3-A: CORRELATIONS WHOLE PERIOD LOG
+
+Label3A <- c(1 + 2*(0:199),400)
+
+plot(CorrIndex[Label3A,], log="y", xlab="", ylab="", ylim=range(c(CorrIndex[,2], CorrTeor[,2])))
+points(CorrTeor, type="l", col=2, lwd=2)
+
+dev.copy2pdf(file="dji_corr400log.pdf")
+
+###################################################
+
+# FIGURE 3-B: CORRELATIONS WHOLE PERIOD LOG-LOG
+
+Label3B <- c(1:50, 1 + 2*(25:199), 400)
+
+plot(CorrIndex[Label3B,], log="xy", xlab="", ylab="", xaxt="n", ylim=range(c(CorrIndex[,2], CorrTeor[,2])))
+points(CorrTeor, type="l", col=2, lwd=2)
+axis(1, at=c(1,2,5,10,20,50,100,400))
+
+dev.copy2pdf(file="dji_corr400loglog.pdf")
+
+###################################################
+
+# FIGURE 3-C: CORRELATIONS WHOLE PERIOD h=2,3
+
+CorrIndex2 <- correlations(Data = LogIndex, Step=2)
+CorrIndex3 <- correlations(Data = LogIndex, Step=3)
+
+plot(CorrIndex, log="y", xlab="", ylab="", type="n", ylim=range(c(CorrIndex[,2], CorrTeor[,2])))
+points(CorrTeor, type="l", col=2, lwd=2)
+points(CorrIndex2, col=1, pch=1)
+points(CorrIndex3, col=4, pch=2)
+legend(257, 0.282, legend=c("h = 2 days","h = 3 days"), pch=c(1,2), col=c(1,4), text.width=95)
+
+dev.copy2pdf(file="dji_corr400-h23.pdf")
+
+###################################################
+
+# FIGURE 3-D: CORRELATIONS SUBPERIODS
+
+CorrIndexA <- correlations(Data=LogIndex[(1:7500)+250*1])
+CorrIndexB <- correlations(Data=LogIndex[(1:7500)+250*9])
+CorrIndexC <- correlations(Data=LogIndex[(1:7500)+250*27])
+
+Label3D <- c(1 + 2*(0:199),400)
+
+plot(CorrIndex, log="y", xlab="", ylab="", type="n", ylim=range(c(CorrIndex[,2], CorrTeor[,2])))
+points(CorrTeor, type="l", col=2, lwd=2)
+points(CorrIndexA[Label3D,], col=1, pch=1)
+points(CorrIndexB[Label3D,], col=4, pch=2)
+points(CorrIndexC[Label3D,], col=6, pch=5)
+legend(252, 0.28, legend=c("1936-1965","1944-1973", "1962-1991"), pch=c(1,2,5), col=c(1,4,6), text.width=100)
+
+dev.copy2pdf(file="dji_corr400-var.pdf")
+
+###################################################
+###################################################
+
+# FIGURE 4-A: DJIA DISTRIBUTION WHOLE PERIOD
+
+plot(DistrIndex, xlab="", ylab="", xaxt="n", ylim=range(c(DistrIndex[,2], DistrTeor[,2])))
+axis(1, at=seq(-0.02,0.02,by=0.01))
+points(DistrTeor, col=2, type="l", lwd=1.5)
+
+dev.copy2pdf(file="dji_distr.pdf")
+
+###################################################
+
+# FIGURE 4-B: DJIA RIGHT AND LEFT TAIL
+
+plot(xTails, RightIndex, log="y", xlab="", ylab="", ylim=range(c(RightIndex, LeftIndex, RightLeftTeor)))
+points(xTails, LeftIndex, pch=2, col=4)
+points(xTails, RightLeftTeor, col=2, type="l", lwd=1.5)
+legend(0.0425, 0.105, legend=c("right tail","left tail"), pch=c(1,2), col=c(1,4), text.width=0.009)
+
+dev.copy2pdf(file="dji_tails.pdf")
+
+###################################################
+
+# FIGURE 4-C: DJIA DISTRIBUTION SUBPERIODS
+
+DistrIndex0 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogIndex[(1:7500)+250*0])
+DistrIndex0[,2] <- DistrIndex0[,2]/Delta
+
+DistrIndex22 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogIndex[(1:7500)+250*22])
+DistrIndex22[,2] <- DistrIndex22[,2]/Delta
+
+DistrIndex45 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogIndex[(1:7500)+250*45])
+DistrIndex45[,2] <- DistrIndex45[,2]/Delta
+
+plot(DistrIndex0, xlab="", ylab="", xaxt="n", yaxt="n", ylim=range(c(DistrIndex0[,2], DistrIndex22[,2], DistrIndex45[,2])))
+points(DistrIndex22, col=4, type="p", pch=2)
+points(DistrIndex45, col=6, type="p", pch=5)
+axis(1, at=seq(-0.02,0.02,by=0.01))
+axis(2, at=seq(0, 60, by=10))
+points(DistrTeor, col=2, type="l", lwd=1.5)
+legend(0.0075, 66.6, legend=c("1935-1964","1957-1986", "1980-2009"), pch=c(1,2,5), col=c(1,4,6), text.width=0.014)
+
+dev.copy2pdf(file="dji_distr-var.pdf")
+
+###################################################
+
+# FIGURE 4-D: DJIA TAILS SUBPERIODS
+
+LeftIndex0 <- lefttail(-xTails, Data=LogIndex[(1:7500)+250*0])
+LeftIndex22 <- lefttail(-xTails, Data=LogIndex[(1:7500)+250*22])
+LeftIndex45 <- lefttail(-xTails, Data=LogIndex[(1:7500)+250*45])
+
+plot(xTails, LeftIndex, log="y", xlab="", ylab="", type="n", ylim=range(c(LeftIndex, LeftIndex0, LeftIndex45, RightLeftTeor)))
+points(xTails, LeftIndex0, pch=1, col=1)
+points(xTails, LeftIndex22, pch=2, col=4)
+points(xTails, LeftIndex45, pch=5, col=6)
+points(xTails, RightLeftTeor, col=2, type="l", lwd=1.5)
+legend(0.0393, 0.12, legend=c("1935-1964","1957-1986", "1980-2009"), pch=c(1,2,5), col=c(1,4,6), text.width=0.012)
+
+dev.copy2pdf(file="dji_tails-var.pdf")
+
+###################################################
+###################################################
+
+# FIGURE 5-A: VARIABILITY OF MULTISCALING FOR SIMULATED DATA
+
+set.seed(481385)
+LogSimNew <- montecarlo()
+
+ExponSim1 <- exponent(Data=LogSimNew[(1:7500)+250*0])
+ExponSim2 <- exponent(Data=LogSimNew[(1:7500)+250*28])
+ExponSim3 <- exponent(Data=LogSimNew[(1:7500)+250*42])
+
+plot(ExponSim1, ylim=c(0,2.5), xlab="", ylab="")
+segments_plot(D=D_Value, Col=2)
+points(ExponSim2, ylim=c(0,2.5), col=4, pch=2)
+points(ExponSim3, ylim=c(0,2.5), col=6, pch=5)
+
+dev.copy2pdf(file="sim_multiscaling-var.pdf")
+
+###################################################
+
+# FIGURE 5-B: VARIABILITY OF CORRELATIONS FOR SIMULATED DATA
+
+CorrSim1 <- correlations(Data=LogSimNew[(1:7500)+250*12])
+CorrSim2 <- correlations(Data=LogSimNew[(1:7500)+250*19])
+CorrSim3 <- correlations(Data=LogSimNew[(1:7500)+250*26])
+
+Label5B <- c(1 + 2*(0:199),400)
+
+plot(CorrIndex, log="y", xlab="", ylab="", type="n", ylim=range(c(CorrIndex[,2], CorrTeor[,2])))
+points(CorrTeor, type="l", col=2, lwd=2)
+points(CorrSim1[Label5B,], col=1, pch=1)
+points(CorrSim2[Label5B,], col=4, pch=2)
+points(CorrSim3[Label5B,], col=6, pch=5)
+
+dev.copy2pdf(file="sim_corr400-var.pdf")
+
+###################################################
+
+# FIGURE 5-C: VARIABILITY OF EMPIRICAL DENSITY FOR SIMULATED DATA
+
+DistrSim1 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogSimNew[(1:7500)+250*0])
+DistrSim1[,2] <- DistrSim1[,2]/Delta
+
+DistrSim2 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogSimNew[(1:7500)+250*7])
+DistrSim2[,2] <- DistrSim2[,2]/Delta
+
+DistrSim3 <- distribution(From=From_Distr, To=To_Distr, Blocks=Blocks_Distr, Data=LogSimNew[(1:7500)+250*35])
+DistrSim3[,2] <- DistrSim3[,2]/Delta
+
+plot(DistrSim1, xlab="", ylab="", xaxt="n", yaxt="n", ylim=range(c(DistrSim1[,2], DistrSim2[,2], DistrSim3[,2],DistrTeor[,2])))
+axis(1, at=seq(-0.02,0.02,by=0.01))
+axis(2, at=seq(0, 60, by=10))
+points(DistrTeor, col=2, type="l", lwd=1.5)
+points(DistrSim2, col=4, type="p", pch=2)
+points(DistrSim3, col=6, type="p", pch=5)
+
+dev.copy2pdf(file="sim_distr-var.pdf")
+
+###################################################
+
+# FIGURE 5-D: VARIABILITY OF TAILS FOR SIMULATED DATA
+
+RightSim1 <- righttail(xTails, Data=LogSimNew[(1:7500)+250*0])
+RightSim2 <- righttail(xTails, Data=LogSimNew[(1:7500)+250*36])
+RightSim3 <- righttail(xTails, Data=LogSimNew[(1:7500)+250*42])
+
+plot(xTails, RightSim1, log="y", xlab="", ylab="", ylim=range(c(RightSim1, RightSim2, RightSim3,RightLeftTeor)))
+points(xTails, RightSim2, pch=2, col=4)
+points(xTails, RightSim3, pch=5, col=6)
+points(xTails, RightLeftTeor, col=2, type="l", lwd=1.5)
+
+dev.copy2pdf(file="sim_tails-var.pdf")
+
+###################################################
+###################################################
+
+# FIGURE 6-A: DJIA RIGHT AND LEFT TAIL OVER 5 DAYS
+
+plot(x5, RightIndex5, log="y", xlab="", ylab="", ylim=range(c(RightIndex5,RightLeftTeor5,LeftIndex5)))
+points(x5,RightLeftTeor5, type="l", col=2, lwd=1.5)
+points(x5, LeftIndex5, col=4, pch=2)
+legend(0.093, 0.44, legend=c("right tail","left tail"), pch=c(1,2), col=c(1,4), text.width=0.023)
+
+dev.copy2pdf(file="dji_tails5days.pdf")
+
+###################################################
+
+# FIGURE 6-B: DJIA RIGHT AND LEFT TAIL OVER 400 DAYS
+
+plot(x400, RightIndex400, log="y", xlab="", ylab="", ylim=range(c(RightIndex400,RightLeftTeor400,LeftIndex400)))
+points(x400, RightLeftTeor400, type="l", col=2, lwd=1.5)
+points(x400, LeftIndex400, col=4, pch=2)
+legend(0.3175, 0.47, legend=c("right tail","left tail"), pch=c(1,2), col=c(1,4), text.width=0.08)
+
+dev.copy2pdf(file="dji_tails400days.pdf")
+
+###################################################
+
+# FIGURE 6-C: VOLATILITY IN THE DJIA
+
+Variance <- sqrt(volatility(LogIndex, 50))
+Xl <- seq(1,length(Variance),by=5)
+
+plot(Xl,Variance[Xl], ylim=c(0,0.035), type="l", xlab="", ylab="", lwd=1, xaxt="n")
+axis(1, at=c(1250,6250,11250,16250), labels=c(1940,1960,1980,2000))
+
+dev.copy2pdf(file="dji_volatility.pdf")
+
+###################################################
+
+# FIGURE 6-D: VOLATILITY IN SIMULATED DATA
+
+set.seed(1)
+LogSim2 <- montecarlo()
+
+Sim_Variance <- sqrt(volatility(LogSim2, 50))
+XlS <- seq(1,length(Sim_Variance),by=5)
+
+plot(XlS,Sim_Variance[XlS], ylim=c(0,0.035), type="l", xlab="", ylab="")
+
+dev.copy2pdf(file="sim_volatility.pdf")
+
+###################################################
+###################################################
+###################################################
+###################################################

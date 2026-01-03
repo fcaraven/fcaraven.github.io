@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco Caravenna - Didattica</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="profile-header">
+            <img src="../images/photo/io-2025-draw.jpg" alt="Francesco Caravenna" class="profile-photo">
+            <div>
+                <h1>Francesco Caravenna</h1>
+                <p class="subtitle">PhD Course</p>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html">Research</a></li>
+                <li><a href="../teaching.html">Teaching</a></li>
+                <li><a href="../more.html">More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <p>PhD course, Spring 2014</p>
+        
+        <h2 class="first">Random Graphs and Complex Networks</h2>
+        
+        <p>
+Federico Bassetti and Francesco Caravenna
+        </p>
+
+        <h3>Presentation</h3>
+        <p>
+            This course is an introduction to the mathematical modeling of random graphs.
+        </p>
+        <p>
+            Only a basic probabilistic background is required (finite and countable probability, discrete random variables), making the course accessible to every mathematical student. One of our aims is to illustrate some interesting ideas and techniques of modern probability theory in an accessible and relatively non-technical framework.
+        </p>
+        <p>
+            <a href="presentazioneBaCa3.pdf">Here are some slides</a> presenting the course.
+        </p>
+
+        <h3>Summary</h3>
+        <p>
+            In recent years there has been an increasing interest for real-world networks, such as the internet, collaboration and citation networks, social relations, biological and ecological networks. A remarkable fact is that such different examples show surprisingly similar large-scale features. For instance, these networks are "small worlds", meaning that typical distances among nodes grow slowly with the size of the network, and many of them are "scale free", meaning that the empirical distribution of the degrees (number of nodes connected to a given node) is almost independent of the size of the network, and shows a power-law decay. In order to explain such features, many efforts have been devoted to the study of mathematical models that go under the name of "random graphs".
+        </p>
+        <p>
+            One of the simplest way to produce a random graph, having {1, 2, ..., n} as the sets of nodes, is to toss a coin for each couple (i,j) of nodes, putting a connection between them if a head comes up (the coins are assumed to be independent, and to give head with the same probability p). This model was investigated already in the late 1950s by Erdos and Renyi, who showed that an interesting "phase transition" occurs: depending on how the probability p scales with n, the graph either presents a "giant connected component", of size proportional to n, or it consists of many "small disconnected ilands", of size at most log(n). Despite its apparent simplicity, the fine properties of this model are far from trivial and are amenable to a thorough mathematical analysis. This will be the main object of the first part of the course.
+        </p>
+        <p>
+            The Erdos-Renyi random graph is not a good model for many real-world networks, because it is not scale free. For this reason, in the last decades several alternative models have been proposed and investigated. We will focus on two of the most popular ones: the "configuration model", a random graph model in which the degrees are fixed beforehand and the nodes are connected in the most random way, and the "preferential attachment model", where the graph is built dynamically, adding nodes to the network in a sequential fashion, favoring connections among nodes with large degrees. Both classes of models lead to scale free and small world networks and one can prove precise asymptotic results for the typical distances and degree distributions. This will be the object of the second part of the course.
+        </p>
+
+        <h3>References</h3>
+        <ul>
+            <li>The course will be mainly based on the lecture notes <i>Random Graphs and Complex Networks</i> by Remco van der Hofstad, available <a href="http://www.win.tue.nl/~rhofstad/NotesRGCN.pdf">on the author webpage</a>.</li>
+            <li>Another relevant reference is the book <i>Random Graph Dynamics</i> by Rick Durrett, Cambridge Unversity Press (2006) (see <a href="http://www.math.duke.edu/~rtd/RGD/RGD.html">here</a> for more information).</li>
+        </ul>
+
+        <h3>Tentative Program</h3>
+        <ol>
+            <li><i>Probabilistic Tools and Techniques</i>: random variables, coupling, inequalities.</li>
+            <li><i>Branching Processes as Random Trees</i>: asymptotic properties.</li>
+            <li><i>The Erdos-Renyi Random Graph</i>: phase transition and giant component.</li>
+            <li><i>Configuration Model</i>: asymptotic distances and small world phenomenon.</li>
+            <li><i>Preferential Attachment</i>: emergence of a scale free network.</li>
+        </ol>
+
+
+        <h3>Lectures Log</h3>
+        <p>References:</p>
+        <ul>
+            <li>[vdH] R. van der Hostad Random graphs and complex networks, lecture notes <a href="http://www.win.tue.nl/~rhofstad/NotesRGCN.pdf">available on the author webpage</a></li>
+            <li>[LP] R. Lyons, Y. Peres. Probability on Trees and Networks, <a href="http://mypage.iu.edu/~rdlyons/prbtree/book.pdf">available here</a></li>
+            <li>[CDP] Caravenna, Dai Pra. Probabilità: Un'introduzione attraverso modelli e applicazioni. Springer.</li>
+        </ul>
+
+        <h4>Lecture 10 (27th May 2014)</h4>
+        <ul>
+            <li>Preferential attachment model.
+                <ul>
+                    <li>Reminders of definition and Markov property of degree (D<sub>i</sub>(t))<sub>t &in; N</sub>.</li>
+                    <li>Remark: if E[Y<sub>t</sub> | F<sub>t-1</sub>] = (&eta;<sub>t</sub>-1) Y<sub>t-1</sub> and Y<sub>0</sub> = y<sub>0</sub>, for some constants &eta;<sub>t</sub> > 1 and y<sub>0</sub> > 0, the process M<sub>t</sub> := (&prod;<sub> s &le; t-1</sub> 1/&eta;<sub>s</sub>) Y<sub>t</sub> / y<sub>0</sub> is a martingale. Corollary: D<sub>i</sub>(t) / t<sup>1/(2+&delta;)</sup> is bounded in L<sup>2</sup> [exercise: considering Y<sub>t</sub> := (D<sub>i</sub>(t) + &delta;) (D<sub>i</sub>(t) + &delta; + 1)].</li>
+                </ul>
+            </li>
+            <li>Azuma-Hoeffding inequality for martingales with bounded increments: discussion and proof (Thm 2.24 [vdH]).</li>
+            <li>Asymptotic properties of degrees in the preferential attachment model.
+                <ul>
+                    <li>Concentration of N<sub>k</sub>(t) (number of vertexes of degree k) around its expected value, using the Azuma-Hoeffding inequality (Prop 8.3 [vdH]).</li>
+                    <li>Detailed proof that (M<sub>n</sub> := E[N<sub>k</sub>(t) | F<sub>n</sub>])<sub>n &in; N</sub> is a martingale with bounded increments (|M<sub>n</sub> - M<sub>n-1</sub>| &le; 2) using the Markov property of (D<sub>i</sub>(t))<sub>t &in; N</sub>.</li>
+                    <li>Asymptotic behavior of E[N<sub>k</sub>(t)] &sim; t p<sub>k</sub> with p<sub>k</sub> &sim; c<sub>&delta;</sub> / k<sup>3+&delta;</sup> using recursive equations (Prop. 8.4 [vdH], sketch of the proof).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 9 (20th May 2014)</h4>
+        <ul>
+            <li>Preferential attachment model.
+                <ul>
+                    <li>Motivation and introduction to the model.</li>
+                    <li>PA(t) = PA<sup>(1,&delta;)</sup>(t) defined as a function of the sequence of random variables Z<sub>i</sub> &in; {1, ..., i}, for i=1, ..., t, where Z<sub>i</sub> is the vertex to which the vertex "i" is attached. Distribution of the random variables Z<sub>i</sub>'s.</li>
+                    <li>&sigma;-algebra F<sub>t</sub> and its interpretation. The process (D<sub>i</sub>(t))<sub>t &in; N</sub>, giving the degree of a vertex "i" as a function of t, is a Markov chain.</li>
+                    <li>Extension of the model: PA<sup>(m,&delta;)</sup>(t) for m &ge; 2 in terms of PA<sup>(1,&delta;/m)</sup>(mt).</li>
+                </ul>
+            </li>
+            <li>Asymptotic properties of degrees in the preferential attachment model.
+                <ul>
+                    <li>Empirical degree distribution in PA(t) as a random probability on N, which converges to a heavy-tailed distribution (Thm 8.2 [vdH], proof next time).</li>
+                    <li>Reminders on martingales, conditions for a.s. and L<sup>p</sup> convergence.</li>
+                    <li>Reminders on Euler's Gamma function &Gamma;(t).</li>
+                    <li>Degrees of fixed vertices: expected value and asymptotic behavior of D<sub>i</sub>(t) as t &rarr; &infin; (Thm. 8.1 [vdH]).</li>
+                    <li>Heuristic derivation of heavy tails for the empirical degree distribution from the knowledge E[D<sub>i</sub>(t)] &sim; c (t/i)<sup>1/(&tau;-1)</sup> (with &tau; = 3+&delta;).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 8 (13th May 2014)</h4>
+        <ul>
+            <li>Size biasing: discussion and examples.</li>
+            <li>Phase transition in the configuration model, revisited.
+                <ul>
+                    <li>Emergence of a giant component according to whether &nu; > 1 or &nu; &le; 1, where &nu; := E[D(D-1)]/E[D] (Thm 10.1 [vdH], no proof).</li>
+                    <li>Heuristics: two-stage branching process with size-biased distribution.</li>
+                </ul>
+            </li>
+            <li>Polynomial &tau;-condition (with &tau; &in; (2,3)) for a sequence <u>d</u><sup>(n)</sup> = (d<sub>1</sub><sup>(n)</sup>, ..., d<sub>n</sub><sup>(n)</sup>).</li>
+            <li>Small world phenomenon in the configuration model:
+                <ul>
+                    <li>log log n asymptotic behavior for the diameter of the configuration model with heavy tails (polynomial &tau;-condition): (Theorem 10.33 [VdH]; partial proof of the upper bound, see below).</li>
+                    <li>Proposition 1: log log n upper bound on the diameter of the Core (Theorem 10.28 [VdH], no proof).</li>
+                    <li>Proposition 2: log log n upper bound on the distance from the Core (proof as a consequence of Propositions 3 and 4 below).</li>
+                    <li>Proposition 3: estimate on the connection probability of two subsets of vertices (enhanced version of Lemma 10.30 [VdH], with proof).</li>
+                    <li>Proposition 4: estimate on the "effective degree" (number of half-edges) of the neighborhood N<sub>&le;k</sub>(v) of a vertex v (sketch of the proof).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 7 (6th May 2014)</h4>
+        <ul>
+            <li>Proof of the convergence of the empirical degree distribution p<sub>k</sub><sup>ER,(n)</sup> of the erased configuration model CM<sub>n</sub><sup>ER</sup>(<u>d</u>) (Thm 7.6 [vdH]).
+                <ul>
+                    <li>Pointwise convergence p<sub>k</sub><sup>(n)</sup> &rarr; p<sub>k</sub> for every fixed k is equivalent to &ell;<sup>1</sup> convergence &sum;<sub>k</sub> |p<sub>k</sub><sup>(n)</sup> - p<sub>k</sub>| &rarr; 0.</li>
+                    <li>If &alpha;<sub>n</sub> &rarr; &infin;, the fraction of vertexes v &in; [n] with d<sub>v</sub> > &alpha;<sub>n</sub> vanishes.</li>
+                    <li>Estimate of &sum;<sub>k</sub> |p<sub>k</sub><sup>ER,(n)</sup> - p<sub>k</sub><sup>(n)</sup>| in terms of the fraction of vertexes v &in; [n] having at least a self-loop or a multiple-edge.</li>
+                    <li>Expected values of the numbers of self-loops (S<sub>v</sub>) and multiple edges (M<sub>v</sub>) emanating from a vertex v &in; [n].</li>
+                    <li>Determination of the truncation &alpha;<sub>n</sub>, assuming max{d<sub>v</sub>: v &in; [n]} = o(n).</li>
+                    <li>Conclusion: proof that max{d<sub>v</sub>: v &in; [n]} = o(n) if regularity conditions (a) and (b) are satisfied.</li>
+                </ul>
+            </li>
+            <li>Configuration model with i.i.d. degrees.
+                <ul>
+                    <li>An i.i.d. sequence <u>D</u> = (D<sub>1</sub>, D<sub>2</sub>, ...) satisfies a.s. the regularity condition (a), and also (b) and (c) if E[D<sub>1</sub>] < &infin; and E[D<sub>1</sub><sup>2</sup>] < &infin; respectively.</li>
+                    <li>Configuration model with i.i.d. degrees CM<sub>n</sub>(<u>D</u>) as a function &Psi;(<u>D</u>, <u>W</u>), where <u>W</u> are i.i.d. U(0,1) which generate a uniform configuration.</li>
+                </ul>
+            </li>
+            <li>Phase transition in the configuration model:
+                <ul>
+                    <li>Emergence of a giant component according to whether &nu; > 1 or &nu; &le; 1, where &nu; := E[D(D-1)]/E[D] (Thm 10.1 [vdH], no proof).</li>
+                    <li>Heuristics: two-stage branching process with size-biased distribution.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 6 (29th April 2014)</h4>
+        <ul>
+            <li>Beyond Erdos-Renyi:
+                <ul>
+                    <li>Reminders: Poisson limit of the empirical degree distribution for Erdos-Renyi (Thm 5.9 [vdH], no proof).</li>
+                    <li>How to build a model with (asymptotic) polynomial degree distribution? Introduction to Configuration Model and Preferential Attachment.</li>
+                </ul>
+            </li>
+            <li>Introduction to the Configuration Model (&sect;7.1 [vdH]):
+                <ul>
+                    <li>Not every <u>d</u> = (d<sub>1</sub>, ..., d<sub>n</sub>) is the degree sequence of a graph. Graphs, multigraphs and their matrix notation: spaces G<sub>n</sub> and MG<sub>n</sub>.</li>
+                    <li>Intuitive definition of the Configuration Model CM<sub>n</sub>(<u>d</u>) via "uniform matching" of the half-edges attached to each vertex in [n].</li>
+                    <li>Notation &ell;<sub>n</sub> := d<sub>1</sub> + ... + d<sub>n</sub>. Space Conf(&ell;<sub>n</sub>) of partitions of [&ell;<sub>n</sub>] into pairs ("configurations"). Map &phi;<sub><u>d</u></u>: Conf(&ell;<sub>n</sub>) &rarr; MG<sub>n</sub> between configurations and multigraphs.</li>
+                    <li>How to generate a r.v. U uniformly distributed on Conf(<u>d</u>) via successive uniform pairings. CM<sub>n</sub>(<u>d</u>) has the same law as &phi;(U).</li>
+                </ul>
+            </li>
+            <li>Basic properties of the Configuration Model:
+                <ul>
+                    <li>Distribution of CM<sub>n</sub>(<u>d</u>): probability of a given multigraph (Prop 7.4 [vdH]).</li>
+                    <li>Corollary: conditionally on the event {CM<sub>n</sub>(<u>d</u>) &in; G<sub>n</sub>}, the r.v. CM<sub>n</sub>(<u>d</u>) is uniformly distributed on G<sub>n</sub>. How to sample a uniform simple graph with given degrees <u>d</u> by repeatedly sampling CM<sub>n</sub>(<u>d</u>).</li>
+                    <li>Regularity conditions (a), (b), (c) for a sequence <u>d</u><sup>(n)</sup> = (d<sub>1</sub><sup>(n)</sup>, ..., d<sub>n</sub><sup>(n)</sup>) with respect to a given probability (p<sub>k</sub>)<sub>k&in;N0</sub>. Probabilistic reformulation.</li>
+                    <li>Probability of CM<sub>n</sub>(<u>d</u>) being a simple graph (Thm 7.8 [vdH], no proof).</li>
+                    <li>Erased configuration model CM<sub>n</sub><sup>ER</sup>(<u>d</u>). Convergence of the corresponding erased empirical degree distribution (Thm 7.6 [vdH], proof next time).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 5 (14th April 2014)</h4>
+        <ul>
+            <li>Proof of the law of large numbers for giant component in the supercritical regime.
+                <ul>
+                    <li>Concentration of the number of vertices in large clusters (Prop 4.10, Coroll 4.11 [vdH]);</li>
+                    <li>The law of the random walk in the exploration process (Prop 4.6 [vdH]);</li>
+                    <li>No intermediate clusters (Prop 4.12, Coroll 4.13 [vdH]).</li>
+                </ul>
+            </li>
+            <li>More on supercritical regime.
+                <ul>
+                    <li>Duality principle for ER random graphs (Section 4.4.2 [vdH]);</li>
+                    <li>Connectivity threshold (Thm 5.5 [vdH], without proof).</li>
+                </ul>
+            </li>
+            <li>Connected components in the critical window of ER random graphs.
+                <ul>
+                    <li>Statement of the Aldous theorem (Theorem 5.4 [vdH]).</li>
+                </ul>
+            </li>
+            <li>Degree sequence.
+                <ul>
+                    <li>Poisson (uniform) limit of the empirical degree distribution (Thm 5.9 [vdH], without proof).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 4 (8th April 2014)</h4>
+        <ul>
+            <li>Comparing the connected components of an Erdos-Renyi graph with binomial branching processes.
+                <ul>
+                    <li>Stochastic domination of the cluster size (thm 4.2 [vdH]);</li>
+                    <li>Lower bound on cluster tail (thm 4.3 [vdH]).</li>
+                </ul>
+            </li>
+            <li>Largest component in the subcritical regime.
+                <ul>
+                    <li>Upper and lower bounds on largest subcritical component and the law of large numbers (thm 4.4/4.5 [vdH]);</li>
+                    <li>Complete proofs of the two bounds (following Sections 4.3.1, 4.3.2, 4.3.3 in [vdH] with minor modifications).</li>
+                </ul>
+            </li>
+            <li>Supercritical regime.
+                <ul>
+                    <li>Statements of the law of large numbers and the central limit theorem for giant component (thm 4.8, thm 4.15 [vdH]);</li>
+                    <li>Statement of the law of large numbers for the second largest component (Sec. 4.4.2 [vdH]).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 3 (1st April 2014)</h4>
+        <ul>
+            <li>Random-walk perspective to branching processes.
+                <ul>
+                    <li>Definition of conjugate pair of off-spring distributions and basic properties (ex. 3.16, 3.17 [vdH]);</li>
+                    <li>Duality principle for branching processes (thm 3.7 [vdH]);</li>
+                    <li>Cramer's upper bound, Chernoff bound (thm 2.17 [vdH]);</li>
+                    <li>Extinction probability with large total progeny (thm 3.8 [vdH]).</li>
+                </ul>
+            </li>
+            <li>Hitting-time theorem and the total progeny.
+                <ul>
+                    <li>Hitting-time theorem (thm. 3.14 [vdH]);</li>
+                    <li>Law of total progeny (thm 3.13 [vdH]);</li>
+                    <li>Individuals with an infinite line of descent (thm. 3.11 [vdH]).</li>
+                </ul>
+            </li>
+            <li>Binomial and Poisson branching processes.
+                <ul>
+                    <li>Poisson duality principle (thm 3.15 [vdH]);</li>
+                    <li>Total progeny distribution for the Poisson branching process (thm. 3.16 [vdH]);</li>
+                    <li>Total variation distance, Strassen theorem, Poisson-Binomial coupling (thm. 2.9, thm 2.10 [vdH], see also Capitolo 4 [CDP]);</li>
+                    <li>Poisson and binomial branching processes (thm. 3.16 [vdH]).</li>
+                </ul>
+            </li>
+            <li>Erdos-Renyi random graph.
+                <ul>
+                    <li>Exploration process for the connected component of a node (random walk perspective);</li>
+                    <li>The size of the connected component as the hitting time of S_t and the law of the X_t's (Sec. 4.1 [vdH]).</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 2 (25th March 2014)</h4>
+        <ul>
+            <li>Brancing process.
+                <ul>
+                    <li>Extinction vs survival (definition and basic results). Thm 3.1 [vdH].</li>
+                </ul>
+            </li>
+            <li>The intrinsic Martingale and its limit.
+                <ul>
+                    <li>Thm 3.3, Thm 3.9, result (3.4.1), Exer.3.19 in [vdH];</li>
+                    <li>Kesten-Stigum Theorem and Seneta Theorem (statements without proofs), Thm 3.10 [vdH].</li>
+                    <li>Definition of inherited property and Proposition 5.6 and Corollary 5.6 in [LP];</li>
+                    <li>Conditioning on extinction, conditioning on survival.</li>
+                </ul>
+            </li>
+            <li>Bernoulli percolation.
+                <ul>
+                    <li>Definition of general percolation graph, definition of critical probability.</li>
+                    <li>Binomial Galton Watson tree as the percolation graph of an n-ary tree.</li>
+                    <li>Erdos-Renyi random graph as the percolation graph of a complete graph.</li>
+                    <li>Critical probability in a Galton Watson tree, Prop 5.9 in [LP].</li>
+                </ul>
+            </li>
+            <li>Total progeny.
+                <ul>
+                    <li>Definition of Total progeny, thm 3.2 in [vdH].</li>
+                    <li>Random-walk perspective to branching processes.</li>
+                    <li>Definition of History. Total progeny as hitting time of a random walk. Sec. 3.3 [vdH].</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h4>Lecture 1 (18 March 2014)</h4>
+        <ul>
+            <li>Graphs and trees.
+                <ul>
+                    <li>Basic definitions: edges, nodes, self-loop, directed and undirected graphs, tree, rooted tree. Degree of a node.</li>
+                    <li>Ulam-Harris tree, rooted labelled trees and locally finite trees.</li>
+                </ul>
+            </li>
+            <li>Random graphs and random trees.
+                <ul>
+                    <li>Definition of (finte) random graph and (finte) random tree.</li>
+                    <li>Definition of random tree as a random variable on the space of locally finite trees.</li>
+                    <li>Definition of Erdos-Renyi graph (density and different constructions).</li>
+                    <li>Binomial distribution of the degree of a node in the Erods-Renyi graph and Poisson limit.</li>
+                </ul>
+            </li>
+            <li>Galton-Watson tree process.
+                <ul>
+                    <li>The off-spring distribution and the definition of Galton-Watson tree.</li>
+                    <li>Basic properties of independence of the Galton-Watson tree.</li>
+                    <li>The number of individuals in the n-th generation (the brancing process Z_n).</li>
+                </ul>
+            </li>
+            <li>Real words networks and random graphs.
+                <ul>
+                    <li>The proportion of vertices of degree k in some empirical networks and the study of the degree distribution of a random graph.</li>
+                    <li>Power-law decay of the degree distribution, hub and small-words in real words networks.</li>
+                </ul>
+            </li>
+        </ul>
+        
+        
+        <h3>Logistic Details</h3>
+        <p>
+            Due to room shortage, lectures in Milano-Bicocca will take place in <i>different rooms located in <b>different buildings</b></i>:
+        </p>
+        <ul>
+            <li>Building <b>U5</b> is in Via Roberto Cozzi 55</li>
+            <li>Building <b>U9</b> is in Viale dell'Innovazione 10</li>
+            <li>Building <b>U7</b> is in Via Bicocca degli Arcimboldi 8</li>
+            <li>Bicocca campus maps: <a href="mappa.gif">here</a> or <a href="schema.png">here</a></li>
+        </ul>
+
+        <p><i>Schedule for the second part of the course</i>, held in <b>Milano Bicocca</b>:</p>
+        <ul>
+            <li>Tuesday 29 April 2014, 11:00-12:30 and 14:00-15:30, Aula <b>U5-3014</b></li>
+            <li>Tuesday 6 May 2014, 11:00-12:30 and 14:00-15:30, Aula <b>U9-10</b></li>
+            <li>Tuesday 13 May 2014, 11:00-12:30 and 14:00-15:30, Aula <b>U7-6</b></li>
+            <li>Tuesday 20 May 2014, <span style="text-decoration: line-through;">11:00-12:30 and 14:00-15:30</span> 14:15-17:30 (with a short break), Aula <b>U7-6</b></li>
+            <li>Tuesday 27 May 2014, 11:00-12:30 and 14:00-15:30, Aula <b>U5-3014</b></li>
+        </ul>
+
+        <p><i>Schedule for the first part of the course</i>, held in <b>Pavia</b> (Dipartimento di Matematica, via Ferrata 1):</p>
+        <ul>
+            <li>Tuesday 18 March 2014, 11:15-13:15, <i>Aula Beltrami</i> (Introductory Lecture)</li>
+            <li>Tuesday 25 March 2014, 11:15-12:45 and 14:00-15:30, <i><b>Aula C13</b></i></li>
+            <li>Tuesday 1 April 2014, 11:15-12:45 and 14:00-15:30, <i>Aula Beltrami</i></li>
+            <li>Tuesday 8 April 2014, 11:15-12:45 and 14:00-15:30, <i>Aula Beltrami</i></li>
+            <li>Tuesday 15 April 2014, 11:15-12:45 and 14:00-15:30, <i>Aula Beltrami</i></li>
+        </ul>
+
+        <p>
+            Interested students are invited to <a href="mailto:francesco.caravenna@unimib.it,federico.bassetti@unipv.it"><b>contact us via email</b></a>.
+        </p>
+
+        <h3>What else?</h3>
+        <p>
+            For more information, do not hesitate to <a href="mailto:francesco.caravenna@unimib.it,federico.bassetti@unipv.it"><b>contact us via email</b></a>.
+        </p>
+
+        <footer>
+            <span>Last modified: 27 May 2014.</span>
+            <a href="../index.html" class="footer-link">Back to Home Page</a>
+        </footer>
+    </main>
+</div>
+
+</body>
+</html>

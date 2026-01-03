@@ -1,0 +1,10 @@
+
+RIDIMENSIONARE FILE pdf DA RIGA DI COMANDO
+
+Legenda dei profili (-dPDFSETTINGS):
+
+/screen: Qualità bassa, file piccolissimi (72 dpi).
+/ebook: Il miglior compromesso (150 dpi), perfetto per il web.
+/printer: Qualità alta (300 dpi).
+
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
