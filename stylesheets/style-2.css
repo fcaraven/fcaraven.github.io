@@ -1,0 +1,697 @@
+/* Configurazione Variabili */
+:root {
+    --bg: #ffffff;
+    --text: #222222;
+    --text-light: #555555;
+    --accent: #000000; 
+    --link: #0056b3;
+    --border: #eeeeee;
+    --max-width: 700px; /* Larghezza ottimizzata per eleganza */
+}
+
+body {
+    /* Usiamo i font già presenti nel computer dell'utente */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    line-height: 1.55;
+    color: var(--text);
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased; /* Rende il font più nitido su Mac */
+}
+
+.container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 60px 25px;
+}
+
+.back-home {
+    margin-bottom: 20px;
+}
+
+.back-home a {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back-home a:hover {
+    color: var(--link);
+}
+
+/* --- HEADER --- */
+header {
+    /* Rimuoviamo il margine qui perché lo gestiremo con la nav */
+    margin-bottom: 0; 
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* Spazio esatto sopra la linea superiore della nav */
+    margin-bottom: 25px; 
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: var(--text-light);
+    margin: 5px 0 0 0;
+    padding: 0;
+    line-height: 1; /* Fondamentale per la simmetria */
+}
+
+.profile-photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+}
+
+header h1 {
+    font-size: 1.8rem;
+    line-height: 1.0;  /* Interlinea quasi nulla per compattare il nome */
+    margin-top: 10px;
+    margin-bottom: 10px; /* Aumentato leggermente per dare aria */
+    letter-spacing: -0.04em;
+}
+
+/* --- NAV --- */
+nav {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    /* Spazio esatto sotto la linea inferiore della nav */
+    margin-bottom: 25px; 
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+    /* Centra il testo perfettamente tra le due linee */
+    line-height: 1; 
+}
+
+
+/* Questa modifica vale sia per Desktop che per Mobile */
+nav a {
+    display: inline-block;
+    padding: 16px 0 12px 0; /* Più spazio sopra (16) che sotto (12) per centrarlo otticamente */
+    line-height: 1;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 600;
+}
+
+nav a:hover, nav a.current {
+    color: var(--link);
+}
+
+/* --- MAIN CONTENT --- */
+h2 {
+font-size: 1.8rem;
+margin: 0 0 15px 0;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 30px; /* Spaziatura corretta */
+    margin-bottom: 18px;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    text-transform: uppercase; /* Tocco di rigore accademico */
+    letter-spacing: 0.05em;
+}
+
+.first {
+margin-top: 30px;
+}
+
+/* Sottosezioni dentro le pagine (es. Photos > Courses) */
+h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: var(--text);
+    text-transform: uppercase; /* Opzionale, per distinguerli bene dai titoli principali */
+    letter-spacing: 0.05em;
+}
+
+/* Sottosezioni dentro le pagine (es. Photos > Courses) */
+h5 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 0.84rem;
+    text-transform: uppercase; /* Opzionale, per distinguerli bene dai titoli principali */
+}
+
+/* Griglia per le foto */
+.photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px; /* Aumentato il distanziamento come richiesto */
+    justify-content: flex-start;
+    margin-bottom: 40px;
+}
+
+.photo-grid img {
+    border: 1px solid var(--border);
+    max-width: 200px;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione fluida */
+}
+
+.photo-grid img:hover {
+    transform: translateY(-8px); /* Si sposta leggermente verso l'alto */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Aggiunge un'ombra per profondità */
+}
+
+.photo-grid figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.photo-grid figcaption {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 5px;
+    text-align: center;
+}
+
+/* --- TABELLA PARTECIPANTI --- */
+.participants-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.participants-table th {
+    text-align: left;
+    font-weight: 600;
+    padding: 10px 5px;
+    border-bottom: 2px solid var(--border);
+    color: var(--text);
+}
+
+.participants-table td {
+    padding: 8px 5px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+}
+
+/* Effetto zebra leggero per facilitare la lettura di liste lunghe */
+.participants-table tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* --- OTTIMIZZAZIONI PER DISPOSITIVI MOBILI (Schermi < 600px) --- */
+ 
+    /* Tabelle e Foto */
+    .mytable, .participants-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+    
+    .photo-grid img {
+        max-width: 130px; 
+    }
+}
+
+section {
+    margin-bottom: 0; /* Più compatto */
+}
+
+p {
+    margin: 12px 0;
+}
+
+ul {
+    padding-left: 20px;
+    margin: 15px 0 20px 0;
+}
+
+li {
+    margin-bottom: 12px;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.cv-links {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    display: flex;
+    gap: 30px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+
+/* --- INDICE RAPIDO (JUMP LINKS) --- */
+.jump-nav {
+    display: flex;
+    align-items: center;
+    justify-content: left; /* Centra l'indice nella pagina */
+    gap: 15px;
+    margin-bottom: 20px;  /* Spazio generoso prima che inizino i contenuti */
+    font-size: 0.95rem;
+}
+
+.jump-title {
+    color: var(--text-light); /* Grigio per il "Go to:" */
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.jump-links {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.jump-links a {
+    color: var(--text-light);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.jump-links a:hover {
+    color: var(--link); /* Diventa blu al passaggio del mouse */
+    text-decoration: underline;
+}
+
+/* Aggiunge il pallino separatore tra i link via CSS */
+.jump-links a:not(:last-child)::after {
+    content: "•";
+    /* Riduciamo il margine destro per compensare lo spazio naturale dell'HTML */
+    margin-left: 12px;
+    margin-right: 8px; 
+    color: #ccc;
+    font-weight: 400;
+    display: inline-block;
+    text-decoration: none !important; /* Evita che il pallino venga sottolineato */
+}
+
+/* --- Variante per Pagine Centrate (Cetraro, etc.) --- */
+.header-centered {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-centered h1 {
+    font-size: 2.2rem; /* Leggermente più grande per l'evento */
+    line-height: 1.1;
+    margin: 0 auto 15px auto;
+}
+
+.header-centered .subtitle {
+	line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.header-centered nav ul {
+    justify-content: center; /* Centra i link della nav */
+}
+
+/* Ottimizzazione per i titoli della pagina evento */
+.header-centered h1 br {
+    display: block; /* Forza l'andata a capo nel titolo se presente */
+}
+
+/* Fix per le tabelle legacy affinché non escano dal container */
+table {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+
+/* --- TABELLA SCHEDULE --- */
+.mytable {
+	display: block;
+    width: 100%;
+    margin: 30px 0;
+    overflow-x: auto; /* Permette lo scorrimento su cellulari se la tabella è larga */
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.9rem; /* Leggermente più piccolo del testo normale, ma leggibile */
+    min-width: 600px; /* Evita che si schiacci troppo */
+}
+
+.schedule-table th {
+    padding: 10px 10px;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.schedule-table td {
+    /* Qui gestisci la separazione verticale */
+    padding: 13px 10px; 
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Colonna degli orari */
+.time-slot {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    white-space: nowrap;
+    text-align: left;
+    font-weight: 500;
+    width: 15%;
+}
+
+/* Righe speciali (Lunch/Dinner) */
+.break-row td {
+    padding: 10px 10px; /* Più strette per distinguersi dalle sessioni */
+    background-color: #fafafa;
+    color: #888;
+    font-size: 0.85rem;
+}
+
+/* Evidenzia la riga al passaggio del mouse per non perdere il segno */
+.schedule-table tbody tr:hover {
+    background-color: #fcfcfc;
+}
+
+
+/* --- HERO PHOTO (Foto di gruppo iniziale) --- */
+.hero-photo {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.hero-photo img {
+    max-width: 100%;
+    height: auto;
+    /* Bordo grigio chiaro invece che nero per far risaltare l'ombra */
+    border: 1px solid #ddd; 
+    /* Ombra un po' più marcata (0.2 invece di 0.1) */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
+    transition: transform 0.3s ease; /* Bonus: piccolo effetto al passaggio del mouse */
+}
+
+.hero-photo img:hover {
+    transform: translateY(-5px); /* L'immagine si alza leggermente quando ci passi sopra */
+}
+
+/* --- PAPERS LIST (Numerazione decrescente automatica) --- */
+ol.papers-list {
+    /* Il tuo ul ha 20px, qui mettiamo 32px per far spazio ai numeri [XX] */
+    padding-left: 32px; 
+    margin-bottom: 20px;
+}
+
+ol.papers-list li::marker {
+    /* Crea il formato [numero] */
+    content: "[" counter(list-item) "] ";
+    font-size: 0.9rem;    /* Rimpicciolisce il numero (il testo standard è ~1rem) */
+    color: var(--accent);
+}
+
+ol.papers-list li {
+    /* Leggermente più spazio tra i paper rispetto agli 8px standard */
+    /* margin-bottom: 12px; */
+    padding-left: 5px;
+}
+
+.papers-list li::marker {
+    color: var(--text-light);
+}
+
+/* --- FOOTER --- */
+footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    color: var(--text-light);
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.footer-link {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: var(--link);
+    text-decoration: underline;
+}
+
+
+
+/* La "mini-bandiera" flat in puro CSS */
+
+.flag-it {
+    display: inline-block;
+    width: 15px;      /* Larghezza totale (5px per ogni banda) */
+    height: 10px;     /* Altezza per proporzione 3:2 */
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 0px;
+    
+    /* Bordo grigio leggerissimo per staccare il bianco della bandiera dallo sfondo */
+    border: 1px solid rgba(0,0,0,0.1); 
+    
+    /* SVG corretto: il namespace è /svg e abbiamo aggiunto no-repeat */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%23009246'/%3E%3Crect x='1' width='1' height='2' fill='%23ffffff'/%3E%3Crect x='2' width='1' height='2' fill='%23ce2b37'/%3E%3C/svg%3E");
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 1px;
+}
+
+.flag-fr {
+    display: inline-block;
+    width: 15px;
+    height: 10px;
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 0px;
+    border: 1px solid rgba(0,0,0,0.1); 
+    
+    /* SVG per la bandiera francese (Blu, Bianco, Rosso) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 3 2'%3E%3Crect width='1' height='2' fill='%230055A4'/%3E%3Crect x='1' width='1' height='2' fill='%23ffffff'/%3E%3Crect x='2' width='1' height='2' fill='%23EF4135'/%3E%3C/svg%3E");
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 1px;
+}
+
+.flag-uk {
+    display: inline-block;
+    width: 15px;      /* Stessa larghezza dell'italiana */
+    height: 10px;     /* Stessa altezza (proporzione 3:2) */
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-left: 0px;
+    
+    /* Bordo grigio leggerissimo per staccare la bandiera dallo sfondo */
+    border: 1px solid rgba(0,0,0,0.1); 
+    
+    /* SVG: Sfondo blu, croce diagonale bianca/rossa e croce dritta bianca/rossa */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cpath fill='%23012169' d='M0 0h50v30H0z'/%3E%3Cpath stroke='%23fff' stroke-width='6' d='M0 0l50 30M50 0L0 30'/%3E%3Cpath stroke='%23C8102E' stroke-width='4' d='M0 0l50 30M50 0L0 30'/%3E%3Cpath stroke='%23fff' stroke-width='10' d='M25 0v30M0 15h50'/%3E%3Cpath stroke='%23C8102E' stroke-width='6' d='M25 0v30M0 15h50'/%3E%3C/svg%3E");
+    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 1px;
+}
+
+/* --- LAYOUT LIBRO (book.html) --- */
+.book-header {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+
+.book-cover {
+    width: 180px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.book-details {
+    flex: 1;
+}
+
+.book-authors {
+    margin-top: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.book-main-title {
+    margin: 10px 0;
+    color: var(--accent);
+    font-size: 1.8rem;
+}
+
+
+/* --- PAGINA TEACHING (teaching.html) --- */
+.teaching-intro {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.teaching-img {
+    height: 160px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.teaching-text {
+    flex: 1;
+}
+
+.teaching-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+
+.teaching-list li {
+    margin-bottom: 12px;
+}
+
+.teaching-list li strong {
+    color: var(--text);
+}
+
+.compr-list {
+margin: 13px 0;
+}
+
+.compr-list li {
+margin: 5px 0;
+}
+
+
+/* Permette di distanziare meglio le righe del diario delle lezioni */
+.teaching-list li br + text, .teaching-list li {
+    margin-bottom: 18px;
+}
+
+
+/* --- NUOVO: Testo che avvolge la foto dei docenti --- */
+.speaker-wrap {
+    margin-bottom: 30px;
+    overflow: auto; /* Necessario per contenere l'immagine flottante */
+}
+
+.speaker-wrap img {
+    float: left;
+    width: 140px;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+    .container { padding: 25px 15px !important; }
+
+    /* 1. HEADER: Risolve H1 troppo a destra e Sottotitolo rotto */
+    .profile-header { 
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+        text-align: left !important;
+    }
+    .profile-photo { 
+        width: 75px !important;  /* Più piccola per dare spazio al testo */
+        height: 75px !important; 
+        flex-shrink: 0 !important;
+    }
+    header h1 { 
+        font-size: 1.4rem !important; /* Rimpicciolito per stare a sinistra */
+        margin: 0 !important;
+        line-height: 1.2 !important;
+    }
+    .subtitle { 
+        font-size: 0.85rem !important; 
+        white-space: nowrap !important; /* Forza il sottotitolo su una riga */
+        display: block !important;
+    }
+
+    /* 2. NAVIGAZIONE (Manteniamo quella che funziona) */
+    nav ul {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        height: 55px !important;
+        padding: 0 !important;
+    }
+    nav li { flex: 1 !important; display: flex !important; justify-content: center !important; }
+    nav a { font-size: 0.85rem !important; line-height: 1 !important; }
+
+    /* 3. JUMP LINKS: "GO TO:" in linea e Bullet simmetrici */
+    .jump-nav {
+        display: flex !important;      /* Diventa una riga unica */
+        flex-wrap: wrap !important;    /* Permette di andare a capo se necessario */
+        align-items: baseline !important; /* Allinea il testo sulla base */
+        gap: 0 !important;
+    }
+    .jump-title {
+        display: inline !important;
+        margin-right: 8px !important;  /* Spazio tra GO TO: e la prima voce */
+        font-weight: bold !important;
+        font-size: 0.85rem !important;
+    }
+    .jump-links {
+        display: inline !important;    /* Si comporta come testo continuo */
+    }
+    .jump-links a {
+        display: inline !important;
+        font-size: 0.85rem !important;
+    }
+    /* Il segreto dei Bullet simmetrici: margin uguale ai lati */
+    .jump-links a:not(:last-child)::after {
+        content: "•" !important;
+        margin: 0 10px !important;     /* 10px a sinistra, 10px a destra esatti */
+        color: #ccc !important;
+        display: inline-block !important;
+    }
+
+    /* FIX GENERALI */
+    .photo-grid img { max-width: 120px !important; }
+    .book-header, .teaching-intro { flex-direction: column !important; text-align: center !important; }
+    footer { flex-direction: column !important; text-align: center !important; gap: 10px !important; }
+}
