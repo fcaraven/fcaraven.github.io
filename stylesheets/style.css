@@ -220,6 +220,8 @@ h5 {
 
 /* --- OTTIMIZZAZIONI PER DISPOSITIVI MOBILI (Schermi < 600px) --- */
 @media (max-width: 600px) {
+body { border: 5px solid red !important; } /* TEST */
+
     .container {
         padding: 30px 20px;
     }
