@@ -470,7 +470,7 @@ footer {
     }
     
     nav li {
-        flex: none !important;           /* Rimuove la forzatura a occupare tutta la larghezza */
+        flex: none !important;    /* Rimuove la forzatura a occupare tutta la larghezza */
     }
     
     nav a {
@@ -543,12 +543,15 @@ footer {
     }
     
     .book-cover {
+    	float: none !important;
+    	display: block !important;
         width: 142px !important; /* Ridotta da 180px */
-        margin-right: 15px !important; /* Ridotto anche lo spazio laterale */
+		margin-left: auto !important;
+        margin-right: auto !important;
         margin-bottom: 10px !important;
     }
 
-    }
+}
 
 @media (max-width: 450px) {
     .book-cover {
