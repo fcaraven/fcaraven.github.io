@@ -8,3 +8,8 @@ Legenda dei profili (-dPDFSETTINGS):
 /printer: Qualità alta (300 dpi).
 
 gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf
+
+
+RIDIMENZIONARE IMMAGINI ON-LINE (MA AGISCE IN LOCALE)
+
+https://bulkresizephotos.com/it
