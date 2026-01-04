@@ -44,6 +44,25 @@ li {
     line-height: 1.4;
 }
 
+/* --- PAPERS LIST (Standard ma stilizzato) --- */
+ol.papers-list {
+    /* Padding ridotto: 28px bastano per due cifre senza sprecare spazio */
+    padding-left: 28px; 
+    margin-bottom: 20px;
+}
+
+ol.papers-list li {
+    margin-bottom: 12px;
+    padding-left: 4px; /* Un po' di spazio tra il numero e il testo */
+}
+
+/* Agiamo solo sull'estetica del numero nativo */
+ol.papers-list li::marker {
+    font-size: 0.9rem;        /* Numeri un po' più piccoli del testo */
+    font-weight: 500;          /* Font leggero (Light) */
+    color: var(--text-light);   /* Colore grigio anziché nero */
+}
+
 .first {
 	margin-top: 0;
 }
@@ -85,7 +104,7 @@ h2 {
 }
 
 h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 600;
     margin-top: 30px;
     margin-bottom: 18px;
@@ -190,11 +209,6 @@ nav a:hover, nav a.current {
 }
 
 
-/* --- ALTRI STILI (Tabelle, Foto, Footer) --- */
-/*.photo-grid { display: flex; flex-wrap: wrap; gap: 25px; }
-.photo-grid img { max-width: 200px; border: 1px solid var(--border); }
-@media (max-width: 600px) { .photo-grid img { max-width: 120px !important; } }*/
-
 /* --- GRIGLIA FOTO UNIVERSALE --- */
 .photo-grid { 
     display: flex; 
@@ -220,7 +234,7 @@ nav a:hover, nav a.current {
 .photo-grid img:hover { transform: translateY(-3px); }
 
 footer {
-    margin-top: 30px;
+    margin: 30px 0 10px 0;
     padding-top: 20px;
     border-top: 1px solid var(--border);
     font-size: 0.8rem;
@@ -266,14 +280,34 @@ footer {
 .flag-uk { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cpath fill='%23012169' d='M0 0h50v30H0z'/%3E%3Cpath stroke='%23fff' stroke-width='6' d='M0 0l50 30M50 0L0 30'/%3E%3Cpath stroke='%23C8102E' stroke-width='4' d='M0 0l50 30M50 0L0 30'/%3E%3Cpath stroke='%23fff' stroke-width='10' d='M25 0v30M0 15h50'/%3E%3Cpath stroke='%23C8102E' stroke-width='6' d='M25 0v30M0 15h50'/%3E%3C/svg%3E"); }
 
 /* --- LAYOUT LIBRO & TEACHING --- */
-.book-header, .teaching-intro {
-    display: flex;
-    gap: 30px;
-    align-items: flex-start;
+/* Container principale */
+.book-header {
+    display: block; /* Rimuoviamo flex per permettere lo scorrimento */
     margin-top: 30px;
 }
-.book-cover { width: 180px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-.teaching-img { height: 160px; border-radius: 4px; border: 1px solid var(--border); }
+
+/* Gestione del "Clearfix" (importante per non rompere il layout dopo) */
+.book-header::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* La foto che "galleggia" a sinistra */
+.book-cover { 
+    float: left; /* Il testo le scorrerà attorno */
+    width: 170px; 
+    margin-right: 25px; /* Spazio tra foto e testo */
+    margin-bottom: 15px; /* Spazio sotto la foto quando il testo ci scorre sotto */
+    border: 1px solid var(--border); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+}
+
+/* Il contenitore del testo */
+.book-details {
+    display: block; /* Non deve più essere flex item */
+}
+
 
 /* --- VARIANTE PER PAGINE CENTRATE (Eventi) --- */
 .header-centered {
@@ -284,7 +318,7 @@ footer {
 .header-centered h1 {
     font-size: 2rem;
     line-height: 1.2;
-    margin: 15px auto;
+    margin: 25px auto 15px auto;
 }
 
 .header-centered .subtitle {
@@ -397,7 +431,7 @@ footer {
         height: 75px !important; 
     }
     header h1 { 
-        font-size: 1.5rem !important; 
+        font-size: 1.6rem !important; 
         text-align: center !important;
         margin: 15px 0 0 0 !important;
     }
@@ -405,7 +439,7 @@ footer {
         font-size: 0.9rem !important; 
         text-align: center !important;
         white-space: normal !important;
-        margin-top: 8px !important;
+        margin-top: 9px !important;
     }
     
     h3 {
@@ -504,6 +538,22 @@ footer {
         width: 150px;
     }
     
-    .schedule-table { min-width: 500px; }
+    .schedule-table {
+    min-width: 500px; 
+    }
+    
+    .book-cover {
+        width: 142px !important; /* Ridotta da 180px */
+        margin-right: 15px !important; /* Ridotto anche lo spazio laterale */
+        margin-bottom: 10px !important;
+    }
 
     }
+
+@media (max-width: 450px) {
+    .book-cover {
+        float: none;      /* Rimuove lo scorrimento */
+        display: block;
+        margin: 0 auto 20px auto; /* Centra la foto e aggiunge spazio sotto */
+    }
+}
