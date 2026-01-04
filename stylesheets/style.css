@@ -248,9 +248,10 @@ footer {
 .cv-links {
     list-style: none; /* Toglie i pallini */
     padding: 0;
-    margin: 15px 0;
+    margin: 20px 0;
     display: flex;    /* Li mette sulla stessa riga */
     gap: 20px;        /* Distanza tra i due link */
+    font-weight: 600;
 }
 
 .cv-links li {
