@@ -44,6 +44,14 @@ li {
     line-height: 1.4;
 }
 
+ul.compr-list {
+    margin: 12px 0;
+}
+
+ul.compr-list li{
+    margin-bottom: 6px;
+}
+
 /* --- PAPERS LIST (Standard ma stilizzato) --- */
 ol.papers-list {
     /* Padding ridotto: 28px bastano per due cifre senza sprecare spazio */
@@ -123,6 +131,12 @@ h4 {
     color: var(--text);
     text-transform: uppercase; /* Torna in MAIUSCOLO */
     letter-spacing: 0.05em;
+}
+
+h5 {
+    margin-top: 20px;
+    margin-bottom: 12px;
+    text-transform: uppercase; /* Torna in MAIUSCOLO */
 }
 
 .subtitle {
