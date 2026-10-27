@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Numerical simulations of the critical 2D Stochastic Heat Flow and KPZ process.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco Caravenna - SHF and KPZ simulations</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="profile-header">
+            <img src="../images/photo/io-2025-draw.jpg" alt="Francesco Caravenna" class="profile-photo">
+            <div>
+                <h1>Francesco Caravenna</h1>
+                <p class="subtitle">Research and Publications</p>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html" class="current">Research</a></li>
+                <li><a href="../teaching.html">Teaching</a></li>
+                <li><a href="../more.html">More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="simulations">
+            <h3>The critical 2D Stochastic Heat Flow and KPZ process</h3>
+
+            <p>
+                Numerical simulations of the <i>critical 2D Stochastic Heat Flow</i>
+                (SHF, left) and <i>KPZ process</i> (right).
+                The animation progressively zooms into the centre of the displayed
+                pictures.
+            </p>
+            
+            <figure>
+                <a href="SHF-KPZ-zoom-frame.webp" title="Open the animation at its original size">
+                    <img src="SHF-KPZ-zoom-frame.webp"
+                         alt="Animated spatial zoom into simulations of the critical 2D Stochastic Heat Flow (left) and KPZ process (right)"
+                         style="display: block; width: 100%; height: auto;">
+                </a>
+                <figcaption style="margin-top: 15px; text-align: center;">
+                    <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
+                    <i>KPZ Process</i> (right)<br>
+                    <small>Click on the animation to enlarge it</small>
+                </figcaption>
+            </figure>
+
+            <p>
+            The SHF simulation (left) shows the point-to-plane partition
+functions of 2D directed polymers
+as a function of the starting point, locally smoothed
+in space by averaging over 3&times;3 grid points.
+After time reversal, partition functions solve a discretised 
+stochastic heat equation with constant initial data,
+providing an approximation of the SHF.
+The polymer length is N = 50&#8239;000 and the 
+disorder strength is tuned in the critical window with &theta; = 0.
+The initially displayed domain is diamond-shaped with 
+vertices (&plusmn;1032, 0) and (0, &plusmn;1032).
+            </p>
+            
+            <p>
+            The KPZ simulation (right) shows the logarithm of the same 
+            point-to-plane partition functions, centred by subtracting its expected
+            value (estimated by a spatial average over the initial displayed domain)
+            and locally smoothed in space (by averaging over
+3&times;3 grid points).
+After time reversal, log partition functions solve a discretised KPZ equation with zero initial data via the Cole–Hopf transform. Upon centring, 
+which provides the required renormalisation,
+they approximate the critical 2D KPZ process.
+            </p>
+
+            <p>
+                See our paper
+                <a href="https://arxiv.org/abs/2610.31614"><em>The Critical 2D KPZ Process</em></a> for more details.
+            </p>
+
+        </section>
+    </main>
+
+    <footer>
+        <span>Last modified: 27 Oct 2026</span>
+        <a href="../research.html#preprints" class="footer-link">Back to Research</a>
+    </footer>
+</div>
+
+<script data-goatcounter="https://fcaraven.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
