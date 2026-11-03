@@ -34,22 +34,35 @@
             <h3>The critical 2D Stochastic Heat Flow and KPZ process</h3>
 
             <p>
-                Numerical simulations of the <i>critical 2D Stochastic Heat Flow</i>
+                Numerical simulations of <i>critical 2D Stochastic Heat Flow</i>
                 (SHF, left) and <i>KPZ process</i> (right).
-                The animation progressively zooms into the center of the displayed
-                pictures.
+                See our paper
+                <a href="https://arxiv.org/abs/2610.31614"><em>The Critical 2D KPZ Process</em></a> for more details.
             </p>
+
             
             <figure style="margin: 0 10px; padding: 0;">
-                <a href="SHF-KPZ-zoom-frame.webp" title="Open the animation at its original size">
-                    <img src="SHF-KPZ-zoom-frame.webp"
+                <a href="SHF-KPZ-zoom1.3_10-smoothing7-sample0.webp" title="Open the animation at its original size">
+                    <img src="SHF-KPZ-zoom1.3_10-smoothing7-sample0.webp"
                          alt="Animated spatial zoom into simulations of the critical 2D Stochastic Heat Flow (left) and KPZ process (right)"
                          style="display: block; width: 100%; height: auto;">
                 </a>
                 <figcaption style="margin-top: 15px; text-align: center;">
                     <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
-                    <i>KPZ Process</i> (right)<br>
-                    <small>Click on the animation to enlarge it</small>
+                    <i>KPZ process</i> (right)<br>
+                    <small style="display: block; margin: 6px 0; line-height: 1.4;">
+                    The animation zooms into the center
+                and then zooms out to 
+                the initial view.
+    The initial view represents the even-parity lattice
+    inside the diamond with vertices (&plusmn;1032, 0)
+and (0, &plusmn;1032). Click to enlarge.<br>
+Still images: <a href="./pictures-frame/index.html">with</a>
+or <a href="./pictures-no-frame/index.html">without</a> frame.&nbsp;
+Other samples:
+<a href="SHF-KPZ-zoom1.3_10-smoothing7-sample1.webp" title="Open the animation at its original size">one</a>,
+<a href="SHF-KPZ-zoom1.3_10-smoothing7-sample2.webp" title="Open the animation at its original size">two</a>,
+<a href="SHF-KPZ-zoom1.3_10-smoothing7-sample3.webp" title="Open the animation at its original size">three</a>.</small>
                 </figcaption>
             </figure>
 
@@ -57,39 +70,63 @@
             The SHF simulation (left) shows the point-to-plane partition
 functions of 2D directed polymers
 as a function of the starting point, locally smoothed
-in space (averaging over 3&times;3 grid points).
+in space (averaging over 7&times;7 lattice points).
+The polymer length is N = 50&#8239;000, the disorder strength is tuned in the
+    critical window (&theta; = 0).
 After time reversal, partition functions solve a discretized 
-stochastic heat equation with constant initial data,
+<i>stochastic heat equation</i> with constant initial data,
 providing an approximation of the SHF at a positive time.
             </p>
             
-            <p style="font-size: 0.9em;">
-    The polymer length is N = 50&#8239;000 and the disorder strength is tuned in the
-    critical window with &theta; = 0.
-The initial domain is the even-parity lattice within the diamond with vertices (&plusmn;1032, 0) and (0, &plusmn;1032).
-</p>
-            
             <p>
             The KPZ simulation (right) shows the logarithm of the same 
-            point-to-plane partition functions, centered by subtracting its expected
-            value (estimated by a spatial average)
+            point-to-plane partition functions,
+            suitably centered (subtracting its spatial average)
             and locally smoothed in space (averaging over
-3&times;3 grid points).
-After time reversal, log partition functions are discretized KPZ solutions with zero initial data, via the Cole–Hopf transform. Upon centering, 
-which provides the required renormalization,
+7&times;7 lattice points).
+After time reversal, log partition functions provide discretized solutions of the
+<i>KPZ equation</i> with zero initial data, via the Cole–Hopf transform. Upon centering, 
+which acts as the required <i>renormalization</i>,
 they approximate the critical 2D KPZ process.
             </p>
-
+            
             <p>
-                See our paper
-                <a href="https://arxiv.org/abs/2610.31614"><em>The Critical 2D KPZ Process</em></a> for more details.
+            SHF and the KPZ process are random <i>distributions</i> (generalized
+            functions) on the plane. The simulations above provide graphical 
+            representations 
+            as <i>functions</i>, after local spatial smoothing. The chosen
+            averaging scale (7&times;7 lattice points)
+            is a tradeoff between smoothing local
+            peaks while retaining enough fine details. 
+            A better sense of such distributions is obtained
+            by varying the size of the averaging scale, as shown in the animation below.
             </p>
+
+            <figure style="margin: 0 10px; padding: 0;">
+                <a href="SHF-KPZ-smoothing1_20-zoom1.3-sample0.webp" title="Open the animation at its original size">
+                    <img src="SHF-KPZ-smoothing1_20-zoom1.3-sample0.webp"
+                         alt="SHF and KPZ simulations with progressively increasing and decreasing spatial averaging scales"
+                         style="display: block; width: 100%; height: auto;">
+                </a>
+                <figcaption style="margin-top: 15px; text-align: center;">
+                    <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
+                    <i>KPZ process</i> (right)<br>
+                    <small style="display: block; margin: 6px 0; line-height: 1.4;">
+                    The same sample as above, with fixed zoom,
+                    is shown at different spatial averaging scales, ranging
+                    from 1&times;1 to 20&times;20 lattice points (back and forth). The vertical scale is fixed across the animation. Click to enlarge.<br>
+Other samples:
+<a href="SHF-KPZ-smoothing1_20-zoom1.3-sample1.webp" title="Open the animation at its original size">one</a>,
+<a href="SHF-KPZ-smoothing1_20-zoom1.3-sample2.webp" title="Open the animation at its original size">two</a>,
+<a href="SHF-KPZ-smoothing1_20-zoom1.3-sample3.webp" title="Open the animation at its original size">three</a>.</small>
+                </figcaption>
+            </figure>
 
         </section>
     </main>
 
     <footer>
-        <span>Last modified: 29 Oct 2026</span>
+        <span>Last modified: 3 Nov 2026</span>
         <a href="../research.html#preprints" class="footer-link">Back to Research</a>
     </footer>
 </div>
