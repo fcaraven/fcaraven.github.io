@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Initial views — Four SHF and KPZ samples</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 1rem auto; padding: 0 1rem; max-width: 100rem; color: #222; background: white; font-family: Georgia, serif; }
+    h1 { font-size: 1.5rem; margin-bottom: .4rem; }
+    p { margin: .4rem 0 1rem; line-height: 1.45; }
+    .samples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    figure { margin: 0; }
+    figcaption { text-align: center; }
+    img { display: block; width: 100%; height: auto; }
+    @media (max-width: 48rem) { .samples { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="kpz-simulations.html">Back to SHF and KPZ simulations</a>
+  <h1>Initial views</h1>
+  <p>Each field uses the same vertical scale for all four samples.
+  The top row shows samples 0 and 1, and the bottom row shows samples 2 and 3.</p>
+  <main class="samples">
+    <figure>
+      <figcaption>Stochastic Heat Flow</figcaption>
+      <a href="SHF-00-1-2-3.jpg"><img src="SHF-00-1-2-3.jpg" alt="Stochastic Heat Flow at zoom 1.2: samples 00 and 1 above samples 2 and 3"></a>
+    </figure>
+    <figure>
+      <figcaption>KPZ process</figcaption>
+      <a href="KPZ-00-1-2-3.jpg"><img src="KPZ-00-1-2-3.jpg" alt="KPZ process at zoom 1.2: samples 00 and 1 above samples 2 and 3"></a>
+    </figure>
+  </main>
+</body>
+</html>
