@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Francesco Caravenna - SHF and KPZ simulations</title>
     <link rel="stylesheet" href="../stylesheets/style.css">
+    <style>
+  figcaption small,
+  .zoom-interpretations {
+    font-size: 0.875rem;
+  }
+
+  .zoom-interpretations > p,
+  .zoom-interpretations > ul,
+  .zoom-interpretations li {
+    font-size: inherit;
+  }
+
+  .zoom-interpretations > p  { margin-bottom: 0; }
+  .zoom-interpretations > ul { margin-top: 0.5em; row-gap: 0; }
+  .zoom-interpretations li   { margin-block: 0.15em; padding-block: 0; }
+</style>
 </head>
 <body>
 
@@ -53,37 +69,47 @@
 <small style="display: block; margin: 6px 0; line-height: 1.4;">
     The animation zooms in (10&times;) toward the center and then
     returns to the initial view. <a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">Click to enlarge</a>.<br>
-    The initial view shows the even-parity lattice inside the diamond
-    with vertices (&plusmn;1580, 0) and (0, &plusmn;1580).
-    Both fields are locally smoothed using the simple random walk kernel:
+    Both fields are locally smoothed via the simple random walk kernel:
     the smoothing radius is a fixed fraction of the visible
-    width (0.2% for SHF, 0.4% for KPZ) to keep the same visual resolution throughout
-    the animation.
+    width (0.2% for SHF, 0.4% for KPZ) to keep the same visual resolution.
     <span style="display: block; margin-top: 6px;">
     <a href="./pictures-frame/index.html">Still images</a>
         (also <a href="./pictures-no-frame/index.html">without frame</a>).<br>
         Other samples:
         <a href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">one</a>,
         <a href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">two</a>,
-        <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">three</a> (same initial vertical scales).&nbsp;
-        All together: <a href="four-samples-initial.html">initial views</a> and
+        <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">three</a> (same initial vertical scales).<br>
+        All samples together: <a href="four-samples-initial.html">initial views</a> and
         <a href="four-samples-zoom.html">animations</a>.
     </span>
 </small>                </figcaption>
             </figure>
 
-            <p>
-            The SHF simulation on the left shows the point-to-plane partition function
+<p>
+The SHF simulation on the left shows the point-to-plane partition function
 of a <i>2D directed polymer</i> as a function of its starting point (locally
-smoothed, see the caption).
-The polymer length is <i>N</i>&nbsp;=&nbsp;100&#8239;000, and the disorder strength
-is tuned to the critical window with parameter &theta;&nbsp;=&nbsp;0.
+smoothed in space, see the caption).
 After time reversal, the partition function solves a discretized
 <i>stochastic heat equation</i> with constant initial data, providing an approximation
 of the SHF at macroscopic time <i>t</i>&nbsp;=&nbsp;1.
 At the initial zoom, the visible region is a tilted square of macroscopic
-side length <i>L</i>&nbsp;=&nbsp;10 (the full simulation is on a domain
-with 20% longer sides and periodic boundary conditions).
+size &approx;&nbsp;10&times;10.
+The full simulation is on a larger 12&times;12 domain
+with periodic boundary conditions (which have 
+<a href="boundary-conditions.html">little effect on the plots</a>).
+</p>
+
+
+<p style="font-size: 0.875rem;">
+The polymer has length <i>N</i>&nbsp;=&nbsp;10<sup>5</sup> and disorder strength
+tuned to the critical window with parameter &theta;&nbsp;=&nbsp;0.
+The initial view shows the even-parity lattice inside the diamond
+with vertices (&plusmn;1580, 0) and (0, &plusmn;1580),
+a tilted square with lattice side length 1580&radic;2&nbsp;&approx;&nbsp;2234.
+Dividing by &radic;(N/2)&nbsp;&approx;&nbsp;224 yields the macroscopic
+side length &approx;&nbsp;10 (the factor 1/2
+comes from the simple random walk variance in each component).
+
             </p>
             
             <p>
@@ -97,6 +123,24 @@ This centering acts as a <i>renormalization</i>, and the resulting field
 approximates the critical 2D KPZ process at macroscopic time
 <i>t</i>&nbsp;=&nbsp;1.
             </p>
+
+<div class="zoom-interpretations">
+  <p>
+    The spatial zoom animation admits different interpretations in terms of
+the parameters, thanks to the scaling covariance of the SHF and the KPZ
+process. As we zoom from the initial view to the final view:
+  </p>
+  <ul>
+    <li>At fixed time <i>t</i> = 1 and parameter &theta; = 0,
+        the visible square shrinks from 10&times;10 to 1&times;1.</li>
+    <li>Viewing each frame on a 10&times;10 square,
+        <i>t</i> increases from 1 to 100 while &theta; decreases
+        from 0 to &minus;log(100)&#8239;&approx;&#8239;&minus;4.6.</li>
+    <li>Viewing each frame on a 1&times;1 square,
+        <i>t</i> increases from 0.01 to 1 while &theta; decreases
+        from log(100)&#8239;&approx;&#8239;4.6 to 0.</li>
+  </ul>
+</div>
             
             <p>
             The SHF and the KPZ process are random <i>distributions</i>
@@ -122,8 +166,7 @@ distribution.
                     <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
                     <i>KPZ process</i> (right)<br>
                     <small style="display: block; margin: 6px 0; line-height: 1.4;">
-                    The animation shows the same sample at the initial zoom
-as the smoothing radius varies.
+                    The animation shows the same sample at the initial zoom with varying smoothing radius.
 <a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">Click to enlarge</a>.<br>
 The smoothing radius starts at 0 (no smoothing), increases to
 0.4% of the visible width for SHF (&approx;&nbsp;12.6 lattice units)
@@ -141,7 +184,7 @@ and is the same for all samples: <a href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0
     </main>
 
     <footer>
-        <span>Last modified: 19 Nov 2026</span>
+        <span>Last modified: 20 Nov 2026</span>
         <a href="../research.html#preprints" class="footer-link">Back to Research</a>
     </footer>
 </div>

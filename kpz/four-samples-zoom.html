@@ -4,39 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Spatial zoom — Four SHF and KPZ samples</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 1rem auto; padding: 0 1rem; max-width: 100rem; color: #222; background: white; font-family: Georgia, serif; }
-    h1 { font-size: 1.5rem; margin-bottom: .4rem; }
-    p { margin: .4rem 0 1rem; line-height: 1.45; }
+    .fields { display: grid; gap: 2rem; }
+    .fields figure { margin: 0; min-width: 0; }
+    .fields figcaption { text-align: center; }
+    .fields img { display: block; width: 100%; height: auto; }
     .samples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    figure { margin: 0; }
-    figcaption { text-align: center; }
-    img { display: block; width: 100%; height: auto; }
-    @media (max-width: 48rem) { .samples { grid-template-columns: 1fr; } }
+    .panel { display: block; overflow: hidden; }
+    .panel img { width: 200%; max-width: none; }
+    .kpz .panel img { transform: translateX(-50%); }
+    @media (max-width: 640px) { .samples { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+<div class="container">
   <a href="kpz-simulations.html">Back to SHF and KPZ simulations</a>
   <h1>Spatial zoom</h1>
-  <p>Stochastic Heat Flow (left) and KPZ process (right). The four samples share the same initial vertical scales. As the view zooms in, the scales adapt separately for each sample.</p>
-  <main class="samples">
-    <figure>
+  <p>The four samples share the same initial vertical scales. As the view zooms in, the scales adapt separately for each sample.</p>
+  <main class="fields">
+<section class="shf"><h2>Stochastic Heat Flow</h2>
+<div class="samples">
+<figure>
       <figcaption>Sample 0</figcaption>
-      <a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 00: animated SHF and KPZ surfaces, spatial zoom"></a>
+      <a class="panel" href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 00: animated SHF surface, spatial zoom"></a>
     </figure>
-    <figure>
+<figure>
       <figcaption>Sample 1</figcaption>
-      <a href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 1: animated SHF and KPZ surfaces, spatial zoom"></a>
+      <a class="panel" href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 1: animated SHF surface, spatial zoom"></a>
     </figure>
-    <figure>
+<figure>
       <figcaption>Sample 2</figcaption>
-      <a href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 2: animated SHF and KPZ surfaces, spatial zoom"></a>
+      <a class="panel" href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 2: animated SHF surface, spatial zoom"></a>
     </figure>
-    <figure>
+<figure>
       <figcaption>Sample 3</figcaption>
-      <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 3: animated SHF and KPZ surfaces, spatial zoom"></a>
+      <a class="panel" href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 3: animated SHF surface, spatial zoom"></a>
     </figure>
-  </main>
+</div></section>
+<section class="kpz"><h2>KPZ process</h2>
+<div class="samples">
+<figure>
+      <figcaption>Sample 0</figcaption>
+      <a class="panel" href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 00: animated KPZ surface, spatial zoom"></a>
+    </figure>
+<figure>
+      <figcaption>Sample 1</figcaption>
+      <a class="panel" href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 1: animated KPZ surface, spatial zoom"></a>
+    </figure>
+<figure>
+      <figcaption>Sample 2</figcaption>
+      <a class="panel" href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 2: animated KPZ surface, spatial zoom"></a>
+    </figure>
+<figure>
+      <figcaption>Sample 3</figcaption>
+      <a class="panel" href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"><img src="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" alt="Sample 3: animated KPZ surface, spatial zoom"></a>
+    </figure>
+</div></section>
+</main>
+</div>
 </body>
 </html>

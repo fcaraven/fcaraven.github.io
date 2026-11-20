@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SHF simulations under periodic and Dirichlet boundary conditions</title>
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <style>
+    .comparison {display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;}
+    .comparison figure {margin: 0; min-width: 0; text-align: center;}
+    .comparison img {display: block; width: 100%; height: auto;}
+    .results {border-collapse: collapse; margin: 1rem auto; font-variant-numeric: tabular-nums;}
+    .results th, .results td {padding: .35em .75em; text-align: right;}
+    .results th:first-child {text-align: left;}
+    .results thead {border-bottom: 1px solid #aaa;}
+    @media (max-width: 640px) {.comparison {grid-template-columns: 1fr;}}
+  </style>
+</head>
+<body>
+<div class="container">
+<main>
+  <p><a href="kpz-simulations.html">&larr; Back to SHF and KPZ simulations</a></p>
+  <h1>Robustness to boundary conditions</h1>
+  <p>We ran the SHF simulation twice for the same realization of the disorder,
+with periodic and with zero Dirichlet boundary conditions.
+  For this sample, the effect is only visible near the edges of the initial view and decreases rapidly as we zoom toward the center.</p>
+
+  <div class="comparison">
+    <figure><a href="SHF-z01.20-r06.32-periodic.jpg"><img src="SHF-z01.20-r06.32-periodic.jpg" alt="SHF field with periodic boundary conditions at the initial zoom"></a>
+    <figcaption>Periodic boundary conditions</figcaption></figure>
+    <figure><a href="SHF-z01.20-r06.32-dirichlet.jpg"><img src="SHF-z01.20-r06.32-dirichlet.jpg" alt="SHF field with zero Dirichlet boundary conditions at the initial zoom"></a>
+    <figcaption>Dirichlet boundary conditions</figcaption></figure>
+  </div>
+  <p>Both images show the initial 10&times;10 view of the 12&times;12 simulation domain,
+  with the same smoothing radius as in the animation (0.2% of the visible width, or 
+  &approx;&nbsp;6.3 lattice units).
+  Some small differences can be seen along the edges. To quantify their effect
+  in the animations, 
+  we measure the mass difference as a percentage of the total periodic mass, and the
+  largest pointwise difference as a percentage of the maximum of the periodic field in the same view.</p>
+
+  <table class="results">
+    <thead><tr><th scope="col">View</th><th scope="col">Mass discrepancy</th><th scope="col">Largest pointwise discrepancy</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Initial view</th><td>5.2%</td><td>19%</td></tr>
+      <tr><th scope="row">First zoom step</th><td>0.85%</td><td>0.99%</td></tr>
+      <tr><th scope="row">Second step</th><td>0.19%</td><td>0.23%</td></tr>
+      <tr><th scope="row">Third step</th><td>0.062%</td><td>0.065%</td></tr>
+      <tr><th scope="row">Fourth step</th><td>0.023%</td><td>0.034%</td></tr>
+    </tbody>
+  </table>
+  <p>Both discrepancies fall below 1% after the first zoom step and below 0.04% after the fourth.</p>
+</main>
+</div>
+</body>
+</html>
