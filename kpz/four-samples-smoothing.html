@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../stylesheets/style.css">
   <style>
     .fields { display: grid; gap: 2rem; }
+    .fields h3 { text-align: center; }
     .fields figure { margin: 0; min-width: 0; }
     .fields figcaption { text-align: center; }
     .fields img { display: block; width: 100%; height: auto; }
@@ -20,45 +21,55 @@
 <body>
 <div class="container">
   <a href="kpz-simulations.html">Back to SHF and KPZ simulations</a>
+
   <h1>Varying smoothing radius</h1>
-  <p>The zoom stays fixed as the smoothing radius varies. For each field, all four samples share the same vertical scale throughout.</p>
+
+<p>
+The animations show how four samples of the SHF
+and their corresponding KPZ fields change in appearance as the
+smoothing radius increases and then decreases.
+The view stays fixed on the initial tilted square of macroscopic size 10&times;10.
+For each field, all four samples share the same vertical scale throughout
+(approximately 0 to 184 for SHF and &minus;5 to +5 for KPZ).
+</p>
+
   <main class="fields">
-<section class="shf"><h2>Stochastic Heat Flow</h2>
+<section class="shf"><h3>Stochastic Heat Flow</h3>
 <div class="samples">
 <figure>
-      <figcaption>Sample 0</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 00: animated SHF surface, varying smoothing radius"></a>
+      <figcaption>Sample 0</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 1</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 1: animated SHF surface, varying smoothing radius"></a>
+      <figcaption>Sample 1</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 2</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 2: animated SHF surface, varying smoothing radius"></a>
+      <figcaption>Sample 2</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 3</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 3: animated SHF surface, varying smoothing radius"></a>
+      <figcaption>Sample 3</figcaption>
     </figure>
 </div></section>
-<section class="kpz"><h2>KPZ process</h2>
+<section class="kpz"><h3>KPZ process</h3>
 <div class="samples">
 <figure>
-      <figcaption>Sample 0</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 00: animated KPZ surface, varying smoothing radius"></a>
+      <figcaption>Sample 0</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 1</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 1: animated KPZ surface, varying smoothing radius"></a>
+      <figcaption>Sample 1</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 2</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 2: animated KPZ surface, varying smoothing radius"></a>
+      <figcaption>Sample 2</figcaption>
     </figure>
 <figure>
-      <figcaption>Sample 3</figcaption>
       <a class="panel" href="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"><img src="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" alt="Sample 3: animated KPZ surface, varying smoothing radius"></a>
+      <figcaption>Sample 3</figcaption>
     </figure>
 </div></section>
 </main>
