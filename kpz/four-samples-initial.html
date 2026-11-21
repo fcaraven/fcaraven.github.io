@@ -11,9 +11,8 @@
     .fields figcaption { text-align: center; }
     .fields img { display: block; width: 100%; height: auto; }
     .samples { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    .panel { display: block; overflow: hidden; }
-    .panel img { width: 200%; max-width: none; }
-    .kpz .panel img { transform: translateX(-50%); }
+    .fields h2 { text-align: center; }
+    .fields figcaption small { display: block; margin-top: 0.2rem; font-variant-numeric: tabular-nums; }
     @media (max-width: 640px) { .samples { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -21,17 +20,53 @@
 <div class="container">
   <a href="kpz-simulations.html">Back to SHF and KPZ simulations</a>
   <h1>Initial views</h1>
-  <p>Each field uses the same vertical scale for all four samples.
-  The top row shows samples 0 and 1, and the bottom row shows samples 2 and 3.</p>
+  <p>Each field uses the same vertical scale for all four samples
+  (0 to 184 for SHF,
+    −5 to +5 for KPZ).
+</p>
   <main class="fields">
-    <figure>
-      <figcaption>Stochastic Heat Flow</figcaption>
-      <a href="SHF-00-1-2-3.jpg"><img src="SHF-00-1-2-3.jpg" alt="Stochastic Heat Flow at zoom 1.2: samples 00 and 1 above samples 2 and 3"></a>
-    </figure>
-    <figure>
-      <figcaption>KPZ process</figcaption>
-      <a href="KPZ-00-1-2-3.jpg"><img src="KPZ-00-1-2-3.jpg" alt="KPZ process at zoom 1.2: samples 00 and 1 above samples 2 and 3"></a>
-    </figure>
+    <section aria-labelledby="shf">
+      <h3 id="shf">Stochastic Heat Flow</h3>
+      <div class="samples">
+        <figure>
+          <a href="initial-view/SHF-00-z01.20-r06.32.jpg"><img src="initial-view/SHF-00-z01.20-r06.32.jpg" alt="Stochastic Heat Flow, sample 0 at zoom 1.2"></a>
+          <figcaption>Sample 0<small>Average 1.44 &middot; Maximum 184 &middot; Minimum 8.52&times;10<sup>-3</sup></small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/SHF-1-z01.20-r06.32.jpg"><img src="initial-view/SHF-1-z01.20-r06.32.jpg" alt="Stochastic Heat Flow, sample 1 at zoom 1.2"></a>
+          <figcaption>Sample 1<small>Average 1.05 &middot; Maximum 67.3 &middot; Minimum 1.07&times;10<sup>-2</sup></small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/SHF-2-z01.20-r06.32.jpg"><img src="initial-view/SHF-2-z01.20-r06.32.jpg" alt="Stochastic Heat Flow, sample 2 at zoom 1.2"></a>
+          <figcaption>Sample 2<small>Average 0.903 &middot; Maximum 142 &middot; Minimum 8.52&times;10<sup>-3</sup></small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/SHF-3-z01.20-r06.32.jpg"><img src="initial-view/SHF-3-z01.20-r06.32.jpg" alt="Stochastic Heat Flow, sample 3 at zoom 1.2"></a>
+          <figcaption>Sample 3<small>Average 1.13 &middot; Maximum 102 &middot; Minimum 1.08&times;10<sup>-2</sup></small></figcaption>
+        </figure>
+      </div>
+    </section>
+    <section aria-labelledby="kpz">
+      <h3 id="kpz">KPZ process</h3>
+      <div class="samples">
+        <figure>
+          <a href="initial-view/KPZ-00-z01.20-r12.64.jpg"><img src="initial-view/KPZ-00-z01.20-r12.64.jpg" alt="KPZ process, sample 0 at zoom 1.2"></a>
+          <figcaption>Sample 0<small>Maximum 5.04 &middot; Minimum &minus;3.73</small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/KPZ-1-z01.20-r12.64.jpg"><img src="initial-view/KPZ-1-z01.20-r12.64.jpg" alt="KPZ process, sample 1 at zoom 1.2"></a>
+          <figcaption>Sample 1<small>Maximum 3.98 &middot; Minimum &minus;3.39</small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/KPZ-2-z01.20-r12.64.jpg"><img src="initial-view/KPZ-2-z01.20-r12.64.jpg" alt="KPZ process, sample 2 at zoom 1.2"></a>
+          <figcaption>Sample 2<small>Maximum 4.55 &middot; Minimum &minus;3.72</small></figcaption>
+        </figure>
+        <figure>
+          <a href="initial-view/KPZ-3-z01.20-r12.64.jpg"><img src="initial-view/KPZ-3-z01.20-r12.64.jpg" alt="KPZ process, sample 3 at zoom 1.2"></a>
+          <figcaption>Sample 3<small>Maximum 4.66 &middot; Minimum &minus;3.31</small></figcaption>
+        </figure>
+      </div>
+    </section>
   </main>
 </div>
 </body>

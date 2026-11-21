@@ -7,8 +7,8 @@
     <title>Francesco Caravenna - SHF and KPZ simulations</title>
     <link rel="stylesheet" href="../stylesheets/style.css">
     <style>
-  figcaption small,
-  .zoom-interpretations {
+  .caption-title { display: block; text-align: center; }
+  .caption-details {
     font-size: 0.875rem;
   }
 
@@ -21,6 +21,30 @@
   .zoom-interpretations > p  { margin-bottom: 0; }
   .zoom-interpretations > ul { margin-top: 0.5em; row-gap: 0; }
   .zoom-interpretations li   { margin-block: 0.15em; padding-block: 0; }
+  #simulations .simulation-caption {
+    margin-top: 15px;
+    padding-inline: clamp(0.5rem, 2vw, 1.25rem);
+    text-align: left;
+  }
+  .caption-details { margin-block: 6px; line-height: 1.4; }
+  #simulations .caption-links {
+    display: block;
+    margin: 0.4em 0 0;
+    padding-inline-start: 1.35em;
+    list-style: disc outside;
+    text-align: left;
+  }
+  #simulations .caption-links > li {
+    display: list-item;
+    margin: 0.15em 0;
+    padding: 0;
+    font-size: inherit;
+  }
+  #simulations .simulation-parameters { row-gap: 0; }
+#simulations .simulation-parameters > li {
+  margin-block: 0.25em;
+  padding-block: 0;
+}
 </style>
 </head>
 <body>
@@ -46,71 +70,76 @@
     </header>
 
     <main>
-        <section id="simulations">
+        <div id="simulations">
             <h3>The critical 2D Stochastic Heat Flow and KPZ process</h3>
 
             <p>
                 Numerical simulations of <i>critical 2D Stochastic Heat Flow</i>
-                (SHF, left) and <i>KPZ process</i> (right).
+                (SHF, left) and <i>KPZ process</i> (right) at a fixed time.
                 See our paper
                 <a href="https://arxiv.org/abs/2610.31614"><em>The Critical 2D KPZ Process</em></a> for more details.
             </p>
 
             
-            <figure style="margin: 0 10px; padding: 0;">
+            <section aria-labelledby="spatial-zoom">
+            <h4 id="spatial-zoom">Spatial zoom</h4>
+            
+
+<p>
+The SHF simulation below shows the point-to-plane partition function
+of a <i>critical 2D directed polymer</i>
+as a function of its starting point (locally
+smoothed in space, see the caption).
+After time reversal, the partition function solves a discretized
+<i>stochastic heat equation</i> with constant initial data, providing an approximation
+of the SHF at macroscopic time <i>t</i>&nbsp;=&nbsp;1
+with disorder parameter &theta;&nbsp;=&nbsp;0.
+At the initial zoom, the visible region is a tilted square of macroscopic
+size &approx;&nbsp;10&times;10 (the microscopic parameters are
+<a href="#microscopic-parameters">described below</a>).
+</p>
+
+<p style="font-size: smaller;">
+To model the SHF on the whole plane, we actually run the full simulation on a larger
+12&times;12 domain with periodic boundary conditions. A comparison with
+Dirichlet boundary conditions for the same disorder shows that the plots are
+<a href="boundary-conditions.html">robust to the choice of boundary conditions</a>.
+</p>
+
+
+
+            <figure style="margin: 0 20px; padding: 0;">
                 <a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">
                     <img src="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"
                          alt="Animated spatial zoom into simulations of the critical 2D Stochastic Heat Flow (left) and KPZ process (right)"
                          style="display: block; width: 100%; height: auto;">
                 </a>
-                <figcaption style="margin-top: 15px; text-align: center;">
-                    <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
-                    <i>KPZ process</i> (right)<br>
-<small style="display: block; margin: 6px 0; line-height: 1.4;">
+                <figcaption class="simulation-caption">
+                    <span class="caption-title"><i>Stochastic Heat Flow</i> (left) 
+                    &nbsp; and &nbsp; <i>KPZ process</i> (right)</span>
+<div class="caption-details">
     The animation zooms in (10&times;) toward the center and then
-    returns to the initial view. <a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">Click to enlarge</a>.<br>
+    returns to the initial view.
     Both fields are locally smoothed via the simple random walk kernel:
     the smoothing radius is a fixed fraction of the visible
     width (0.2% for SHF, 0.4% for KPZ) to keep the same visual resolution.
-    <span style="display: block; margin-top: 6px;">
-    <a href="./pictures-frame/index.html">Still images</a>
-        (also <a href="./pictures-no-frame/index.html">without frame</a>).<br>
-        Other samples:
+    At the initial zoom, the vertical axis range is approximately 0 to 184 for SHF,
+    −5 to +5 for KPZ.
+    <ul class="caption-links">
+    <li><a href="./pictures-frame/index.html">Still images</a>,
+        also <a href="./pictures-no-frame/index.html">without frame</a></li>
+    <li><a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">Larger view</a> and more samples:
         <a href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">one</a>,
         <a href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">two</a>,
-        <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">three</a> (same initial vertical scales).<br>
-        All samples together: <a href="four-samples-initial.html">initial views</a> and
-        <a href="four-samples-zoom.html">animations</a>.
-    </span>
-</small>                </figcaption>
+        <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">three</a>, with the same initial vertical scale</li>
+    <li>All samples together: <a href="four-samples-initial.html">initial views</a> and
+        <a href="four-samples-zoom.html">animations</a></li>
+    </ul>
+</div>                </figcaption>
             </figure>
 
-<p>
-The SHF simulation on the left shows the point-to-plane partition function
-of a <i>2D directed polymer</i> as a function of its starting point (locally
-smoothed in space, see the caption).
-After time reversal, the partition function solves a discretized
-<i>stochastic heat equation</i> with constant initial data, providing an approximation
-of the SHF at macroscopic time <i>t</i>&nbsp;=&nbsp;1.
-At the initial zoom, the visible region is a tilted square of macroscopic
-size &approx;&nbsp;10&times;10.
-The full simulation is on a larger 12&times;12 domain
-with periodic boundary conditions (which have 
-<a href="boundary-conditions.html">little effect on the plots</a>).
-</p>
 
 
-<p style="font-size: 0.875rem;">
-The polymer has length <i>N</i>&nbsp;=&nbsp;10<sup>5</sup> and disorder strength
-tuned to the critical window with parameter &theta;&nbsp;=&nbsp;0.
-The initial view shows the even-parity lattice inside the diamond
-with vertices (&plusmn;1580, 0) and (0, &plusmn;1580),
-a tilted square with lattice side length 1580&radic;2&nbsp;&approx;&nbsp;2234.
-Dividing by &radic;(N/2)&nbsp;&approx;&nbsp;224 yields the macroscopic
-side length &approx;&nbsp;10 (the factor 1/2
-comes from the simple random walk variance in each component).
-
-            </p>
             
             <p>
 The KPZ simulation on the right shows the (locally smoothed) logarithm of the same
@@ -120,11 +149,11 @@ The KPZ simulation on the right shows the (locally smoothed) logarithm of the sa
     via the Cole&ndash;Hopf transform. To center the KPZ field, we subtract the spatial average of the log partition
 function at the initial zoom, averaged across all four samples.
 This centering acts as a <i>renormalization</i>, and the resulting field
-approximates the critical 2D KPZ process at macroscopic time
-<i>t</i>&nbsp;=&nbsp;1.
+approximates the critical 2D KPZ process.
             </p>
 
-<div class="zoom-interpretations">
+<!--
+<div class="zoom-interpretations" style="font-size: smaller;">
   <p>
     The spatial zoom animation admits different interpretations in terms of
 the parameters, thanks to the scaling covariance of the SHF and the KPZ
@@ -141,7 +170,11 @@ process. As we zoom from the initial view to the final view:
         from log(100)&#8239;&approx;&#8239;4.6 to 0.</li>
   </ul>
 </div>
+-->
             
+            </section>
+            <section aria-labelledby="spatial-smoothing">
+            <h4 id="spatial-smoothing">Spatial smoothing</h4>
             <p>
             The SHF and the KPZ process are random <i>distributions</i>
     (generalized functions) on the plane. We can
@@ -156,35 +189,63 @@ field changes with the radius conveys a fuller picture of the underlying
 distribution.
             </p>
 
-            <figure style="margin: 0 10px; padding: 0;">
+            <figure style="margin: 0 20px; padding: 0;">
                 <a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">
                     <img src="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"
                          alt="SHF and KPZ simulations with progressively increasing and decreasing spatial averaging scales"
                          style="display: block; width: 100%; height: auto;">
                 </a>
-                <figcaption style="margin-top: 15px; text-align: center;">
-                    <i>Stochastic Heat Flow</i> (left) &nbsp; and &nbsp; 
-                    <i>KPZ process</i> (right)<br>
-                    <small style="display: block; margin: 6px 0; line-height: 1.4;">
-                    The animation shows the same sample at the initial zoom with varying smoothing radius.
-<a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">Click to enlarge</a>.<br>
+                <figcaption class="simulation-caption">
+                    <span class="caption-title"><i>Stochastic Heat Flow</i> (left) 
+                    &nbsp; and &nbsp; <i>KPZ process</i> (right)</span>
+                    <div class="caption-details">
+                    The animation shows the same sample as above at the initial zoom with varying smoothing radius.
 The smoothing radius starts at 0 (no smoothing), increases to
 0.4% of the visible width for SHF (&approx;&nbsp;12.6 lattice units)
-and 0.8% for KPZ (&approx;&nbsp;25.3 lattice units), then returns to 0.
+and to 0.8% for KPZ (&approx;&nbsp;25.3 lattice units), then returns to 0.
 For each field, the vertical scale is fixed throughout the animation
-and is the same for all samples: <a href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">one</a>,
+and is the same for all samples.
+<ul class="caption-links">
+<li><a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">Larger view</a> and more samples: <a href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">one</a>,
 <a href="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">two</a>,
-<a href="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">three</a>
-(<a href="four-samples-smoothing.html">also together</a>).
-</small>
+<a href="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">three</a></li>
+<li>All samples together: <a href="four-samples-smoothing.html">animations</a></li>
+</ul>
+</div>
                 </figcaption>
             </figure>
 
+</section>
+            <section aria-labelledby="microscopic-parameters">
+            <h4 id="microscopic-parameters">Parameters and scaling</h4>
+<p>We use the following parameters for the directed polymer simulation.</p>
+
+<ul class="simulation-parameters">
+<li> <i>Polymer length:</i> <i>N</i>&nbsp;=&nbsp;10<sup>5</sup></li>
+<li> <i>Disorder strength:</i> critical window with parameter &theta;&nbsp;=&nbsp;0</li>
+<li><i>Starting points:</i> even-parity sites inside the diamond with vertices
+(&plusmn;<i>R</i>&radic;<i>N</i>, 0) and (0, &plusmn;<i>R</i>&radic;<i>N</i>)
+with <i>R</i> = 5 for the initial view
+(the full simulation uses <i>R</i> = 6 to
+<a href="boundary-conditions.html">reduce boundary effects</a>).</li>
+</ul>
+
+<p>
+Dividing the microscopic domain by the diffusive scale
+&radic;(<i>N</i>/2) (the factor 1/2 comes from
+the simple random walk variance in each coordinate)
+yields
+the macroscopic domain: a diamond with vertices (&plusmn;&radic;2&#8239;R, 0) 
+and (0, &plusmn;&radic;2&#8239;R), i.e. a tilted square of side length
+2&#8239;R = 10.
+</p>
+
         </section>
+        </div>
     </main>
 
     <footer>
-        <span>Last modified: 20 Nov 2026</span>
+        <span>Last modified: 21 Nov 2026</span>
         <a href="../research.html#preprints" class="footer-link">Back to Research</a>
     </footer>
 </div>

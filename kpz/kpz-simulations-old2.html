@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Numerical simulations of the critical 2D Stochastic Heat Flow and KPZ process.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesco Caravenna - SHF and KPZ simulations</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <style>
+  .caption-title { display: block; text-align: center; }
+  .caption-details {
+    font-size: 0.875rem;
+  }
+
+  .zoom-interpretations > p,
+  .zoom-interpretations > ul,
+  .zoom-interpretations li {
+    font-size: inherit;
+  }
+
+  .zoom-interpretations > p  { margin-bottom: 0; }
+  .zoom-interpretations > ul { margin-top: 0.5em; row-gap: 0; }
+  .zoom-interpretations li   { margin-block: 0.15em; padding-block: 0; }
+  #simulations .simulation-caption {
+    margin-top: 15px;
+    padding-inline: clamp(0.5rem, 2vw, 1.25rem);
+    text-align: left;
+  }
+  .caption-details { margin-block: 6px; line-height: 1.4; }
+  #simulations .caption-links {
+    display: block;
+    margin: 0.4em 0 0;
+    padding-inline-start: 1.35em;
+    list-style: disc outside;
+    text-align: left;
+  }
+  #simulations .caption-links > li {
+    display: list-item;
+    margin: 0.15em 0;
+    padding: 0;
+    font-size: inherit;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="profile-header">
+            <img src="../images/photo/io-2025-draw.jpg" alt="Francesco Caravenna" class="profile-photo">
+            <div>
+                <h1>Francesco Caravenna</h1>
+                <p class="subtitle">Research and Publications</p>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../research.html" class="current">Research</a></li>
+                <li><a href="../teaching.html">Teaching</a></li>
+                <li><a href="../more.html">More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="simulations">
+            <h2>The critical 2D Stochastic Heat Flow and KPZ process</h2>
+
+            <p>
+                Numerical simulations of <i>critical 2D Stochastic Heat Flow</i>
+                (SHF, left) and <i>KPZ process</i> (right).
+                See our paper
+                <a href="https://arxiv.org/abs/2610.31614"><em>The Critical 2D KPZ Process</em></a> for more details.
+            </p>
+
+            
+            <section aria-labelledby="spatial-zoom">
+            <h3 id="spatial-zoom">Spatial zoom</h3>
+            <figure style="margin: 0 15px; padding: 0;">
+                <a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">
+                    <img src="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp"
+                         alt="Animated spatial zoom into simulations of the critical 2D Stochastic Heat Flow (left) and KPZ process (right)"
+                         style="display: block; width: 100%; height: auto;">
+                </a>
+                <figcaption class="simulation-caption">
+                    <span class="caption-title"><i>Stochastic Heat Flow</i> (left) and <i>KPZ process</i> (right)</span>
+<div class="caption-details">
+    The animation zooms in (10&times;) toward the center and then
+    returns to the initial view.
+    Both fields are locally smoothed via the simple random walk kernel:
+    the smoothing radius is a fixed fraction of the visible
+    width (0.2% for SHF, 0.4% for KPZ) to keep the same visual resolution.
+    <ul class="caption-links">
+    <li><a href="./pictures-frame/index.html">Still images</a>
+        (also <a href="./pictures-no-frame/index.html">without frame</a>)</li>
+    <li><a href="SHF-KPZ-ZZnew00_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">Larger view</a> and more samples:
+        <a href="SHF-KPZ-ZZnew1_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">one</a>,
+        <a href="SHF-KPZ-ZZnew2_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">two</a>,
+        <a href="SHF-KPZ-ZZnew3_100k-zoom1.2_12-SHF0.2pct-KPZ0.4pct.webp" title="Open the animation at its original size">three</a> (same initial vertical scales)</li>
+    <li>All samples together: <a href="four-samples-initial.html">initial views</a> and
+        <a href="four-samples-zoom.html">animations</a></li>
+    </ul>
+</div>                </figcaption>
+            </figure>
+
+<p>
+The SHF simulation on the left shows the point-to-plane partition function
+of a <i>critical 2D directed polymer</i>
+as a function of its starting point (locally
+smoothed in space, see the caption).
+After time reversal, the partition function solves a discretized
+<i>stochastic heat equation</i> with constant initial data, providing an approximation
+of the SHF at macroscopic time <i>t</i>&nbsp;=&nbsp;1.</p>
+
+<p>
+At the initial zoom, the visible region is a tilted square of macroscopic
+size &approx;&nbsp;10&times;10 (the microscopic parameters are
+<a href="#microscopic-parameters">described below</a>). To model the SHF on the whole plane,
+we actually run the simulation on a larger 12&times;12 domain with periodic boundary
+conditions, and checked the outcome to be
+<a href="boundary-conditions.html">robust with respect to the choice
+of boundary conditions</a>.
+</p>
+
+
+
+            
+            <p>
+The KPZ simulation on the right shows the (locally smoothed) logarithm of the same
+    point-to-plane partition function.
+    After time reversal, the log partition function gives a discrete
+    approximation to the solution of the <i>KPZ equation</i> with zero initial data
+    via the Cole&ndash;Hopf transform. To center the KPZ field, we subtract the spatial average of the log partition
+function at the initial zoom, averaged across all four samples.
+This centering acts as a <i>renormalization</i>, and the resulting field
+approximates the critical 2D KPZ process at macroscopic time
+<i>t</i>&nbsp;=&nbsp;1.
+            </p>
+
+
+            
+            </section>
+            <section aria-labelledby="spatial-smoothing">
+            <h3 id="spatial-smoothing">Spatial smoothing</h3>
+            <p>
+            The SHF and the KPZ process are random <i>distributions</i>
+    (generalized functions) on the plane. We can
+    visualize these fields as <i>functions</i> after local
+    spatial smoothing, as in the simulations
+    above. A smaller smoothing radius reveals finer local
+    detail, while a larger radius makes large-scale spatial patterns
+    easier to see.
+The animation below illustrates this tradeoff by varying the smoothing
+radius while keeping the zoom fixed. Seeing how the shape of the smoothed
+field changes with the radius conveys a fuller picture of the underlying
+distribution.
+            </p>
+
+            <figure style="margin: 0 15px; padding: 0;">
+                <a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">
+                    <img src="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp"
+                         alt="SHF and KPZ simulations with progressively increasing and decreasing spatial averaging scales"
+                         style="display: block; width: 100%; height: auto;">
+                </a>
+                <figcaption class="simulation-caption">
+                    <span class="caption-title"><i>Stochastic Heat Flow</i> (left) and <i>KPZ process</i> (right)</span>
+                    <div class="caption-details">
+                    The animation shows the same sample at the initial zoom with varying smoothing radius.
+
+The smoothing radius starts at 0 (no smoothing), increases to
+0.4% of the visible width for SHF (&approx;&nbsp;12.6 lattice units)
+and 0.8% for KPZ (&approx;&nbsp;25.3 lattice units), then returns to 0.
+For each field, the vertical scale is fixed throughout the animation
+and is the same for all samples.
+<ul class="caption-links">
+<li><a href="SHF-KPZ-ZZnew00_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">Larger view</a> and more samples: <a href="SHF-KPZ-ZZnew1_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">one</a>,
+<a href="SHF-KPZ-ZZnew2_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">two</a>,
+<a href="SHF-KPZ-ZZnew3_100k-SHF0_0.4pct-KPZ0_0.8pct-zoom1.2-zscale-normal.webp" title="Open the animation at its original size">three</a></li>
+<li>All samples together: <a href="four-samples-smoothing.html">animations</a></li>
+</ul>
+</div>
+                </figcaption>
+            </figure>
+
+</section>
+            <section aria-labelledby="microscopic-parameters">
+            <h3 id="microscopic-parameters">Parameters and scaling</h3>
+<p>
+The polymer has length <i>N</i>&nbsp;=&nbsp;10<sup>5</sup> and disorder strength
+tuned to the critical window with parameter &theta;&nbsp;=&nbsp;0.
+The initial view shows the even-parity lattice inside the diamond
+with vertices (&plusmn;1580, 0) and (0, &plusmn;1580),
+a tilted square with lattice side length 1580&radic;2&nbsp;&approx;&nbsp;2234.
+Dividing by &radic;(N/2)&nbsp;&approx;&nbsp;224 yields the macroscopic
+side length &approx;&nbsp;10 (the factor 1/2
+comes from the simple random walk variance in each component).
+
+            </p>
+<div class="zoom-interpretations">
+  <p>
+    The spatial zoom animation admits different interpretations in terms of
+the parameters, thanks to the scaling covariance of the SHF and the KPZ
+process. As we zoom from the initial view to the final view:
+  </p>
+  <ul>
+    <li>At fixed time <i>t</i> = 1 and parameter &theta; = 0,
+        the visible square shrinks from 10&times;10 to 1&times;1.</li>
+    <li>Viewing each frame on a 10&times;10 square,
+        <i>t</i> increases from 1 to 100 while &theta; decreases
+        from 0 to &minus;log(100)&#8239;&approx;&#8239;&minus;4.6.</li>
+    <li>Viewing each frame on a 1&times;1 square,
+        <i>t</i> increases from 0.01 to 1 while &theta; decreases
+        from log(100)&#8239;&approx;&#8239;4.6 to 0.</li>
+  </ul>
+</div>
+        </section>
+        </div>
+    </main>
+
+    <footer>
+        <span>Last modified: 21 Nov 2026</span>
+        <a href="../research.html#preprints" class="footer-link">Back to Research</a>
+    </footer>
+</div>
+
+<script data-goatcounter="https://fcaraven.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
